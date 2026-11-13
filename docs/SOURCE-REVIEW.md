@@ -26,7 +26,7 @@ Reviewed source on 2026-11-13. This is a source review of pinned snapshots; no l
 
 ## New work
 
-The implementation here was authored as a fresh starter, rather than copied from either repository. It keeps the loan workflow as an explicitly synthetic example, makes external platforms optional, and adds a prompt-to-demo output bundle: process source and image, storyboard, solution brief, runbook, tool matrix, and acceptance checks from one narrative definition.
+The implementation here was authored as a fresh starter, rather than copied from either repository. It keeps the loan workflow as an explicitly synthetic example, requires Box and Salesforce while keeping additional platforms optional, and adds a prompt-to-demo output bundle: process source and image, storyboard, solution brief, runbook, tool matrix, and acceptance checks from one narrative definition.
 
 The loans snapshot includes an MIT license. No root license was found in the Bedrock snapshot; its implementation and assets were not copied. This project has its own MIT license. This note records provenance, not a legal opinion about the source repositories.
 

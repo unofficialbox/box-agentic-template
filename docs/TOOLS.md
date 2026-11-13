@@ -40,3 +40,7 @@ Enforce identity, record/folder ownership, current version, lifecycle state, fie
 If a write times out, reconcile the exact operation and record state before retrying. Never choose generated outputs by name or latest timestamp. Job acceptance is not completion. Verify the job's output ID and version, resolved tags, matching terms, and current approval state before any signature action. Do not reuse a prior request after generating a new draft.
 
 Persist live receipts with operation IDs, timestamps, before/after versions, verification, and redacted authorization provenance in ignored output storage. Stop retries when completion cannot be determined; report an uncertain outcome rather than asserting nothing changed.
+
+## Required platform ownership
+
+`config/platforms.json` maps every tool to Box, Salesforce, or both. Record reads and proposals belong to Salesforce; document lookup and analysis belong to Box; generated-output readiness reconciles both. The validator requires both platforms, a Salesforce mapping for every proposed field, and a Salesforce-to-Box folder binding. See [Box + Salesforce starter](BOX-SALESFORCE.md).

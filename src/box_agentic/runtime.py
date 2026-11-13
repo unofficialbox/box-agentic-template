@@ -3,6 +3,7 @@ from copy import deepcopy
 import json
 from pathlib import Path
 from jsonschema import Draft202012Validator
+from .platforms import validate_platforms
 
 
 class ToolError(ValueError):
@@ -13,6 +14,7 @@ class Runtime:
     def __init__(self, root: Path, *, mode: str = "mock"):
         if mode != "mock":
             raise ToolError("Live adapters are not implemented; use mock mode")
+        self.platforms = validate_platforms(root)
         self.tools = json.loads((root / "config/tools.json").read_text())["tools"]
         self.data = json.loads((root / "fixtures/workflow.json").read_text())
         if self.data.get("synthetic") is not True:

@@ -1,0 +1,22 @@
+{
+  "kind": "portable_specification",
+  "template_key": "agenticDocument",
+  "scope": "enterprise",
+  "fields": [
+    {
+      "key": "salesforceRecordId",
+      "type": "string"
+    },
+    {
+      "key": "documentType",
+      "type": "string"
+    },
+    {
+      "key": "versionStatus",
+      "type": "string"
+    }
+  ],
+  "lookup": "Resolve the Salesforce record first; obtain its Box_Folder_ID__c and bound every document search to that folder.",
+  "bytes_authority": "Box",
+  "deployment": "Translate this blueprint to the authenticated Box tenant schema; this is not a deploy request."
+}

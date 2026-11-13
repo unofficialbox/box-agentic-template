@@ -1,0 +1,102 @@
+{
+  "version": "1.0",
+  "scenario": "box-agentic-template",
+  "provider": "box-dispatch",
+  "context": "solution-manifest",
+  "generatedAt": "",
+  "metadata": {
+    "manifest": {
+      "schema_version": "1.0",
+      "template_id": "box-agentic-template",
+      "deployment_config": ".dispatch/deployment.bcl",
+      "salesforce": {
+        "required_packages": [],
+        "required_permission_sets": [],
+        "seed_scripts": []
+      },
+      "box": {
+        "deployment_defaults": {
+          "global_strategy": "reuse",
+          "naming": {
+            "pattern": "{name} - {suffix}"
+          },
+          "rollback": {
+            "enabled": true,
+            "directory": ".dispatch/deployments",
+            "retain": 10
+          },
+          "component_strategies": {},
+          "components": {
+            "mode": "defaults",
+            "selections": {}
+          }
+        },
+        "component_order": [
+          "Folder Structure",
+          "Metadata Template",
+          "Sample Content"
+        ],
+        "workspace": {
+          "component_type": "Folder Structure",
+          "display_name": "Agentic Demo Workspace",
+          "name": "Agentic Demo Workspace",
+          "children": [
+            "01 - Source Documents",
+            "02 - Policy",
+            "03 - Generated Drafts"
+          ]
+        },
+        "sample_content": [
+          {
+            "source": "sample-data/documents/file-demo-terms.md",
+            "target_folder": "01 - Source Documents"
+          },
+          {
+            "source": "sample-data/documents/file-demo-policy.md",
+            "target_folder": "02 - Policy"
+          },
+          {
+            "source": "sample-data/documents/file-demo-output.md",
+            "target_folder": "03 - Generated Drafts"
+          }
+        ],
+        "capabilities": [
+          {
+            "id": "folder_structure",
+            "component_type": "Folder Structure",
+            "enabled_by_default": true,
+            "api": "public",
+            "handler": "box.folder-tree",
+            "operations": [
+              "validate",
+              "deploy"
+            ]
+          },
+          {
+            "id": "metadata_template",
+            "component_type": "Metadata Template",
+            "enabled_by_default": true,
+            "api": "public",
+            "handler": "box.metadata-template",
+            "operations": [
+              "validate",
+              "deploy"
+            ]
+          },
+          {
+            "id": "sample_content",
+            "component_type": "Sample Content",
+            "enabled_by_default": true,
+            "api": "public",
+            "handler": "box.file-upload",
+            "operations": [
+              "validate",
+              "deploy"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "resources": []
+}

@@ -1,0 +1,29 @@
+{
+  "version": "1.0",
+  "scenario": "",
+  "provider": "box-dispatch",
+  "context": "deployment-settings",
+  "generatedAt": "",
+  "metadata": {
+    "settings": {
+      "schema_version": "1.0",
+      "box": {
+        "global_strategy": "reuse",
+        "naming": {
+          "pattern": "{name} - {suffix}"
+        },
+        "rollback": {
+          "enabled": true,
+          "directory": ".dispatch/deployments",
+          "retain": 10
+        },
+        "component_strategies": {},
+        "components": {
+          "mode": "defaults",
+          "selections": {}
+        }
+      }
+    }
+  },
+  "resources": []
+}

@@ -6,6 +6,8 @@ import sys
 from box_agentic.runtime import Runtime
 from sync_skills import sync
 from build_deliverables import build
+from build_salesforce import build as build_salesforce
+from build_deployment import build as build_deployment
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -18,6 +20,10 @@ def main():
     if project["kind"] not in {"template", "project"} or project["mode"] != "mock":
         raise ValueError("Unsupported project kind or runtime mode")
     Runtime(ROOT)
+    if build_deployment(check=True):
+        raise ValueError("Run python scripts/build_deployment.py to refresh deployment artifacts")
+    if build_salesforce(check=True):
+        raise ValueError("Run python scripts/build_salesforce.py to refresh Salesforce metadata")
     if build(check=True):
         raise ValueError("Run python scripts/build_deliverables.py to refresh demo materials")
     stale = sync(check=True)

@@ -17,3 +17,8 @@ output/
 
 .mcp.json
 .cursor/mcp.json
+
+.dispatch/*
+!.dispatch/deployment.bcl
+
+config/runtime/demo-environment.json

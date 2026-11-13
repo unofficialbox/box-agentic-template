@@ -5,9 +5,11 @@
     "policy_hub_id": null,
     "docgen_template_id": null
   },
-  "record_system": {
-    "provider": null,
-    "target": null
-  },
-  "tool_bindings": {}
+  "tool_bindings": {},
+  "salesforce": {
+    "org_alias": null,
+    "instance_url": null,
+    "object_api_name": "Agentic_Work_Item__c",
+    "credential_source": "Existing authenticated connector or Salesforce CLI session"
+  }
 }

@@ -1,5 +1,8 @@
 flowchart TD
-  intake["Resolve the loan package<br/>Loan officer"]
+  box["Box: governed content"]
+  salesforce["Salesforce: structured records"]
+  salesforce <-->|"record to folder mapping"| box
+  intake["Resolve Salesforce record and Box package<br/>Loan officer"]
   evidence["Find and analyze the term sheet<br/>Loan officer"]
   proposal["Propose the bank terms<br/>Loan officer"]
   approval["Human credit decision<br/>Credit officer"]

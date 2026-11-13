@@ -1,0 +1,13 @@
+{
+  "label": "Agentic Work Item",
+  "plural_label": "Agentic Work Items",
+  "api_version": "67.0",
+  "fields": [
+    {"api_name": "External_Key__c", "label": "External Key", "type": "Text", "length": 100, "external_id": true},
+    {"api_name": "Box_Folder_ID__c", "label": "Box Folder ID", "type": "Text", "length": 100},
+    {"api_name": "Status__c", "label": "Status", "type": "Text", "length": 80},
+    {"api_name": "Amount__c", "label": "Amount", "type": "Currency", "precision": 18, "scale": 2},
+    {"api_name": "Rate__c", "label": "Rate", "type": "Number", "precision": 8, "scale": 4},
+    {"api_name": "Term_Months__c", "label": "Term Months", "type": "Number", "precision": 6, "scale": 0}
+  ]
+}

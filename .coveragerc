@@ -8,3 +8,8 @@ parallel = true
 [report]
 fail_under = 85
 show_missing = true
+
+[paths]
+package =
+    src/box_agentic
+    */src/box_agentic

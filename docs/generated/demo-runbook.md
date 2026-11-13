@@ -8,6 +8,10 @@
 6. Explain each held action and name the human decision owner. Do not describe fixtures as live.
 7. Repeat the walkthrough: it has no external side effects and needs no tenant reset.
 
+## Deployment preparation
+
+Read docs/DEPLOYMENT.md. Use included platform assets standalone, or the optional Dispatch BCL interface. Infrastructure deployment does not activate live workflow adapters.
+
 ## Live rehearsal
 
 Use docs/OPERATIONS.md after implementing live adapters. Keep live receipts outside the portable bundle.

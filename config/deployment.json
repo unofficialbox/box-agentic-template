@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.0",
+  "workspace": {
+    "name": "Agentic Demo Workspace",
+    "children": [
+      "01 - Source Documents",
+      "02 - Policy",
+      "03 - Generated Drafts"
+    ]
+  },
+  "document_folders": {
+    "term_sheet": "01 - Source Documents",
+    "policy": "02 - Policy",
+    "generated_draft": "03 - Generated Drafts"
+  },
+  "box_strategy": "reuse",
+  "supported_scope": [
+    "Box workspace folder tree",
+    "Box document metadata template",
+    "Synthetic sample content",
+    "Salesforce custom object and fields"
+  ],
+  "manual_steps": [
+    "Deploy or connect live workflow adapters separately.",
+    "Assign Salesforce permissions appropriate to the deployment user.",
+    "Resolve each real Salesforce record and set its Box_Folder_ID__c from verified Box deployment IDs.",
+    "Classify and apply Box document metadata for each uploaded source.",
+    "Verify source-cited reads and authorized writes with the intended identity before calling the demo live."
+  ]
+}

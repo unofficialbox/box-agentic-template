@@ -1,0 +1,44 @@
+{
+  "required_platforms": [
+    "box",
+    "salesforce"
+  ],
+  "box": {
+    "role": "governed_content",
+    "metadata_template_key": "agenticDocument",
+    "record_reference_field": "salesforceRecordId",
+    "document_type_field": "documentType",
+    "folder_binding": "salesforce.Box_Folder_ID__c"
+  },
+  "salesforce": {
+    "role": "structured_record",
+    "object_api_name": "Agentic_Work_Item__c",
+    "external_id_field": "External_Key__c",
+    "folder_id_field": "Box_Folder_ID__c",
+    "status_field": "Status__c",
+    "version_field": "SystemModstamp",
+    "field_mapping": {
+      "amount": "Amount__c",
+      "rate": "Rate__c",
+      "term_months": "Term_Months__c"
+    }
+  },
+  "tool_authorities": {
+    "get_record": [
+      "salesforce"
+    ],
+    "search_documents": [
+      "box"
+    ],
+    "analyze_document": [
+      "box"
+    ],
+    "propose_update": [
+      "salesforce"
+    ],
+    "verify_generated_document": [
+      "box",
+      "salesforce"
+    ]
+  }
+}

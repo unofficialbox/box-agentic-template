@@ -1,0 +1,40 @@
+{
+  "version": "1.0",
+  "scenario": "box-agentic-template",
+  "provider": "generic",
+  "context": "box-metadata-templates",
+  "generatedAt": "",
+  "metadata": {},
+  "resources": [
+    {
+      "name": "agentic_document_template",
+      "type": "config_file",
+      "provider": "generic",
+      "config": {
+        "templates": [
+          {
+            "templateKey": "agenticDocument",
+            "displayName": "Agentic Document",
+            "fields": [
+              {
+                "key": "salesforceRecordId",
+                "type": "string",
+                "displayName": "salesforceRecordId"
+              },
+              {
+                "key": "documentType",
+                "type": "string",
+                "displayName": "documentType"
+              },
+              {
+                "key": "versionStatus",
+                "type": "string",
+                "displayName": "versionStatus"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

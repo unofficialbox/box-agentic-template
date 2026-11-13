@@ -6,6 +6,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+from build_deployment import build as build_deployment
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -13,6 +14,8 @@ ROOT = Path(__file__).resolve().parents[1]
 def generate(slug, name, system_of_record, destination, *, init_git=False, source=ROOT):
     if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug):
         raise ValueError("slug must be lowercase kebab-case")
+    if system_of_record != "Salesforce":
+        raise ValueError("This template requires Salesforce as the system of record")
     if not name.strip() or not system_of_record.strip():
         raise ValueError("name and system of record must not be empty")
     destination = Path(destination).absolute()
@@ -44,8 +47,9 @@ def generate(slug, name, system_of_record, destination, *, init_git=False, sourc
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(source / entry, target)
         project = {"kind": "project", "slug": slug, "name": name,
-                   "system_of_record": system_of_record, "mode": "mock"}
+                   "system_of_record": "Salesforce", "required_platforms": ["box", "salesforce"], "mode": "mock"}
         (staging / "config/project.json").write_text(json.dumps(project, indent=2) + "\n")
+        build_deployment(staging)
         if init_git:
             subprocess.run(["git", "init", "-b", "main", str(staging)], check=True, capture_output=True)
         # mkdir reserves the destination without overwriting a concurrent creator.
@@ -65,7 +69,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--slug", required=True)
     parser.add_argument("--name", required=True)
-    parser.add_argument("--system-of-record", required=True)
+    parser.add_argument("--system-of-record", choices=["Salesforce"], default="Salesforce",
+                        help="Salesforce is required and selected by default")
     parser.add_argument("--destination", type=Path)
     parser.add_argument("--init-git", action="store_true")
     args = parser.parse_args()

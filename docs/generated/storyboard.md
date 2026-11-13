@@ -1,16 +1,16 @@
 # Commercial Loan Review: demo storyboard
 
-**Evidence level: synthetic fixture.**
+**Platforms: Box + Salesforce. Evidence level: synthetic fixture.**
 
 A source-cited loan review and a checked draft, with human credit approval retained.
 
-## Beat 1: Resolve the loan package
+## Beat 1: Resolve Salesforce record and Box package
 
 **Actor:** Loan officer
 
-**Say / ask:** Show the loan record and the folder that owns its documents.
+**Say / ask:** Show the Salesforce loan record and the Box folder that owns its documents.
 
-**Show:** Read the structured record and its mapped Box folder.
+**Show:** Read the Salesforce record and its mapped Box folder.
 
 **Expected evidence:** Record case-demo-001 is Underwriting at version 1.
 
@@ -22,7 +22,7 @@ A source-cited loan review and a checked draft, with human credit approval retai
 
 **Say / ask:** Compare the bank rate and borrower-requested rate in the term sheet.
 
-**Show:** Find term_sheet documents in the mapped folder and cite their versioned facts.
+**Show:** Find term_sheet documents in the mapped Box folder and cite their versioned facts.
 
 **Expected evidence:** Bank rate 6.85%; borrower requests 6.50%; cite file-demo-terms version 1.
 
@@ -34,7 +34,7 @@ A source-cited loan review and a checked draft, with human credit approval retai
 
 **Say / ask:** Propose the bank rate for review; keep the record unchanged.
 
-**Show:** Create a reviewable rate diff against the current record version.
+**Show:** Create a reviewable Salesforce rate diff against the current record version.
 
 **Expected evidence:** Proposal requires human approval and applied is false.
 
@@ -46,7 +46,7 @@ A source-cited loan review and a checked draft, with human credit approval retai
 
 **Say / ask:** Who owns this decision, and what evidence remains before proceeding?
 
-**Show:** Review the evidence and authorize the exact consequential action in the record system.
+**Show:** Review the Box evidence and authorize the exact consequential action in Salesforce.
 
 **Expected evidence:** The credit officer owns approval. No approval or write is fabricated.
 

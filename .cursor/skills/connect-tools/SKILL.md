@@ -1,11 +1,15 @@
 ---
 name: connect-tools
-description: Discover connected Box and record-system capabilities, design tool contracts, or implement and verify an adapter.
+description: Discover connected Box and Salesforce capabilities, design tool contracts, or implement and verify an adapter.
 ---
 
 # Connect Tools
 
-Read `docs/TOOLS.md` and `config/tools.json`. The registry contains local mock contracts, not Box API names.
+Read `docs/TOOLS.md`, `docs/BOX-SALESFORCE.md`, `config/platforms.json`, and `config/tools.json`.
+
+Discover both Box and Salesforce connectors. Box tools own content search, analysis, generation, and signatures; Salesforce tools own business-record reads and governed changes. Cross-system actions must resolve the authorized Salesforce record and its Box folder. Missing live access to either platform is a reported integration gap, not permission to remove it from the design.
+
+The registry contains local mock contracts, not Box API names.
 
 Inspect the actual connected tool inventory and schemas. Prefer an available purpose-built connector; do not infer that a shell, browser, HTTP client, or MCP server is available. Record missing capabilities rather than substituting a tool that broadens access. For live integration, fill the binding worksheet in `docs/TOOLS.md` with the provider tool, schema, authority, scope, and verification evidence. Keep tenant values in ignored local config and tokens outside source.
 

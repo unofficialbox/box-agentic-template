@@ -19,7 +19,7 @@ class DeliverableTests(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.dest = Path(self.tmp.name) / 'project with spaces'
-        generate('test-case', 'Test Case', 'Example CRM', self.dest)
+        generate('test-case', 'Test Case', 'Salesforce', self.dest)
         self.usecase = json.loads((self.dest / 'config/use-case.json').read_text())
 
     def save(self):

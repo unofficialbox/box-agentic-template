@@ -2,6 +2,10 @@
   "kind": "template",
   "slug": "box-agentic-template",
   "name": "Box Agentic Template",
-  "system_of_record": "Choose your structured system",
-  "mode": "mock"
+  "system_of_record": "Salesforce",
+  "mode": "mock",
+  "required_platforms": [
+    "box",
+    "salesforce"
+  ]
 }

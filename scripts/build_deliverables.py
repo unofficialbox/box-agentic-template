@@ -5,12 +5,14 @@ import json
 from pathlib import Path
 import textwrap
 from jsonschema import Draft202012Validator
+from box_agentic.platforms import validate_platforms
 
 ROOT = Path(__file__).resolve().parents[1]
 NAMES = ("process.mmd", "process.svg", "storyboard.md", "storyboard.html", "solution-brief.md", "demo-runbook.md", "tool-matrix.md", "acceptance.md")
 
 
 def load(root):
+    validate_platforms(root)
     usecase = json.loads((root / "config/use-case.json").read_text())
     schema = json.loads((root / "config/use-case.schema.json").read_text())
     Draft202012Validator(schema).validate(usecase)
@@ -40,7 +42,7 @@ def process_svg(usecase):
              '<desc id="desc">Ordered workflow. Each step includes its stop condition. Synthetic demonstration.</desc>',
              '<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#53657c"/></marker></defs>',
              f'<rect width="960" height="{height}" fill="#f4f7fb"/>',
-             '<text x="40" y="42" font-family="sans-serif" font-size="24" fill="#172b4d">Business process · synthetic demo</text>']
+             '<text x="40" y="42" font-family="sans-serif" font-size="24" fill="#172b4d">Box + Salesforce · synthetic demo</text>']
     for index, step in enumerate(steps):
         y = 76 + index * 124
         if index:
@@ -60,7 +62,7 @@ def process_svg(usecase):
 def render(root=ROOT):
     u, tools = load(root)
     steps = u["steps"]
-    mmd = ['flowchart TD']
+    mmd = ['flowchart TD', '  box["Box: governed content"]', '  salesforce["Salesforce: structured records"]', '  salesforce <-->|"record to folder mapping"| box']
     for step in steps:
         mmd.append(f'  {step["id"]}["{label(step["title"])}<br/>{label(step["actor"])}"]')
     for left, right in zip(steps, steps[1:]):
@@ -68,7 +70,7 @@ def render(root=ROOT):
     mmd.append('  hold["Hold action and report missing evidence or authorization"]')
     for step in steps:
         mmd.append(f'  {step["id"]} -. "check fails" .-> hold')
-    story = [f'# {u["title"]}: demo storyboard', '', '**Evidence level: synthetic fixture.**', '', u['outcome'], '']
+    story = [f'# {u["title"]}: demo storyboard', '', '**Platforms: Box + Salesforce. Evidence level: synthetic fixture.**', '', u['outcome'], '']
     cards = []
     for index, step in enumerate(steps, 1):
         story.extend([f'## Beat {index}: {step["title"]}', '', f'**Actor:** {step["actor"]}', '',
@@ -84,14 +86,15 @@ def render(root=ROOT):
             'main{max-width:1080px;margin:auto;padding:48px 24px}h1{font-size:clamp(32px,5vw,52px);line-height:1.1}'
             '.badge,.number{font-size:13px;letter-spacing:.08em;color:#31598c}article{background:white;border:1px solid #c5d1df;border-radius:14px;padding:28px;margin:24px 0}'
             '.diagram{overflow-x:auto;margin:24px 0}.diagram svg{width:100%;min-width:720px;height:auto}p{overflow-wrap:anywhere}strong{display:block;font-size:13px;text-transform:uppercase;color:#53657c}'
-            '@media print{article{break-inside:avoid}main{padding:0}}</style><main><span class="badge">SYNTHETIC DEMONSTRATION · NO LIVE WRITES</span>'
+            '@media print{article{break-inside:avoid}main{padding:0}}</style><main><span class="badge">BOX + SALESFORCE · SYNTHETIC DEMONSTRATION · NO LIVE WRITES</span>'
             '<h1>' + escape(u['title']) + '</h1><p>' + escape(u['outcome']) + '</p><div class="diagram" tabindex="0" role="region" aria-label="Process diagram, scroll horizontally on small screens">' + process_svg(u) + '</div>' + ''.join(cards) + '</main></html>\n')
     brief = [f'# {u["title"]}: solution brief', '', '## Business request', '', u['business_prompt'], '', '## Intended outcome', '', u['outcome'], '',
              '## Authorities', '', f'- Governed content: {u["content_authority"]}', f'- Structured record: {u["system_of_record"]}', f'- Consequential decision: {u["decision_owner"]}', '',
              '## Assumptions', '', *['- ' + a for a in u['assumptions']], '', '## Not implemented', '', *['- ' + a for a in u['not_implemented']], '']
-    matrix = ['# Tool matrix', '', 'All included implementations are mock-only and read-only. Inspect config/tools.json for exact schemas.', '', '| Tool | Purpose | Implementation | External writes |', '|---|---|---|---|']
+    authorities = validate_platforms(root)['tool_authorities']
+    matrix = ['# Tool matrix', '', 'All included implementations are mock-only and read-only. Inspect config/tools.json for exact schemas.', '', '| Tool | Purpose | Platform authority | Implementation | External writes |', '|---|---|---|---|---|']
     for tool in tools:
-        matrix.append('| ' + ' | '.join([tool['name'], tool['description'].replace('|', r'\|').replace('\n', ' '), tool['implementation'], 'None']) + ' |')
+        matrix.append('| ' + ' | '.join([tool['name'], tool['description'].replace('|', r'\|').replace('\n', ' '), ' + '.join({'box': 'Box', 'salesforce': 'Salesforce'}[owner] for owner in authorities[tool['name']]), tool['implementation'], 'None']) + ' |')
     runbook = ['# Presenter runbook', '', '1. Create a virtual environment and install `.[mcp,dev]` as documented in README.',
                '2. Run `python scripts/validate.py` and `python scripts/build_deliverables.py --check`.',
                '3. Open `docs/generated/storyboard.html` locally; it is self-contained and makes no network requests.',
@@ -99,6 +102,7 @@ def render(root=ROOT):
                '5. Follow each storyboard prompt and verify its expected evidence.',
                '6. Explain each held action and name the human decision owner. Do not describe fixtures as live.',
                '7. Repeat the walkthrough: it has no external side effects and needs no tenant reset.', '',
+               '## Deployment preparation', '', 'Read docs/DEPLOYMENT.md. Use included platform assets standalone, or the optional Dispatch BCL interface. Infrastructure deployment does not activate live workflow adapters.', '',
                '## Live rehearsal', '', 'Use docs/OPERATIONS.md after implementing live adapters. Keep live receipts outside the portable bundle.', '']
     acceptance = ['# Acceptance checklist', '', 'These are required checks, not claims that a live test passed.', '', *['- [ ] ' + a for a in u['acceptance']], '',
                   '- [ ] Code, fixture fields, tool contracts, and storyboard describe the same domain.',

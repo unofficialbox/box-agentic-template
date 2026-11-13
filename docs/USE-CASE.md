@@ -7,7 +7,7 @@ The included reference is a **synthetic commercial loan review**, not a live dep
 | Business outcome | Source-cited review, proposed bank terms, checked draft |
 | Primary actor | Loan officer |
 | Content authority | Box; simulated by synthetic documents locally |
-| Record authority | Example CRM; simulated by a versioned fixture |
+| Record authority | Salesforce; simulated by a versioned fixture |
 | Consequential decision owner | Credit officer |
 | Document classes | Term sheet, policy, generated draft |
 | Proposed fields | Amount, rate, term in months |

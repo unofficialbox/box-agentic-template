@@ -15,12 +15,10 @@
       "minLength": 1
     },
     "system_of_record": {
-      "type": "string",
-      "minLength": 1
+      "const": "Salesforce"
     },
     "content_authority": {
-      "type": "string",
-      "minLength": 1
+      "const": "Box"
     },
     "decision_owner": {
       "type": "string",

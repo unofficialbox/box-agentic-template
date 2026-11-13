@@ -36,7 +36,7 @@ The official [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk
 ## Verify each client
 
 1. Reload the project's skills and MCP connection in the client.
-2. Confirm the five project skills are visible or select one by its file path.
+2. Confirm the six project skills are visible or select one by its file path.
 3. Confirm `box-agentic-mock` lists the five registry tools with matching argument schemas.
 4. Ask: “Use get_record for case-demo-001, then find its term_sheet documents and cite the bank and requested rate.” Expect 6.85% versus 6.50%, with a versioned fixture citation.
 5. Ask for a proposal. Verify it returns `applied: false`.

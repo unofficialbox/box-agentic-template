@@ -19,7 +19,7 @@ class DeploymentTests(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name) / 'standalone project'
-        generate('standalone-test', 'Standalone test', 'Salesforce', self.root)
+        generate('standalone-test', 'Standalone test', 'Salesforce', self.root, scaffold_only=True)
 
     def save(self, path, value):
         (self.root / path).write_text(json.dumps(value))

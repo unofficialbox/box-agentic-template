@@ -9,11 +9,13 @@ Read `config/project.json`, `config/platforms.json`, and `docs/BUILD-YOUR-OWN.md
 
 Every generated use case must include Box and Salesforce. Keep Box as governed content authority and Salesforce as structured-record authority. Adapt the Salesforce object and field mapping, Box metadata blueprint, and record-to-folder binding to the business domain. Do not make Salesforce optional when tailoring the use case. Read `docs/BOX-SALESFORCE.md` for the integration starter. Keep the generated project standalone and update the supported Dispatch deployment assets per `docs/DEPLOYMENT.md`; neither Dispatch nor a sibling checkout may become a runtime dependency.
 
-If `kind` is `template`, use `scripts/new_project.py` to generate a sibling and continue there. If `kind` is `project`, tailor it in place; the generator remains available for intentionally creating another project.
+First use gather-use-case and run `python scripts/intake.py check`. If the intake is absent, incomplete, or unconfirmed, continue the guided questions and user review before implementation. Do not replace this with silent assumptions.
+
+If `kind` is `template`, use `scripts/new_project.py --intake-state config/intake.local.json` with the confirmed project identity to generate a sibling and continue there. If `kind` is `project`, tailor it in place after the intake check; the generator remains available for intentionally creating another project.
 
 Preserve the user's full business request in `config/use-case.json.business_prompt`. Read its schema and adapt the structured definition, including actors, process steps, presenter prompts, expected evidence, failure conditions, assumptions, and acceptance criteria. Deliver code AND the demo materials required by `docs/BUILD-YOUR-OWN.md`; a scaffold or renamed loan example alone is incomplete.
 
-Capture the business outcome, actor, record authority, document types, proposed changes, decision owner, and observable success criteria in `docs/USE-CASE.md`. Use reasonable assumptions for optional detail and identify them. Resolve any missing decision that determines authorization or data access before dependent live work.
+Capture the business outcome, actor, record authority, document types, proposed changes, decision owner, and observable success criteria in `docs/USE-CASE.md`. Use only assumptions/proposals included in the user-confirmed brief and identify them. Resolve any missing decision that determines authorization or data access before dependent live work.
 
 Replace synthetic fixtures and domain field schemas together; preserve versioned citations, per-record document scope, and distinct requested versus authoritative values. Update mock handlers and tests alongside `config/tools.json`. Do not globally replace text through code or JSON. Generate host skill copies after editing canonical skills.
 

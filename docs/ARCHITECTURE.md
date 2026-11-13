@@ -4,7 +4,10 @@ The user's business prompt drives both the implementation and its demo materials
 
 ```mermaid
 flowchart TD
-  prompt[Business use-case prompt] --> agent[Coding agent plus create-use-case skill]
+  prompt[Business use-case prompt] --> intake[Fixed guided intake catalog]
+  intake --> brief[Complete build brief]
+  brief --> confirmation[User confirms current review fingerprint]
+  confirmation --> agent[Coding agent plus create-use-case skill]
   agent --> project[New local project]
   project --> code[Domain code, contracts, fixtures, tests]
   project --> definition[Structured use-case definition]
@@ -52,3 +55,7 @@ flowchart LR
 ```
 
 [Deployment scope and operator steps](DEPLOYMENT.md) distinguish infrastructure packaging from live workflow acceptance. Dispatch package normalization and operator settings belong to its assembled copy; developer source regeneration must not overwrite that operator context.
+
+## Intake readiness
+
+The guided intake uses a fixed question catalog, provenance-aware answers, conditional live preparation, and a confirmation fingerprint over the catalog, original request, and answers. Any edit invalidates the confirmation. Normal generation requires confirmed intake; explicit reference scaffolding uses `--scaffold-only`. Renderers and validation check a local intake when present. This is a build-requirements gate, not cloud authorization or proof that natural-language answers are technically correct. See [guided prompt](GUIDED-PROMPT.md).

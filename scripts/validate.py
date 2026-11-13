@@ -4,6 +4,7 @@ from pathlib import Path
 import subprocess
 import sys
 from box_agentic.runtime import Runtime
+from box_agentic.intake import load_catalog, require_ready
 from sync_skills import sync
 from build_deliverables import build
 from build_salesforce import build as build_salesforce
@@ -19,6 +20,9 @@ def main():
     project = json.loads((ROOT / "config/project.json").read_text())
     if project["kind"] not in {"template", "project"} or project["mode"] != "mock":
         raise ValueError("Unsupported project kind or runtime mode")
+    load_catalog(ROOT)
+    if (ROOT / "config/intake.local.json").exists():
+        require_ready(ROOT, ROOT / "config/intake.local.json")
     Runtime(ROOT)
     if build_deployment(check=True):
         raise ValueError("Run python scripts/build_deployment.py to refresh deployment artifacts")

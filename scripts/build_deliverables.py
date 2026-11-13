@@ -6,12 +6,15 @@ from pathlib import Path
 import textwrap
 from jsonschema import Draft202012Validator
 from box_agentic.platforms import validate_platforms
+from box_agentic.intake import require_ready
 
 ROOT = Path(__file__).resolve().parents[1]
 NAMES = ("process.mmd", "process.svg", "storyboard.md", "storyboard.html", "solution-brief.md", "demo-runbook.md", "tool-matrix.md", "acceptance.md")
 
 
 def load(root):
+    if (root / "config/intake.local.json").exists():
+        require_ready(root, root / "config/intake.local.json")
     validate_platforms(root)
     usecase = json.loads((root / "config/use-case.json").read_text())
     schema = json.loads((root / "config/use-case.schema.json").read_text())

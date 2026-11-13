@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 import re
 from box_agentic.platforms import validate_platforms
+from box_agentic.intake import require_ready
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -18,6 +19,8 @@ def document(scenario, provider, context, *, metadata=None, resources=None):
 
 
 def render(root=ROOT):
+    if (root / "config/intake.local.json").exists():
+        require_ready(root, root / "config/intake.local.json")
     validate_platforms(root)
     project = json.loads((root / "config/project.json").read_text())
     config = json.loads((root / "config/deployment.json").read_text())

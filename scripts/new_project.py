@@ -7,11 +7,12 @@ import shutil
 import subprocess
 import tempfile
 from build_deployment import build as build_deployment
+from box_agentic.intake import require_ready
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def generate(slug, name, system_of_record, destination, *, init_git=False, source=ROOT):
+def generate(slug, name, system_of_record, destination, *, init_git=False, source=ROOT, intake_state=None, scaffold_only=False):
     if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug):
         raise ValueError("slug must be lowercase kebab-case")
     if system_of_record != "Salesforce":
@@ -21,9 +22,15 @@ def generate(slug, name, system_of_record, destination, *, init_git=False, sourc
     destination = Path(destination).absolute()
     if destination.exists() or destination.is_symlink():
         raise ValueError("Destination already exists; choose a new directory")
+    if intake_state is None and not scaffold_only:
+        raise ValueError("Supply a confirmed --intake-state, or explicitly choose --scaffold-only for the reference example")
+    if intake_state is not None and scaffold_only:
+        raise ValueError("Choose a confirmed intake or scaffold-only, not both")
     source = source.resolve()
     if destination.resolve().is_relative_to(source):
         raise ValueError("Create a sibling outside the source repository")
+    if intake_state is not None:
+        require_ready(source, Path(intake_state))
     manifest = json.loads((source / "config/scaffold.json").read_text())
     entries = manifest["files"]
     if len(set(entries)) != len(entries):
@@ -49,6 +56,9 @@ def generate(slug, name, system_of_record, destination, *, init_git=False, sourc
         project = {"kind": "project", "slug": slug, "name": name,
                    "system_of_record": "Salesforce", "required_platforms": ["box", "salesforce"], "mode": "mock"}
         (staging / "config/project.json").write_text(json.dumps(project, indent=2) + "\n")
+        if intake_state is not None:
+            shutil.copyfile(intake_state, staging / "config/intake.local.json")
+            (staging / "config/intake.local.json").chmod(0o600)
         build_deployment(staging)
         if init_git:
             subprocess.run(["git", "init", "-b", "main", str(staging)], check=True, capture_output=True)
@@ -73,10 +83,13 @@ def main():
                         help="Salesforce is required and selected by default")
     parser.add_argument("--destination", type=Path)
     parser.add_argument("--init-git", action="store_true")
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument("--intake-state", type=Path, help="Complete, confirmed use-case intake")
+    mode.add_argument("--scaffold-only", action="store_true", help="Copy the reference example without claiming domain tailoring")
     args = parser.parse_args()
     try:
         result = generate(args.slug, args.name, args.system_of_record,
-                          args.destination or ROOT.parent / args.slug, init_git=args.init_git)
+                          args.destination or ROOT.parent / args.slug, init_git=args.init_git, intake_state=args.intake_state, scaffold_only=args.scaffold_only)
     except (ValueError, OSError, subprocess.CalledProcessError) as error:
         parser.exit(1, str(error) + "\n")
     print(result)

@@ -21,7 +21,7 @@ class PlatformTests(unittest.TestCase):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
         self.root = Path(self.tmp.name) / 'generated project'
-        generate('platform-test', 'Platform test', 'Salesforce', self.root)
+        generate('platform-test', 'Platform test', 'Salesforce', self.root, scaffold_only=True)
         self.config = json.loads((self.root / 'config/platforms.json').read_text())
 
     def save(self, path, value):
@@ -45,7 +45,7 @@ class PlatformTests(unittest.TestCase):
     def test_generator_defaults_to_salesforce_and_rejects_other_crm(self):
         dest = Path(self.tmp.name) / 'cli'
         subprocess.run([sys.executable, str(ROOT / 'scripts/new_project.py'), '--slug', 'cli-case',
-                        '--name', 'CLI Case', '--destination', str(dest)], check=True, capture_output=True)
+                        '--name', 'CLI Case', '--scaffold-only', '--destination', str(dest)], check=True, capture_output=True)
         self.assertEqual(json.loads((dest / 'config/project.json').read_text())['system_of_record'], 'Salesforce')
         with self.assertRaisesRegex(ValueError, 'requires Salesforce'):
             generate('wrong-crm', 'Wrong CRM', 'Other CRM', Path(self.tmp.name) / 'other')

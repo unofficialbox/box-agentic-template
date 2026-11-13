@@ -1,33 +1,8 @@
 # From one business prompt to a complete demo
 
-Open this repository in your coding agent and paste the following with your own business request. Box and Salesforce are included in every generated project; additional platform choices are optional; the agent should infer a minimal offline implementation and state assumptions.
+Start with the [guided prompt](GUIDED-PROMPT.md). It uses a fixed, resumable question catalog to gather every applicable business, Box, Salesforce, workflow, demo, and deployment decision before implementation. The user reviews and confirms the complete brief, including concrete agent recommendations.
 
-```text
-Use this template to build a complete demo for this business use case:
-
-[Describe the business problem, people, documents, decisions, and desired outcome in plain language.]
-
-Include Box for governed documents and Salesforce for structured business
-records and workflow state. Preserve both platforms throughout the code,
-configuration, process diagram, storyboard, and acceptance checks.
-Read AGENTS.md and use the create-use-case skill. If this is the template,
-create a new sibling Git project; continue in that generated project.
-Make reasonable assumptions for optional details and record them.
-Ask only when a missing decision prevents correct or authorized work.
-
-Deliver working code, tool contracts, configuration, synthetic fixtures,
-a process diagram (Mermaid and rendered SVG), a self-contained HTML and
-Markdown demo storyboard, a solution brief, a tool/skill map, a presenter
-runbook, and acceptance checks. Make the project standalone and include
-Box Dispatch-compatible deployment artifacts. Tailor all of them to my use case.
-
-Use config/use-case.json as the shared narrative source. Preserve my
-original request in business_prompt. Adapt runtime handlers, schemas,
-fixtures, tests, and scripts/demo.py to the domain; do not stop after
-renaming the loan example. Run scripts/build_deliverables.py, then the
-validator and coverage. Keep live integration gaps explicit. Do not
-deploy, publish, or modify cloud data merely to generate the project.
-```
+Box and Salesforce, standalone operation, Dispatch compatibility, and the standard output bundle are fixed requirements. The agent gathers domain-specific decisions instead of silently inheriting the loan example.
 
 ## Example business request
 
@@ -37,8 +12,8 @@ The resulting code should implement supplier fields and expiration checks; a ren
 
 ## Agent execution sequence
 
-1. Read `config/project.json`. If `kind` is `template`, run `scripts/new_project.py` with a derived slug and name; Salesforce is the default required system of record. Continue in that sibling directory. The generator creates identity and portable source; the coding agent performs semantic tailoring.
-2. Preserve the request and record assumptions in `config/use-case.json`. Complete the authority and acceptance sections in `docs/USE-CASE.md`.
+1. Complete [guided intake](GUIDED-PROMPT.md), receive the user's brief confirmation, and run `python scripts/intake.py check`. Read `config/project.json`. If `kind` is `template`, run `scripts/new_project.py --intake-state config/intake.local.json` with a derived slug and name; Salesforce is the default required system of record. Continue in that sibling directory. The generator creates identity and portable source; the coding agent performs semantic tailoring.
+2. Translate the confirmed answers using each question's `maps_to` source list. Preserve the request and record approved assumptions in `config/use-case.json`. Complete the authority and acceptance sections in `docs/USE-CASE.md`.
 3. Tailor `src/box_agentic/runtime.py`, `config/tools.json`, fixtures, and `scripts/demo.py`. Replace loan-specific fields and checks, add relevant success and failure cases, and update tests. Keep all mock implementations explicitly labeled.
 4. Make each process step actionable: actor, prompt, tool (or human task), visible evidence, expected result, and failure response. Steps may name only registered tools. Use `null` for a human or unimplemented action and state the limitation.
 5. Update the canonical skills if domain behavior requires it; regenerate native copies. Keep `docs/CLIENTS.md` accurate for the tools actually implemented.
@@ -55,6 +30,7 @@ The resulting code should implement supplier fields and expiration checks; a ren
 | Box + Salesforce starters | `config/platforms.json`, `config/box/`, `config/salesforce/`, `salesforce-project/` |
 | Standalone / Dispatch deployment | `dispatch.bcl`, `.dispatch/deployment.bcl`, `config/deployment.json`, `config/box/metadata-templates.bcl`, `sample-data/documents/` |
 | Synthetic evidence | `fixtures/workflow.json` |
+| Guided intake | `config/intake/questions.json`, ignored `config/intake.local.json` |
 | Business prompt and narrative | `config/use-case.json`, `docs/USE-CASE.md` |
 | Process diagram | `docs/generated/process.mmd`, `process.svg` |
 | Demo storyboard | `docs/generated/storyboard.html`, `storyboard.md` |

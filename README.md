@@ -6,7 +6,7 @@ The loan example demonstrates document evidence → record comparison → propos
 
 ## Start with your business use case
 
-Open the template in your coding agent and paste the [starter prompt](docs/BUILD-YOUR-OWN.md), adding your business request in plain language. The agent creates a sibling project, tailors code/configuration/fixtures, and renders the demo materials from `config/use-case.json`. No technical platform selection is required to begin.
+Open the template in your coding agent and paste the [guided prompt](docs/GUIDED-PROMPT.md), adding your business request in plain language. The agent asks the fixed intake questions in small batches, shows the complete brief for your confirmation, then creates a sibling project and tailors its code, configuration, fixtures, and demo materials. No technical platform selection is required to begin.
 
 Preview the included reference: [demo storyboard](docs/generated/storyboard.html), [process diagram](docs/generated/process.svg), and [solution brief](docs/generated/solution-brief.md).
 
@@ -30,11 +30,13 @@ Expected: synthetic evidence at the bank rate of 6.85%, a proposal with `applied
 
 ## Create your own project
 
-Run from this template's root:
+For a tailored project, complete the [guided intake](docs/GUIDED-PROMPT.md) and generate with `--intake-state config/intake.local.json`.
+
+To explore an unchanged reference scaffold, run from this template's root:
 
 ```bash
 python scripts/new_project.py --slug vendor-onboarding \
-  --name "Vendor Onboarding" --system-of-record "Salesforce" --init-git
+  --name "Vendor Onboarding" --system-of-record "Salesforce" --scaffold-only --init-git
 cd ../vendor-onboarding
 python3 -m venv .venv
 source .venv/bin/activate
@@ -44,14 +46,14 @@ python scripts/validate.py
 
 This creates a new sibling Git repository, copies only allowlisted source, and sets its identity in `config/project.json`. It does not copy Git history, credentials, local bindings, installed dependencies, or outputs. The example remains synthetic loans until tailored. Existing destinations are refused. Use `--destination` for a different location outside the source tree.
 
-Give your coding agent the [starter prompt](docs/BUILD-YOUR-OWN.md). In a generated project, follow the tailoring steps in that guide.
+Give your coding agent the [guided prompt](docs/GUIDED-PROMPT.md). In a generated project, follow the tailoring steps in that guide.
 
 ## Skills and tools
 
 | Layer | Source | Purpose |
 |---|---|---|
 | Shared instructions | [AGENTS.md](AGENTS.md) | Authority, routing, verification |
-| Canonical skills | [.agents/skills](.agents/skills) | Create, connect, deploy, rehearse, verify |
+| Canonical skills | [.agents/skills](.agents/skills) | Gather, create, connect, deploy, rehearse, verify |
 | Claude entry point | [CLAUDE.md](CLAUDE.md), `.claude/skills/` | Native Claude discovery |
 | Cursor entry point | [.cursor/rules/project.mdc](.cursor/rules/project.mdc), `.cursor/skills/` | Native Cursor discovery |
 | Codex entry point | `AGENTS.md`, `.agents/skills/` | Project instructions and skills |

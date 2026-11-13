@@ -5,12 +5,15 @@ import re
 from pathlib import Path
 from xml.sax.saxutils import escape
 from box_agentic.platforms import validate_platforms
+from box_agentic.intake import require_ready
 
 ROOT = Path(__file__).resolve().parents[1]
 NS = 'http://soap.sforce.com/2006/04/metadata'
 
 
 def render(root=ROOT):
+    if (root / "config/intake.local.json").exists():
+        require_ready(root, root / "config/intake.local.json")
     sf = validate_platforms(root)['salesforce']
     spec = json.loads((root / 'config/salesforce/object.json').read_text())
     object_name = sf['object_api_name']

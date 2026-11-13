@@ -22,3 +22,5 @@ output/
 !.dispatch/deployment.bcl
 
 config/runtime/demo-environment.json
+
+config/intake.local.json

@@ -17,7 +17,7 @@ def check(dispatch_root):
         raise ValueError('--dispatch-root must select a box-dispatch source checkout')
     with tempfile.TemporaryDirectory(prefix='agentic-dispatch-check-') as temp:
         temp = Path(temp)
-        project = generate('dispatch-smoke', 'Dispatch Smoke', 'Salesforce', temp / 'project')
+        project = generate('dispatch-smoke', 'Dispatch Smoke', 'Salesforce', temp / 'project', scaffold_only=True)
         subprocess.run(['git', 'init', '-b', 'main', str(project)], check=True, capture_output=True)
         subprocess.run(['git', 'add', '.'], cwd=project, check=True, capture_output=True)
         subprocess.run(['git', '-c', 'user.name=Template Compatibility Test', '-c', 'user.email=template-test@example.invalid',

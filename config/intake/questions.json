@@ -1,0 +1,337 @@
+{
+  "version": 1,
+  "max_batch_size": 3,
+  "invariants": [
+    "Box is required and owns governed content.",
+    "Salesforce is required and owns structured business records.",
+    "The project must operate standalone and carry a Box Dispatch deployment interface.",
+    "Code, configuration, process diagram, storyboard, brief, tool/skill map, runbook, and acceptance checks are required.",
+    "No secrets in intake; tenant bindings remain in ignored runtime configuration."
+  ],
+  "groups": [
+    {
+      "id": "business",
+      "title": "Business purpose",
+      "questions": [
+        {
+          "id": "project_identity",
+          "prompt": "What should the project be called, and what lowercase kebab-case repository slug should it use?",
+          "maps_to": [
+            "config/project.json"
+          ]
+        },
+        {
+          "id": "business_outcome",
+          "prompt": "What business problem and industry are we addressing, what is the current process, and what measurable outcome should improve?",
+          "maps_to": [
+            "config/use-case.json",
+            "docs/USE-CASE.md"
+          ]
+        },
+        {
+          "id": "scope",
+          "prompt": "Where does this workflow begin and end, and what is explicitly out of scope?",
+          "maps_to": [
+            "config/use-case.json",
+            "docs/USE-CASE.md"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "delivery",
+      "title": "Implementation scope",
+      "questions": [
+        {
+          "id": "implementation_depth",
+          "prompt": "Should the first build be an offline demo or include implemented live Box and Salesforce adapters? Infrastructure deployment alone does not make the workflow live.",
+          "maps_to": [
+            "config/project.json",
+            "docs/DEPLOYMENT.md"
+          ],
+          "choices": [
+            "offline",
+            "live_adapters"
+          ]
+        },
+        {
+          "id": "technical_constraints",
+          "prompt": "What languages/frameworks, hosting/runtime, licensing, existing-code, and deadline constraints apply? What user/document volumes, latency/reliability targets, and cost budget should the design support? Say none or request a concrete proposal where unrestricted.",
+          "maps_to": [
+            "pyproject.toml",
+            "src/",
+            "docs/ARCHITECTURE.md"
+          ]
+        },
+        {
+          "id": "agent_clients",
+          "prompt": "Which coding agents and demo-facing AI clients should be supported, and what existing connectors, tools, models, or orchestration frameworks are available? Say none if starting fresh.",
+          "maps_to": [
+            "docs/CLIENTS.md",
+            "config/tools.json",
+            ".agents/skills/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "people",
+      "title": "People and access",
+      "questions": [
+        {
+          "id": "actors",
+          "prompt": "Who participates, what does each role do, and who owns the process?",
+          "maps_to": [
+            "config/use-case.json"
+          ]
+        },
+        {
+          "id": "surfaces",
+          "prompt": "Which employee or external-user surfaces are needed: headless agent, Salesforce workspace, portal, or other UI? What must each role see and do?",
+          "maps_to": [
+            "docs/ARCHITECTURE.md",
+            "src/"
+          ]
+        },
+        {
+          "id": "access_boundaries",
+          "prompt": "What tenant, record, document, sensitive-data, and internal/external access boundaries must be enforced?",
+          "maps_to": [
+            "config/platforms.json",
+            "docs/USE-CASE.md",
+            "tests/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "workflow",
+      "title": "Workflow and decision ownership",
+      "questions": [
+        {
+          "id": "trigger_and_steps",
+          "prompt": "What starts the workflow? Describe the ordered steps, actor, input, action, expected output, and end state for each step.",
+          "maps_to": [
+            "config/use-case.json",
+            "src/box_agentic/runtime.py"
+          ]
+        },
+        {
+          "id": "decisions_and_approvals",
+          "prompt": "Who owns each consequential decision, what evidence must they review, and which exact transitions/writes/generation/signature actions require their confirmation?",
+          "maps_to": [
+            "config/use-case.json",
+            "config/tools.json"
+          ]
+        },
+        {
+          "id": "exceptions",
+          "prompt": "What can go wrong, when must the workflow stop or escalate, who receives exceptions, and how should it resume?",
+          "maps_to": [
+            "config/use-case.json",
+            "tests/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "salesforce",
+      "title": "Salesforce records",
+      "questions": [
+        {
+          "id": "salesforce_model",
+          "prompt": "Which Salesforce objects and relationships are involved? Specify existing versus new objects, required fields and types, stable external IDs, and source-to-record mappings. If unknown, request a concrete proposal.",
+          "maps_to": [
+            "config/salesforce/object.json",
+            "config/platforms.json",
+            "salesforce-project/"
+          ]
+        },
+        {
+          "id": "salesforce_lifecycle",
+          "prompt": "What record states and allowed transitions exist, and what rules or approvals permit each transition?",
+          "maps_to": [
+            "src/box_agentic/runtime.py",
+            "config/use-case.json"
+          ]
+        },
+        {
+          "id": "salesforce_writes",
+          "prompt": "Which fields may the agent propose or update, which must remain human-owned, and how should current versions, permissions, duplicate records, and conflicting values be handled?",
+          "maps_to": [
+            "config/tools.json",
+            "config/platforms.json",
+            "tests/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "box",
+      "title": "Box content and policy",
+      "questions": [
+        {
+          "id": "document_inventory",
+          "prompt": "What document types/formats are required, what information is extracted or compared, and are approved sample documents available? Describe sample locations without supplying sensitive content or credentials.",
+          "maps_to": [
+            "fixtures/workflow.json",
+            "config/box/content-model.json"
+          ]
+        },
+        {
+          "id": "content_structure",
+          "prompt": "What Box folder structure and metadata are needed? How does each Salesforce record map to its authorized Box folder, and how are files classified and versioned?",
+          "maps_to": [
+            "config/deployment.json",
+            "config/box/content-model.json",
+            "config/platforms.json"
+          ]
+        },
+        {
+          "id": "policy_and_governance",
+          "prompt": "Which policies or approved knowledge sources govern decisions, what citations are required, and what retention, sharing, approval-status, or compliance rules apply? Say none where not applicable.",
+          "maps_to": [
+            "docs/USE-CASE.md",
+            "config/use-case.json",
+            "tests/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "outputs",
+      "title": "Documents and business rules",
+      "questions": [
+        {
+          "id": "rules_and_calculations",
+          "prompt": "What exact validations, thresholds, calculations, units, authoritative values, and conflict-resolution rules must be implemented? Say none if there are no calculations.",
+          "maps_to": [
+            "src/box_agentic/runtime.py",
+            "tests/"
+          ]
+        },
+        {
+          "id": "document_generation",
+          "prompt": "Are generated documents needed? Identify document purpose, template/merge fields, output format and destination, required verification, and approval owner; otherwise say none.",
+          "maps_to": [
+            "config/tools.json",
+            "config/use-case.json"
+          ]
+        },
+        {
+          "id": "signature_workflow",
+          "prompt": "Are signatures needed? Distinguish preparation from sending, signer roles, consent/approval gates, verified-file requirements, and completion evidence; otherwise say none. Do not provide signer credentials.",
+          "maps_to": [
+            "config/tools.json",
+            "config/use-case.json"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "demo",
+      "title": "Demo story and evidence",
+      "questions": [
+        {
+          "id": "demo_audience",
+          "prompt": "Who is the audience, what should they learn, how long is the demo, and what narrative, branding, or accessibility preferences matter?",
+          "maps_to": [
+            "config/use-case.json",
+            "docs/generated/"
+          ]
+        },
+        {
+          "id": "demo_scenarios",
+          "prompt": "Describe at least one successful case and one blocked/exception case. Include synthetic actors/documents, relevant sample values, expected evidence, and reset behavior.",
+          "maps_to": [
+            "fixtures/workflow.json",
+            "scripts/demo.py",
+            "config/use-case.json"
+          ]
+        },
+        {
+          "id": "artifact_preferences",
+          "prompt": "The output always includes code/config, diagrams, storyboard, solution brief, tool/skill map, runbook, and acceptance checklist. What additional screenshots, decks, exports, UI views, or presentation formats are needed? Say none if the standard bundle is sufficient.",
+          "maps_to": [
+            "docs/BUILD-YOUR-OWN.md",
+            "docs/generated/"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acceptance",
+      "title": "Acceptance and operations",
+      "questions": [
+        {
+          "id": "acceptance_criteria",
+          "prompt": "What observable results prove the use case works? Include happy path, blocked path, access refusal, stale data, exact output verification, and any domain-specific checks.",
+          "maps_to": [
+            "config/use-case.json",
+            "tests/"
+          ]
+        },
+        {
+          "id": "deployment_operations",
+          "prompt": "Both standalone operation and Box Dispatch deployment are required. Which infrastructure must be deployed, who operates it, and what idempotency, audit, rollback, cleanup, and environment-reset behavior is expected?",
+          "maps_to": [
+            "config/deployment.json",
+            "dispatch.bcl",
+            "docs/DEPLOYMENT.md"
+          ]
+        },
+        {
+          "id": "known_dependencies",
+          "prompt": "What integrations, entitlements, managed packages, org features, permission sets, reference links, source assets, or manual prerequisites are required? State unavailable or unknown items explicitly; do not assume they are installed.",
+          "maps_to": [
+            "dispatch.bcl",
+            "docs/DEPLOYMENT.md",
+            "docs/USE-CASE.md"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "live",
+      "title": "Live adapter preparation",
+      "questions": [
+        {
+          "id": "live_targets",
+          "prompt": "Which non-secret Box tenant/parent-folder and Salesforce org aliases are intended, what environments are disposable, and who owns access? Store actual tenant IDs only in ignored runtime config; never paste tokens, client secrets, or passwords.",
+          "maps_to": [
+            "config/runtime.local.json",
+            "config/runtime/demo-environment.json"
+          ],
+          "when": {
+            "question": "implementation_depth",
+            "equals": "live_adapters"
+          }
+        },
+        {
+          "id": "live_capabilities",
+          "prompt": "Which authenticated Box and Salesforce tools/endpoints and permissions are available for the required reads and writes? What evidence can verify their schemas, identities, and scope? Do not provide credentials.",
+          "maps_to": [
+            "config/runtime.local.json",
+            "docs/TOOLS.md"
+          ],
+          "when": {
+            "question": "implementation_depth",
+            "equals": "live_adapters"
+          }
+        },
+        {
+          "id": "live_verification",
+          "prompt": "What disposable data/resources and approved test scope can verify live success/failure, post-deployment record-to-folder binding, read-back, and cleanup? Intake confirmation itself does not authorize these external operations.",
+          "maps_to": [
+            "docs/OPERATIONS.md",
+            "docs/DEPLOYMENT.md"
+          ],
+          "when": {
+            "question": "implementation_depth",
+            "equals": "live_adapters"
+          }
+        }
+      ]
+    }
+  ]
+}

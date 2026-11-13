@@ -21,7 +21,7 @@ class ScaffoldTests(unittest.TestCase):
         self.dest = self.base / "new-case"
 
     def generate(self, **kwargs):
-        return generate("new-case", 'New "Case"', "Salesforce", self.dest, **kwargs)
+        return generate("new-case", 'New "Case"', "Salesforce", self.dest, scaffold_only=True, **kwargs)
 
     def test_clean_generated_project_and_git(self):
         self.generate(init_git=True)
@@ -54,7 +54,7 @@ class ScaffoldTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             generate("valid", "Name", " ", self.dest)
         with self.assertRaises(ValueError):
-            generate("valid", "Name", "Salesforce", ROOT / "nested-output")
+            generate("valid", "Name", "Salesforce", ROOT / "nested-output", scaffold_only=True)
 
     def test_manifest_rejects_traversal_private_missing_and_symlinks(self):
         source = self.base / "source"
@@ -85,7 +85,7 @@ class ScaffoldTests(unittest.TestCase):
 
     def test_generator_cli_success_and_refusal(self):
         args = [sys.executable, 'scripts/new_project.py', '--slug', 'new-case', '--name', 'New Case',
-                '--system-of-record', 'Salesforce', '--destination', str(self.dest)]
+                '--system-of-record', 'Salesforce', '--scaffold-only', '--destination', str(self.dest)]
         result = subprocess.run(args, cwd=ROOT, capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stderr)
         refused = subprocess.run(args, cwd=ROOT, capture_output=True, text=True)

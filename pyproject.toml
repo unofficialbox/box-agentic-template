@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "box-agentic-template"
+version = "0.1.0"
+description = "Portable Box workflow starter with shared agent skills and contract-driven mock MCP tools"
+requires-python = ">=3.11"
+dependencies = ["jsonschema>=4.26,<5"]
+license = "MIT"
+
+[project.optional-dependencies]
+mcp = ["mcp>=1.26,<2"]
+dev = ["coverage>=7.10,<8"]
+
+[tool.setuptools.packages.find]
+where = ["src"]

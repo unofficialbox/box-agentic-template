@@ -1,0 +1,7 @@
+{
+  "kind": "template",
+  "slug": "box-agentic-template",
+  "name": "Box Agentic Template",
+  "system_of_record": "Choose your structured system",
+  "mode": "mock"
+}

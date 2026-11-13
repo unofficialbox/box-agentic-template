@@ -1,0 +1,81 @@
+{
+  "title": "Commercial Loan Review",
+  "business_prompt": "Help a loan officer review a borrower term sheet against the bank record and policy, propose the accepted bank terms, and check a draft commitment before signature preparation. Keep approval with the credit officer.",
+  "outcome": "A source-cited loan review and a checked draft, with human credit approval retained.",
+  "actors": [
+    "Loan officer",
+    "Credit officer",
+    "Borrower"
+  ],
+  "system_of_record": "Example CRM",
+  "content_authority": "Box",
+  "decision_owner": "Credit officer",
+  "assumptions": [
+    "All records, policies, and documents in the included example are synthetic.",
+    "Live adapters are not included."
+  ],
+  "record_id": "case-demo-001",
+  "steps": [
+    {
+      "id": "intake",
+      "title": "Resolve the loan package",
+      "actor": "Loan officer",
+      "action": "Read the structured record and its mapped Box folder.",
+      "tool": "get_record",
+      "prompt": "Show the loan record and the folder that owns its documents.",
+      "expected": "Record case-demo-001 is Underwriting at version 1.",
+      "failure": "Stop if the record is missing or ambiguous."
+    },
+    {
+      "id": "evidence",
+      "title": "Find and analyze the term sheet",
+      "actor": "Loan officer",
+      "action": "Find term_sheet documents in the mapped folder and cite their versioned facts.",
+      "tool": "analyze_document",
+      "prompt": "Compare the bank rate and borrower-requested rate in the term sheet.",
+      "expected": "Bank rate 6.85%; borrower requests 6.50%; cite file-demo-terms version 1.",
+      "failure": "Reject an unrelated folder or unsupported source claim."
+    },
+    {
+      "id": "proposal",
+      "title": "Propose the bank terms",
+      "actor": "Loan officer",
+      "action": "Create a reviewable rate diff against the current record version.",
+      "tool": "propose_update",
+      "prompt": "Propose the bank rate for review; keep the record unchanged.",
+      "expected": "Proposal requires human approval and applied is false.",
+      "failure": "Reject stale versions, unknown fields, and invalid amounts."
+    },
+    {
+      "id": "approval",
+      "title": "Human credit decision",
+      "actor": "Credit officer",
+      "action": "Review the evidence and authorize the exact consequential action in the record system.",
+      "tool": null,
+      "prompt": "Who owns this decision, and what evidence remains before proceeding?",
+      "expected": "The credit officer owns approval. No approval or write is fabricated.",
+      "failure": "Hold the action when authorization or capability is missing."
+    },
+    {
+      "id": "output",
+      "title": "Verify the exact generated draft",
+      "actor": "Loan officer",
+      "action": "Check job-demo-001 and file-demo-output against current terms and lifecycle state.",
+      "tool": "verify_generated_document",
+      "prompt": "Is this draft ready for signature preparation?",
+      "expected": "Not ready: the record is Underwriting. No signature is prepared or sent.",
+      "failure": "Hold mismatched jobs, stale versions, unresolved tags, and unapproved records."
+    }
+  ],
+  "acceptance": [
+    "The fixture walkthrough performs zero external writes.",
+    "Every document finding names a file, version, and evidence location.",
+    "Proposals cannot update a record or grant approval.",
+    "The wrong generation job and unapproved records fail verification."
+  ],
+  "not_implemented": [
+    "Live Box or record-system adapters",
+    "Document generation and signature preparation",
+    "A borrower portal or hosted model orchestration"
+  ]
+}

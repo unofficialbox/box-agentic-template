@@ -1,0 +1,16 @@
+flowchart TD
+  intake["Resolve the loan package<br/>Loan officer"]
+  evidence["Find and analyze the term sheet<br/>Loan officer"]
+  proposal["Propose the bank terms<br/>Loan officer"]
+  approval["Human credit decision<br/>Credit officer"]
+  output["Verify the exact generated draft<br/>Loan officer"]
+  intake --> evidence
+  evidence --> proposal
+  proposal --> approval
+  approval --> output
+  hold["Hold action and report missing evidence or authorization"]
+  intake -. "check fails" .-> hold
+  evidence -. "check fails" .-> hold
+  proposal -. "check fails" .-> hold
+  approval -. "check fails" .-> hold
+  output -. "check fails" .-> hold

@@ -1,0 +1,361 @@
+{
+  "schema_version": 1,
+  "tools": [
+    {
+      "name": "get_record",
+      "description": "Read a synthetic structured record and its mapped content folder.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "record_id"
+        ],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "folder_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "type": "string",
+            "minLength": 1
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1
+          },
+          "fields": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "record_id",
+          "folder_id",
+          "status",
+          "version",
+          "fields"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "implementation": "mock",
+      "live_binding": null
+    },
+    {
+      "name": "search_documents",
+      "description": "Find synthetic documents by metadata within the record folder. Never searches across records.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "document_type": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "record_id",
+          "document_type"
+        ],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "documents": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "file_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "version": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "folder_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "document_type": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "text": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "facts": {
+                  "type": "object"
+                }
+              },
+              "required": [
+                "file_id",
+                "version",
+                "folder_id",
+                "document_type",
+                "text",
+                "facts"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "documents"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "implementation": "mock",
+      "live_binding": null
+    },
+    {
+      "name": "analyze_document",
+      "description": "Return curated synthetic facts and a versioned citation. This is a fixture lookup, not an AI model.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "file_id": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "record_id",
+          "file_id"
+        ],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "facts": {
+            "type": "object"
+          },
+          "citation": {
+            "type": "object",
+            "properties": {
+              "file_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "version": {
+                "type": "string",
+                "minLength": 1
+              },
+              "location": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "file_id",
+              "version",
+              "location"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "facts",
+          "citation"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "implementation": "mock",
+      "live_binding": null
+    },
+    {
+      "name": "propose_update",
+      "description": "Validate a proposed allowlisted field diff against a record version; writes nothing and grants no approval.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "expected_version": {
+            "type": "string",
+            "minLength": 1
+          },
+          "changes": {
+            "type": "object",
+            "properties": {
+              "amount": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "rate": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "term_months": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "required": [],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "record_id",
+          "expected_version",
+          "changes"
+        ],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "expected_version": {
+            "type": "string",
+            "minLength": 1
+          },
+          "before": {
+            "type": "object"
+          },
+          "changes": {
+            "type": "object"
+          },
+          "requires_human_approval": {
+            "const": true
+          },
+          "applied": {
+            "const": false
+          }
+        },
+        "required": [
+          "record_id",
+          "expected_version",
+          "before",
+          "changes",
+          "requires_human_approval",
+          "applied"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "implementation": "mock",
+      "live_binding": null
+    },
+    {
+      "name": "verify_generated_document",
+      "description": "Verify the exact synthetic output ID and generation job for signature readiness; no signature action is implemented.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "record_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "file_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "job_id": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "record_id",
+          "file_id",
+          "job_id"
+        ],
+        "additionalProperties": false
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "verified": {
+            "type": "boolean"
+          },
+          "reasons": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "file_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1
+          },
+          "job_id": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "verified",
+          "reasons",
+          "file_id",
+          "version",
+          "job_id"
+        ],
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "implementation": "mock",
+      "live_binding": null
+    }
+  ]
+}

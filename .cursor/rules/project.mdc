@@ -1,0 +1,5 @@
+---
+description: Shared project workflow and tool boundaries
+alwaysApply: true
+---
+Read and follow `AGENTS.md` at the repository root. Select the matching native skill in `.cursor/skills/`, generated from `.agents/skills/`. Read `docs/CLIENTS.md` for MCP configuration. Mock tools use synthetic data and cannot perform live actions. Use connected schemas rather than guessing provider tool names.

@@ -1,0 +1,10 @@
+[run]
+source =
+    box_agentic
+    scripts
+patch = subprocess
+parallel = true
+
+[report]
+fail_under = 85
+show_missing = true

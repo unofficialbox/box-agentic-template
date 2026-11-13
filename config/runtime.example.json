@@ -1,0 +1,13 @@
+{
+  "box": {
+    "enterprise_id": null,
+    "root_folder_id": null,
+    "policy_hub_id": null,
+    "docgen_template_id": null
+  },
+  "record_system": {
+    "provider": null,
+    "target": null
+  },
+  "tool_bindings": {}
+}

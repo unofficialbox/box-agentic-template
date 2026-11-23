@@ -34,7 +34,7 @@ class DeliverableTests(unittest.TestCase):
         for step in self.usecase['steps']:
             self.assertIn(step['title'], outputs['storyboard.md'])
             self.assertIn(step['expected'], outputs['storyboard.html'])
-        self.assertIn(self.usecase['business_prompt'], outputs['solution-brief.md'])
+        self.assertTrue(all('> ' + line in outputs['solution-brief.md'] for line in self.usecase['business_prompt'].splitlines() if line))
         self.assertNotIn('<script', outputs['storyboard.html'])
         self.assertNotIn('src="http', outputs['storyboard.html'])
         build(self.dest)

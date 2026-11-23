@@ -8,6 +8,7 @@
 public with sharing class PortalBoxAccess {
     @TestVisible private static String userTypeOverride;
     @TestVisible private static Id accountOverride;
+    @TestVisible private static SObject recordOverride;
 
     public static Boolean isGuest() {
         return userType() == 'Guest';
@@ -18,6 +19,9 @@ public with sharing class PortalBoxAccess {
         if (isGuest() || recordId == null
             || recordId.getSObjectType().getDescribe().getName() != PortalBoxSettings.RECORD_OBJECT) {
             return null;
+        }
+        if (Test.isRunningTest() && recordOverride != null) {
+            return recordOverride.Id == recordId ? recordOverride : null;
         }
         List<String> fields = new List<String>{ 'Id' };
         if (String.isNotBlank(PortalBoxSettings.ACCOUNT_FIELD)) fields.add(PortalBoxSettings.ACCOUNT_FIELD);

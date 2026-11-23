@@ -13,7 +13,10 @@ public with sharing class PortalBoxDocuments {
     }
 
     /** Folder mapped to the record by Box for Salesforce, or null. Read only: no DML. */
+    @TestVisible private static String folderOverride;
+
     public static String folderFor(Id recordId) {
+        if (Test.isRunningTest() && folderOverride != null) return folderOverride;
         return new FolderMapping().forRecord(recordId);
     }
 

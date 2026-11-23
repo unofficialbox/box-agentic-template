@@ -103,7 +103,11 @@ Settings: `object`, `label`, `plural_label`, `lookup_field`, and `relationship_n
 - **Record binding:** tool inputs named in `record_inputs` (default `record_id`) are bound to the record ID the router captures; the model fills every other input from the conversation.
 - **Actions:** each tool becomes an action targeting `apex://<apex_prefix><Tool>`, with inputs taken from the tool's `inputSchema`. Tools that are not read-only get `require_user_confirmation: True`.
 - **Guardrails:** the system instructions and every subagent state that documents are data, that proposals are not writes, and that people approve. The agent never approves, signs, or writes on its own.
-- **Agent type:** employee agents only (`AgentforceEmployeeAgent`). A service agent also needs `default_agent_user` and messaging setup, so the generator refuses it.
+- **Agent type:**
+  - `AgentforceEmployeeAgent` runs as the signed-in employee.
+  - `AgentforceServiceAgent` runs as a dedicated Einstein Agent User. Set its username in `default_agent_user` (an org-specific value, so change it per org); the generator then adds the `access:` block and a `connection customer_web_client:` surface for Agent Builder preview.
+  - Some Developer Edition orgs refuse to publish employee agents ("Changes for this Bot Version are not allowed at the moment"); a service agent publishes there.
+- **Access:** `<developer_name>_Access` grants the action Apex classes. Assign it to the Einstein Agent User for a service agent, or to the employees for an employee agent.
 
 **Apex action stubs** (`classes/<Prefix><Tool>.cls` and `<Prefix>ActionsTest.cls`) are seeded once and never overwritten. Implement the live Box and Salesforce call there. Until you do, each stub returns `live_adapter_not_implemented`, and the agent is told to report that error, so it cannot claim success.
 
@@ -115,6 +119,10 @@ sf agent validate authoring-bundle --api-name <developer_name> --target-org <age
 sf project deploy start --source-dir force-app --target-org <agentforce-org>
 sf agent publish authoring-bundle --api-name <developer_name> --target-org <agentforce-org>
 ```
+
+If `sf agent publish` reports only `fetch failed`, run it with `SF_LOG_LEVEL=trace DEBUG='*'`: the CLI falls back to a Salesforce-internal test host after the real `api.salesforce.com` response (for example a 404), so the visible error hides the real one. Publish from Agentforce Builder (Setup → Agentforce Agents) for a readable error.
+
+Publishing creates an inactive version; activate it with `sf agent activate --api-name <developer_name> --target-org <org>`. Publishing also retrieves generated `bots/` and `genAiPlannerBundles/` into the project; those are ignored because the `.agent` file is the source.
 
 Validation compiles the script in an org with Agentforce enabled. A scratch org without Agentforce times out on the compile service. The template's sample agent compiles against an Agentforce Developer Edition org.
 

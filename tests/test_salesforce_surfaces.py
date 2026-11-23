@@ -184,6 +184,26 @@ class AgentTests(unittest.TestCase):
                 if any(key in tools[t]["inputSchema"].get("properties", {}) for s in agent["subagents"] for t in s["tools"]):
                     self.assertIn(f"with {key} = @variables.record_id", script)
 
+    def test_service_agent_runs_as_its_agent_user_with_action_access(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = project_copy(tmp)
+            edit(root, "config/salesforce/agent.json", lambda a: a.update(agent_type="AgentforceServiceAgent", default_agent_user="demo_agent@example.ext"))
+            generated, seeds = build_agent.render(root)
+            agent = json.loads((root / "config/salesforce/agent.json").read_text())
+            name = agent["developer_name"]
+            script = generated[f"salesforce-project/force-app/main/default/aiAuthoringBundles/{name}/{name}.agent"]
+            self.assertIn('access:\n    default_agent_user: "demo_agent@example.ext"', script)
+            self.assertIn("connection customer_web_client:", script)
+            self.assertIn('agent_type: "AgentforceServiceAgent"', script)
+            perms = generated[f"salesforce-project/force-app/main/default/permissionsets/{name}_Access.permissionset-meta.xml"]
+            for target in re.findall(r'target: "apex://(\w+)"', script):
+                self.assertIn(f"<apexClass>{target}</apexClass>", perms)
+            self.assertIn("Einstein Agent User", perms)
+            edit(root, "config/salesforce/agent.json", lambda a: a.update(agent_type="AgentforceEmployeeAgent"))
+            script = build_agent.render(root)[0][f"salesforce-project/force-app/main/default/aiAuthoringBundles/{name}/{name}.agent"]
+            self.assertNotIn("default_agent_user", script)
+            self.assertNotIn("connection customer_web_client", script)
+
     def test_seeded_apex_is_never_overwritten_but_script_drift_is_detected(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = project_copy(tmp)
@@ -199,7 +219,8 @@ class AgentTests(unittest.TestCase):
 
     def test_invalid_agent_config_refuses(self):
         cases = [lambda a: a["subagents"][0]["tools"].append("missing_tool"),
-                 lambda a: a.update(agent_type="AgentforceServiceAgent"),
+                 lambda a: a.update(agent_type="AgentforceServiceAgent", default_agent_user=None),
+                 lambda a: a.update(agent_type="AgentforceServiceAgent", default_agent_user="not a username"),
                  lambda a: a.update(developer_name="Bad__Name"),
                  lambda a: a["subagents"].append(dict(a["subagents"][0])),
                  lambda a: a.update(agent_type="Other")]

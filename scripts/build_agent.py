@@ -12,6 +12,7 @@ import argparse
 import json
 from pathlib import Path
 import re
+from xml.sax.saxutils import escape
 
 ROOT = Path(__file__).resolve().parents[1]
 TEMPLATES = Path("templates/salesforce/agent")
@@ -60,7 +61,9 @@ def plan(root=ROOT):
     if agent["agent_type"] not in AGENT_TYPES:
         raise ValueError("agent_type must be AgentforceEmployeeAgent or AgentforceServiceAgent")
     if agent["agent_type"] == "AgentforceServiceAgent":
-        raise ValueError("Service agents need default_agent_user and messaging setup; this generator emits employee agents only")
+        user = agent.get("default_agent_user") or ""
+        if not re.fullmatch(r"[^\s\"@]+@[^\s\"@]+", user):
+            raise ValueError("A service agent needs default_agent_user: the username of an active Einstein Agent User in the target org")
     prefix = ident(agent["apex_prefix"], "apex_prefix", 20)
     tools = {t["name"]: t for t in json.loads((root / "config/tools.json").read_text())["tools"]}
     names = [ident(s["name"], "subagent name") for s in agent["subagents"]]
@@ -130,6 +133,11 @@ def agent_script(root, agent, actions):
               "{{DESCRIPTION}}": text(agent["description"]), "{{AGENT_TYPE}}": agent["agent_type"],
               "{{SYSTEM_INSTRUCTIONS}}": text(agent["system_instructions"]), "{{WELCOME}}": text(agent["welcome"]),
               "{{ROUTER_ACTIONS}}": "\n".join(router), "{{SUBAGENTS}}": "\n".join(subagents)}
+    service = agent["agent_type"] == "AgentforceServiceAgent"
+    # Service agents run as a dedicated Einstein Agent User and need a web client surface for
+    # Agent Builder preview; employee agents run as the signed-in user and must omit both.
+    values["{{ACCESS_BLOCK}}"] = ("\naccess:\n    default_agent_user: \"" + text(agent["default_agent_user"]) + "\"\n") if service else ""
+    values["{{CONNECTION_BLOCK}}"] = ("\nconnection customer_web_client:\n    adaptive_response_allowed: True\n") if service else ""
     out = (Path(root) / TEMPLATES / "agent.agent").read_text()
     for key, value in values.items():
         out = out.replace(key, value)
@@ -161,6 +169,13 @@ def render(root=ROOT):
         tests.append(f"    @IsTest\n    static void {name}ReportsMissingAdapter() {{\n"
                      f"        List<{a['class']}.Response> responses = {a['class']}.run(new List<{a['class']}.Request>{{ new {a['class']}.Request() }});\n"
                      f"        System.assert(responses[0].result.contains('live_adapter_not_implemented'));\n    }}")
+    classes = sorted(a["class"] for a in actions.values())
+    access = "".join(f"    <classAccesses>\n        <apexClass>{c}</apexClass>\n        <enabled>true</enabled>\n    </classAccesses>\n" for c in classes)
+    who = "the agent's Einstein Agent User" if agent["agent_type"] == "AgentforceServiceAgent" else "the employees who use the agent"
+    generated[(TARGET / "permissionsets" / f"{agent['developer_name']}_Access.permissionset-meta.xml").as_posix()] = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">\n' + access +
+        f"    <description>Run the {escape(agent['label'])} actions. Assign to {who}.</description>\n"
+        f"    <hasActivationRequired>false</hasActivationRequired>\n    <label>{escape(agent['label'][:80])} access</label>\n</PermissionSet>\n")
     test_class = agent["apex_prefix"] + "ActionsTest"
     seeds[(TARGET / "classes" / f"{test_class}.cls").as_posix()] = (root / TEMPLATES / "InvocableActionsTest.cls").read_text() \
         .replace("{{CLASS}}", test_class).replace("{{TEST_METHODS}}", "\n\n".join(tests))

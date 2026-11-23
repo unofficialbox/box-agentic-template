@@ -11,7 +11,7 @@ config:
     agent_label: "{{LABEL}}"
     description: "{{DESCRIPTION}}"
     agent_type: "{{AGENT_TYPE}}"
-
+{{ACCESS_BLOCK}}
 variables:
     record_id: mutable string = ""
         description: "Salesforce record ID the user is working on"
@@ -38,7 +38,7 @@ start_agent agent_router:
             go_to_off_topic: @utils.transition to @subagent.off_topic
                 description: "The request is unrelated to this workflow"
 
-{{SUBAGENTS}}
+{{SUBAGENTS}}{{CONNECTION_BLOCK}}
 subagent off_topic:
     label: "Off topic"
     description: "Redirect requests that are outside this workflow"

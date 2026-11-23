@@ -39,7 +39,7 @@ The resulting code should implement supplier fields and expiration checks; a ren
 | Presenter runbook | `docs/generated/demo-runbook.md` |
 | Acceptance checklist | `docs/generated/acceptance.md` |
 
-The HTML includes its diagram and styling, so it can be shared as one file. Generated assets are deterministic; `python scripts/build_deliverables.py --check` catches drift. Long SVG labels are summarized; complete text remains in Mermaid and the storyboard.
+All generated materials follow the [Box brand guide](brand/BOX-BRAND.md); the renderer reads `config/brand.json` and refuses text that breaks the checked writing rules. The HTML includes its diagram and styling, so it can be shared as one file. Generated assets are deterministic; `python scripts/build_deliverables.py --check` catches drift. Long SVG labels are summarized; complete text remains in Mermaid and the storyboard.
 
 ## Maintainers
 

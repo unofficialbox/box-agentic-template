@@ -1,0 +1,2190 @@
+{
+ "schema_version": 1,
+ "source": "Box Corporate Template Q3 FY27, icon and logo slides 62-71",
+ "icons": [
+  {
+   "path": "file-types/adobe/illustrator.png",
+   "name": "illustrator",
+   "group": "file-types/adobe",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/adobe/indesign.png",
+   "name": "indesign",
+   "group": "file-types/adobe",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/adobe/pdf.png",
+   "name": "pdf",
+   "group": "file-types/adobe",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/adobe/photoshop.png",
+   "name": "photoshop",
+   "group": "file-types/adobe",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/apple/keynote.png",
+   "name": "keynote",
+   "group": "file-types/apple",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/apple/numbers.png",
+   "name": "numbers",
+   "group": "file-types/apple",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/apple/pages.png",
+   "name": "pages",
+   "group": "file-types/apple",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/box-folders/folder-external.png",
+   "name": "folder-external",
+   "group": "file-types/box-folders",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/box-folders/folder-shared.png",
+   "name": "folder-shared",
+   "group": "file-types/box-folders",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/box-folders/folder-upload.png",
+   "name": "folder-upload",
+   "group": "file-types/box-folders",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/box-folders/folder.png",
+   "name": "folder",
+   "group": "file-types/box-folders",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/generic/3d-object.png",
+   "name": "3d-object",
+   "group": "file-types/generic",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/generic/audio.png",
+   "name": "audio",
+   "group": "file-types/generic",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/generic/blank.png",
+   "name": "blank",
+   "group": "file-types/generic",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/generic/chart.png",
+   "name": "chart",
+   "group": "file-types/generic",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/generic/code.png",
+   "name": "code",
+   "group": "file-types/generic",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/generic/design.png",
+   "name": "design",
+   "group": "file-types/generic",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/generic/document.png",
+   "name": "document",
+   "group": "file-types/generic",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/generic/drawing.png",
+   "name": "drawing",
+   "group": "file-types/generic",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/generic/image.png",
+   "name": "image",
+   "group": "file-types/generic",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/generic/medical.png",
+   "name": "medical",
+   "group": "file-types/generic",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/generic/note.png",
+   "name": "note",
+   "group": "file-types/generic",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/generic/spreadsheet.png",
+   "name": "spreadsheet",
+   "group": "file-types/generic",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/generic/vector.png",
+   "name": "vector",
+   "group": "file-types/generic",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/generic/video.png",
+   "name": "video",
+   "group": "file-types/generic",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/generic/web-link.png",
+   "name": "web-link",
+   "group": "file-types/generic",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/generic/xbd.png",
+   "name": "xbd",
+   "group": "file-types/generic",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/generic/xdw.png",
+   "name": "xdw",
+   "group": "file-types/generic",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/generic/zip.png",
+   "name": "zip",
+   "group": "file-types/generic",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/google-workspace/docs.png",
+   "name": "docs",
+   "group": "file-types/google-workspace",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/google-workspace/sheets.png",
+   "name": "sheets",
+   "group": "file-types/google-workspace",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/google-workspace/slides.png",
+   "name": "slides",
+   "group": "file-types/google-workspace",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/microsoft-office/excel.png",
+   "name": "excel",
+   "group": "file-types/microsoft-office",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/microsoft-office/powerpoint.png",
+   "name": "powerpoint",
+   "group": "file-types/microsoft-office",
+   "template_slide": 71
+  },
+  {
+   "path": "file-types/microsoft-office/word.png",
+   "name": "word",
+   "group": "file-types/microsoft-office",
+   "template_slide": 71
+  },
+  {
+   "path": "line/actions/a-b-test.png",
+   "name": "a-b-test",
+   "group": "line/actions",
+   "template_slide": 65
+  },
+  {
+   "path": "line/actions/approve-sign.png",
+   "name": "approve-sign",
+   "group": "line/actions",
+   "template_slide": 65
+  },
+  {
+   "path": "line/actions/checklist-select.png",
+   "name": "checklist-select",
+   "group": "line/actions",
+   "template_slide": 65
+  },
+  {
+   "path": "line/actions/clock-schedule.png",
+   "name": "clock-schedule",
+   "group": "line/actions",
+   "template_slide": 65
+  },
+  {
+   "path": "line/actions/delete.png",
+   "name": "delete",
+   "group": "line/actions",
+   "template_slide": 65
+  },
+  {
+   "path": "line/actions/desktop-download.png",
+   "name": "desktop-download",
+   "group": "line/actions",
+   "template_slide": 65
+  },
+  {
+   "path": "line/actions/desktop-upload.png",
+   "name": "desktop-upload",
+   "group": "line/actions",
+   "template_slide": 65
+  },
+  {
+   "path": "line/actions/download.png",
+   "name": "download",
+   "group": "line/actions",
+   "template_slide": 65
+  },
+  {
+   "path": "line/actions/fast-clock.png",
+   "name": "fast-clock",
+   "group": "line/actions",
+   "template_slide": 65
+  },
+  {
+   "path": "line/actions/hand-stop.png",
+   "name": "hand-stop",
+   "group": "line/actions",
+   "template_slide": 65
+  },
+  {
+   "path": "line/actions/mobile-download.png",
+   "name": "mobile-download",
+   "group": "line/actions",
+   "template_slide": 65
+  },
+  {
+   "path": "line/actions/path.png",
+   "name": "path",
+   "group": "line/actions",
+   "template_slide": 65
+  },
+  {
+   "path": "line/actions/reroute.png",
+   "name": "reroute",
+   "group": "line/actions",
+   "template_slide": 65
+  },
+  {
+   "path": "line/actions/rotate.png",
+   "name": "rotate",
+   "group": "line/actions",
+   "template_slide": 65
+  },
+  {
+   "path": "line/actions/scan.png",
+   "name": "scan",
+   "group": "line/actions",
+   "template_slide": 65
+  },
+  {
+   "path": "line/actions/search.png",
+   "name": "search",
+   "group": "line/actions",
+   "template_slide": 65
+  },
+  {
+   "path": "line/actions/swap.png",
+   "name": "swap",
+   "group": "line/actions",
+   "template_slide": 65
+  },
+  {
+   "path": "line/actions/touch-download.png",
+   "name": "touch-download",
+   "group": "line/actions",
+   "template_slide": 65
+  },
+  {
+   "path": "line/actions/touch.png",
+   "name": "touch",
+   "group": "line/actions",
+   "template_slide": 65
+  },
+  {
+   "path": "line/actions/transform.png",
+   "name": "transform",
+   "group": "line/actions",
+   "template_slide": 65
+  },
+  {
+   "path": "line/actions/upload.png",
+   "name": "upload",
+   "group": "line/actions",
+   "template_slide": 65
+  },
+  {
+   "path": "line/apps-and-workflows/add-app-grid.png",
+   "name": "add-app-grid",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/add-app.png",
+   "name": "add-app",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/add-square.png",
+   "name": "add-square",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/add-to-collection.png",
+   "name": "add-to-collection",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/app-grid.png",
+   "name": "app-grid",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/connect-blocks.png",
+   "name": "connect-blocks",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/connect.png",
+   "name": "connect",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/copy-square.png",
+   "name": "copy-square",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/dashboard-layout.png",
+   "name": "dashboard-layout",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/dot-grid.png",
+   "name": "dot-grid",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/duplicate.png",
+   "name": "duplicate",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/flow-path.png",
+   "name": "flow-path",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/focus-diamond.png",
+   "name": "focus-diamond",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/grid-small.svg",
+   "name": "grid-small",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/hierarchy.png",
+   "name": "hierarchy",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/layer.png",
+   "name": "layer",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/layers-stack.png",
+   "name": "layers-stack",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/layers-three.png",
+   "name": "layers-three",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/move-between.png",
+   "name": "move-between",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/network-mesh.png",
+   "name": "network-mesh",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/network-triangle.png",
+   "name": "network-triangle",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/node-cycle.png",
+   "name": "node-cycle",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/node-grid.png",
+   "name": "node-grid",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/overlap-shapes.png",
+   "name": "overlap-shapes",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/overlap-squares.png",
+   "name": "overlap-squares",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/pyramid.png",
+   "name": "pyramid",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/select-area.png",
+   "name": "select-area",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/share.png",
+   "name": "share",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/square-corner.png",
+   "name": "square-corner",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/swap-nodes.png",
+   "name": "swap-nodes",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/apps-and-workflows/workflow-tree.png",
+   "name": "workflow-tree",
+   "group": "line/apps-and-workflows",
+   "template_slide": 64
+  },
+  {
+   "path": "line/buildings/bank.png",
+   "name": "bank",
+   "group": "line/buildings",
+   "template_slide": 63
+  },
+  {
+   "path": "line/buildings/factory.png",
+   "name": "factory",
+   "group": "line/buildings",
+   "template_slide": 63
+  },
+  {
+   "path": "line/buildings/government.png",
+   "name": "government",
+   "group": "line/buildings",
+   "template_slide": 63
+  },
+  {
+   "path": "line/buildings/office-building.png",
+   "name": "office-building",
+   "group": "line/buildings",
+   "template_slide": 63
+  },
+  {
+   "path": "line/buildings/office-towers.png",
+   "name": "office-towers",
+   "group": "line/buildings",
+   "template_slide": 63
+  },
+  {
+   "path": "line/buildings/skyscraper.png",
+   "name": "skyscraper",
+   "group": "line/buildings",
+   "template_slide": 63
+  },
+  {
+   "path": "line/buildings/storefront.svg",
+   "name": "storefront",
+   "group": "line/buildings",
+   "template_slide": 63
+  },
+  {
+   "path": "line/chat/chat-bubble.png",
+   "name": "chat-bubble",
+   "group": "line/chat",
+   "template_slide": 64
+  },
+  {
+   "path": "line/chat/chat-idea.png",
+   "name": "chat-idea",
+   "group": "line/chat",
+   "template_slide": 64
+  },
+  {
+   "path": "line/chat/chat-lightning.png",
+   "name": "chat-lightning",
+   "group": "line/chat",
+   "template_slide": 64
+  },
+  {
+   "path": "line/chat/chat-message.png",
+   "name": "chat-message",
+   "group": "line/chat",
+   "template_slide": 64
+  },
+  {
+   "path": "line/chat/chat-question.png",
+   "name": "chat-question",
+   "group": "line/chat",
+   "template_slide": 64
+  },
+  {
+   "path": "line/chat/conversation-question.png",
+   "name": "conversation-question",
+   "group": "line/chat",
+   "template_slide": 64
+  },
+  {
+   "path": "line/chat/conversation.png",
+   "name": "conversation",
+   "group": "line/chat",
+   "template_slide": 64
+  },
+  {
+   "path": "line/chat/megaphone.png",
+   "name": "megaphone",
+   "group": "line/chat",
+   "template_slide": 64
+  },
+  {
+   "path": "line/chat/send.png",
+   "name": "send",
+   "group": "line/chat",
+   "template_slide": 64
+  },
+  {
+   "path": "line/chat/typing-dots-active.png",
+   "name": "typing-dots-active",
+   "group": "line/chat",
+   "template_slide": 64
+  },
+  {
+   "path": "line/chat/typing-dots.png",
+   "name": "typing-dots",
+   "group": "line/chat",
+   "template_slide": 64
+  },
+  {
+   "path": "line/cloud-storage/cloud-network.svg",
+   "name": "cloud-network",
+   "group": "line/cloud-storage",
+   "template_slide": 63
+  },
+  {
+   "path": "line/cloud-storage/cloud-upload.png",
+   "name": "cloud-upload",
+   "group": "line/cloud-storage",
+   "template_slide": 63
+  },
+  {
+   "path": "line/cloud-storage/cloud.svg",
+   "name": "cloud",
+   "group": "line/cloud-storage",
+   "template_slide": 63
+  },
+  {
+   "path": "line/cloud-storage/database-cloud.svg",
+   "name": "database-cloud",
+   "group": "line/cloud-storage",
+   "template_slide": 63
+  },
+  {
+   "path": "line/cloud-storage/database-export.png",
+   "name": "database-export",
+   "group": "line/cloud-storage",
+   "template_slide": 63
+  },
+  {
+   "path": "line/cloud-storage/database-key.svg",
+   "name": "database-key",
+   "group": "line/cloud-storage",
+   "template_slide": 63
+  },
+  {
+   "path": "line/cloud-storage/database-search.png",
+   "name": "database-search",
+   "group": "line/cloud-storage",
+   "template_slide": 63
+  },
+  {
+   "path": "line/cloud-storage/database.png",
+   "name": "database",
+   "group": "line/cloud-storage",
+   "template_slide": 63
+  },
+  {
+   "path": "line/cloud-storage/file-cloud.svg",
+   "name": "file-cloud",
+   "group": "line/cloud-storage",
+   "template_slide": 63
+  },
+  {
+   "path": "line/cloud-storage/globe-check.png",
+   "name": "globe-check",
+   "group": "line/cloud-storage",
+   "template_slide": 63
+  },
+  {
+   "path": "line/cloud-storage/globe.png",
+   "name": "globe",
+   "group": "line/cloud-storage",
+   "template_slide": 63
+  },
+  {
+   "path": "line/cloud-storage/server-cloud.svg",
+   "name": "server-cloud",
+   "group": "line/cloud-storage",
+   "template_slide": 63
+  },
+  {
+   "path": "line/cloud-storage/server-stack.svg",
+   "name": "server-stack",
+   "group": "line/cloud-storage",
+   "template_slide": 63
+  },
+  {
+   "path": "line/currency/balance-dollar.png",
+   "name": "balance-dollar",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/balance-euro.png",
+   "name": "balance-euro",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/balance-pound.png",
+   "name": "balance-pound",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/balance-yen.png",
+   "name": "balance-yen",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/balance.png",
+   "name": "balance",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/bill-dollar.png",
+   "name": "bill-dollar",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/bill-euro.png",
+   "name": "bill-euro",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/bill-pound.png",
+   "name": "bill-pound",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/document-dollar.png",
+   "name": "document-dollar",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/document-euro.png",
+   "name": "document-euro",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/document-pound.png",
+   "name": "document-pound",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/document-ruble.png",
+   "name": "document-ruble",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/document-yen.png",
+   "name": "document-yen",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/exchange-dollar.png",
+   "name": "exchange-dollar",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/exchange-euro.png",
+   "name": "exchange-euro",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/exchange-pound.png",
+   "name": "exchange-pound",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/exchange-ruble.png",
+   "name": "exchange-ruble",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/exchange-yen.png",
+   "name": "exchange-yen",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/growth-dollar.png",
+   "name": "growth-dollar",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/growth-euro.png",
+   "name": "growth-euro",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/growth-pound.png",
+   "name": "growth-pound",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/growth-ruble.png",
+   "name": "growth-ruble",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/growth-yen.png",
+   "name": "growth-yen",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/invoice-dollar.png",
+   "name": "invoice-dollar",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/invoice-euro.png",
+   "name": "invoice-euro",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/invoice-pound.png",
+   "name": "invoice-pound",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/invoice-ruble.png",
+   "name": "invoice-ruble",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/invoice-yen.png",
+   "name": "invoice-yen",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/money-add.png",
+   "name": "money-add",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/money-cards.png",
+   "name": "money-cards",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/currency/money-receive.png",
+   "name": "money-receive",
+   "group": "line/currency",
+   "template_slide": 66
+  },
+  {
+   "path": "line/date-and-time/calendar-check.png",
+   "name": "calendar-check",
+   "group": "line/date-and-time",
+   "template_slide": 66
+  },
+  {
+   "path": "line/date-and-time/calendar-day.png",
+   "name": "calendar-day",
+   "group": "line/date-and-time",
+   "template_slide": 66
+  },
+  {
+   "path": "line/date-and-time/calendar-event.png",
+   "name": "calendar-event",
+   "group": "line/date-and-time",
+   "template_slide": 66
+  },
+  {
+   "path": "line/date-and-time/clock.png",
+   "name": "clock",
+   "group": "line/date-and-time",
+   "template_slide": 66
+  },
+  {
+   "path": "line/date-and-time/timer.png",
+   "name": "timer",
+   "group": "line/date-and-time",
+   "template_slide": 66
+  },
+  {
+   "path": "line/directional/arrow-down-square.png",
+   "name": "arrow-down-square",
+   "group": "line/directional",
+   "template_slide": 65
+  },
+  {
+   "path": "line/directional/arrow-left-square.png",
+   "name": "arrow-left-square",
+   "group": "line/directional",
+   "template_slide": 65
+  },
+  {
+   "path": "line/directional/arrow-right-square.png",
+   "name": "arrow-right-square",
+   "group": "line/directional",
+   "template_slide": 65
+  },
+  {
+   "path": "line/directional/arrow-up-square.png",
+   "name": "arrow-up-square",
+   "group": "line/directional",
+   "template_slide": 65
+  },
+  {
+   "path": "line/directional/collapse.png",
+   "name": "collapse",
+   "group": "line/directional",
+   "template_slide": 65
+  },
+  {
+   "path": "line/directional/compass.png",
+   "name": "compass",
+   "group": "line/directional",
+   "template_slide": 65
+  },
+  {
+   "path": "line/directional/converge.png",
+   "name": "converge",
+   "group": "line/directional",
+   "template_slide": 65
+  },
+  {
+   "path": "line/directional/expand.png",
+   "name": "expand",
+   "group": "line/directional",
+   "template_slide": 65
+  },
+  {
+   "path": "line/directional/merge.png",
+   "name": "merge",
+   "group": "line/directional",
+   "template_slide": 65
+  },
+  {
+   "path": "line/directional/move.png",
+   "name": "move",
+   "group": "line/directional",
+   "template_slide": 65
+  },
+  {
+   "path": "line/directional/orbit.png",
+   "name": "orbit",
+   "group": "line/directional",
+   "template_slide": 65
+  },
+  {
+   "path": "line/directional/refresh-dotted.png",
+   "name": "refresh-dotted",
+   "group": "line/directional",
+   "template_slide": 65
+  },
+  {
+   "path": "line/directional/swap-horizontal.png",
+   "name": "swap-horizontal",
+   "group": "line/directional",
+   "template_slide": 65
+  },
+  {
+   "path": "line/e-commerce/basket-add.png",
+   "name": "basket-add",
+   "group": "line/e-commerce",
+   "template_slide": 64
+  },
+  {
+   "path": "line/e-commerce/cart.png",
+   "name": "cart",
+   "group": "line/e-commerce",
+   "template_slide": 64
+  },
+  {
+   "path": "line/e-commerce/delivery-truck.png",
+   "name": "delivery-truck",
+   "group": "line/e-commerce",
+   "template_slide": 64
+  },
+  {
+   "path": "line/e-commerce/shopping-bag.png",
+   "name": "shopping-bag",
+   "group": "line/e-commerce",
+   "template_slide": 64
+  },
+  {
+   "path": "line/e-commerce/tag.png",
+   "name": "tag",
+   "group": "line/e-commerce",
+   "template_slide": 64
+  },
+  {
+   "path": "line/electronic-devices/announcement.png",
+   "name": "announcement",
+   "group": "line/electronic-devices",
+   "template_slide": 64
+  },
+  {
+   "path": "line/electronic-devices/battery-charging.png",
+   "name": "battery-charging",
+   "group": "line/electronic-devices",
+   "template_slide": 64
+  },
+  {
+   "path": "line/electronic-devices/binders.png",
+   "name": "binders",
+   "group": "line/electronic-devices",
+   "template_slide": 64
+  },
+  {
+   "path": "line/electronic-devices/briefcase.png",
+   "name": "briefcase",
+   "group": "line/electronic-devices",
+   "template_slide": 64
+  },
+  {
+   "path": "line/electronic-devices/calculator.png",
+   "name": "calculator",
+   "group": "line/electronic-devices",
+   "template_slide": 64
+  },
+  {
+   "path": "line/electronic-devices/camera.png",
+   "name": "camera",
+   "group": "line/electronic-devices",
+   "template_slide": 64
+  },
+  {
+   "path": "line/electronic-devices/desktop-bookmark.png",
+   "name": "desktop-bookmark",
+   "group": "line/electronic-devices",
+   "template_slide": 64
+  },
+  {
+   "path": "line/electronic-devices/devices.png",
+   "name": "devices",
+   "group": "line/electronic-devices",
+   "template_slide": 64
+  },
+  {
+   "path": "line/electronic-devices/headphones-off.png",
+   "name": "headphones-off",
+   "group": "line/electronic-devices",
+   "template_slide": 64
+  },
+  {
+   "path": "line/electronic-devices/headphones.png",
+   "name": "headphones",
+   "group": "line/electronic-devices",
+   "template_slide": 64
+  },
+  {
+   "path": "line/electronic-devices/headset.png",
+   "name": "headset",
+   "group": "line/electronic-devices",
+   "template_slide": 64
+  },
+  {
+   "path": "line/electronic-devices/microphone-off.png",
+   "name": "microphone-off",
+   "group": "line/electronic-devices",
+   "template_slide": 64
+  },
+  {
+   "path": "line/electronic-devices/microphone.png",
+   "name": "microphone",
+   "group": "line/electronic-devices",
+   "template_slide": 64
+  },
+  {
+   "path": "line/electronic-devices/mobile.png",
+   "name": "mobile",
+   "group": "line/electronic-devices",
+   "template_slide": 64
+  },
+  {
+   "path": "line/electronic-devices/monitor.png",
+   "name": "monitor",
+   "group": "line/electronic-devices",
+   "template_slide": 64
+  },
+  {
+   "path": "line/electronic-devices/multi-device.png",
+   "name": "multi-device",
+   "group": "line/electronic-devices",
+   "template_slide": 64
+  },
+  {
+   "path": "line/electronic-devices/video-camera.png",
+   "name": "video-camera",
+   "group": "line/electronic-devices",
+   "template_slide": 64
+  },
+  {
+   "path": "line/files/archive.png",
+   "name": "archive",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/book.png",
+   "name": "book",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/clipboard-chart.png",
+   "name": "clipboard-chart",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/clipboard-check.png",
+   "name": "clipboard-check",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/clipboard-heart.png",
+   "name": "clipboard-heart",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/clipboard-search.png",
+   "name": "clipboard-search",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/clipboard.png",
+   "name": "clipboard",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/envelope-certificate.png",
+   "name": "envelope-certificate",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/envelope-document.png",
+   "name": "envelope-document",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/file-add.png",
+   "name": "file-add",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/file-approved.png",
+   "name": "file-approved",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/file-audio.png",
+   "name": "file-audio",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/file-bug.png",
+   "name": "file-bug",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/file-chart.png",
+   "name": "file-chart",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/file-check.png",
+   "name": "file-check",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/file-code.png",
+   "name": "file-code",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/file-edit.png",
+   "name": "file-edit",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/file-form.png",
+   "name": "file-form",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/file-forward.png",
+   "name": "file-forward",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/file-history.png",
+   "name": "file-history",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/file-image.png",
+   "name": "file-image",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/file-lines.png",
+   "name": "file-lines",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/file-sync.png",
+   "name": "file-sync",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/file-table.png",
+   "name": "file-table",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/file-text.png",
+   "name": "file-text",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/file-type.png",
+   "name": "file-type",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/file-video.png",
+   "name": "file-video",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/file-view.png",
+   "name": "file-view",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/file.png",
+   "name": "file",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/files-stack.png",
+   "name": "files-stack",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/folder-forward.png",
+   "name": "folder-forward",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/folder-remove.png",
+   "name": "folder-remove",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/folder-upload.png",
+   "name": "folder-upload",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/folder.png",
+   "name": "folder",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/files/mail-stack.png",
+   "name": "mail-stack",
+   "group": "line/files",
+   "template_slide": 63
+  },
+  {
+   "path": "line/general/attachment.png",
+   "name": "attachment",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/award-cup.png",
+   "name": "award-cup",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/brain.png",
+   "name": "brain",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/brush.png",
+   "name": "brush",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/coffee-break.png",
+   "name": "coffee-break",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/delivery.png",
+   "name": "delivery",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/document-list.png",
+   "name": "document-list",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/education.png",
+   "name": "education",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/filter.png",
+   "name": "filter",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/heart.png",
+   "name": "heart",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/home.png",
+   "name": "home",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/link.png",
+   "name": "link",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/location.png",
+   "name": "location",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/mail.png",
+   "name": "mail",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/notes.png",
+   "name": "notes",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/notification.png",
+   "name": "notification",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/percent.png",
+   "name": "percent",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/pin.png",
+   "name": "pin",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/pointer-hand.png",
+   "name": "pointer-hand",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/screen-text-alt.png",
+   "name": "screen-text-alt",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/screen-text.png",
+   "name": "screen-text",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/spray.png",
+   "name": "spray",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/star.png",
+   "name": "star",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/support.png",
+   "name": "support",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/general/thumbs-up.png",
+   "name": "thumbs-up",
+   "group": "line/general",
+   "template_slide": 65
+  },
+  {
+   "path": "line/industries/all-industries.png",
+   "name": "all-industries",
+   "group": "line/industries",
+   "template_slide": 66
+  },
+  {
+   "path": "line/industries/financial-services.png",
+   "name": "financial-services",
+   "group": "line/industries",
+   "template_slide": 66
+  },
+  {
+   "path": "line/industries/geometric-star.png",
+   "name": "geometric-star",
+   "group": "line/industries",
+   "template_slide": 66
+  },
+  {
+   "path": "line/industries/healthcare.png",
+   "name": "healthcare",
+   "group": "line/industries",
+   "template_slide": 66
+  },
+  {
+   "path": "line/industries/hospitality.png",
+   "name": "hospitality",
+   "group": "line/industries",
+   "template_slide": 66
+  },
+  {
+   "path": "line/industries/legal.png",
+   "name": "legal",
+   "group": "line/industries",
+   "template_slide": 66
+  },
+  {
+   "path": "line/industries/life-sciences.png",
+   "name": "life-sciences",
+   "group": "line/industries",
+   "template_slide": 66
+  },
+  {
+   "path": "line/industries/media-and-arts.png",
+   "name": "media-and-arts",
+   "group": "line/industries",
+   "template_slide": 66
+  },
+  {
+   "path": "line/industries/pencil-line.png",
+   "name": "pencil-line",
+   "group": "line/industries",
+   "template_slide": 66
+  },
+  {
+   "path": "line/industries/travel.png",
+   "name": "travel",
+   "group": "line/industries",
+   "template_slide": 66
+  },
+  {
+   "path": "line/it-tools/bookmark.png",
+   "name": "bookmark",
+   "group": "line/it-tools",
+   "template_slide": 63
+  },
+  {
+   "path": "line/it-tools/brightness.png",
+   "name": "brightness",
+   "group": "line/it-tools",
+   "template_slide": 63
+  },
+  {
+   "path": "line/it-tools/code.png",
+   "name": "code",
+   "group": "line/it-tools",
+   "template_slide": 63
+  },
+  {
+   "path": "line/it-tools/idea.png",
+   "name": "idea",
+   "group": "line/it-tools",
+   "template_slide": 63
+  },
+  {
+   "path": "line/it-tools/lightning.png",
+   "name": "lightning",
+   "group": "line/it-tools",
+   "template_slide": 63
+  },
+  {
+   "path": "line/it-tools/settings-idea.png",
+   "name": "settings-idea",
+   "group": "line/it-tools",
+   "template_slide": 63
+  },
+  {
+   "path": "line/it-tools/settings-multiple.png",
+   "name": "settings-multiple",
+   "group": "line/it-tools",
+   "template_slide": 63
+  },
+  {
+   "path": "line/it-tools/settings-sync.png",
+   "name": "settings-sync",
+   "group": "line/it-tools",
+   "template_slide": 63
+  },
+  {
+   "path": "line/it-tools/settings.png",
+   "name": "settings",
+   "group": "line/it-tools",
+   "template_slide": 63
+  },
+  {
+   "path": "line/it-tools/signal.png",
+   "name": "signal",
+   "group": "line/it-tools",
+   "template_slide": 63
+  },
+  {
+   "path": "line/it-tools/sparkle.png",
+   "name": "sparkle",
+   "group": "line/it-tools",
+   "template_slide": 63
+  },
+  {
+   "path": "line/it-tools/usb.png",
+   "name": "usb",
+   "group": "line/it-tools",
+   "template_slide": 63
+  },
+  {
+   "path": "line/it-tools/vision.png",
+   "name": "vision",
+   "group": "line/it-tools",
+   "template_slide": 63
+  },
+  {
+   "path": "line/it-tools/wifi.png",
+   "name": "wifi",
+   "group": "line/it-tools",
+   "template_slide": 63
+  },
+  {
+   "path": "line/it-tools/wrench.png",
+   "name": "wrench",
+   "group": "line/it-tools",
+   "template_slide": 63
+  },
+  {
+   "path": "line/media/audio-wave.png",
+   "name": "audio-wave",
+   "group": "line/media",
+   "template_slide": 65
+  },
+  {
+   "path": "line/media/chart-window.png",
+   "name": "chart-window",
+   "group": "line/media",
+   "template_slide": 65
+  },
+  {
+   "path": "line/media/image.png",
+   "name": "image",
+   "group": "line/media",
+   "template_slide": 65
+  },
+  {
+   "path": "line/media/layout.png",
+   "name": "layout",
+   "group": "line/media",
+   "template_slide": 65
+  },
+  {
+   "path": "line/media/media-file.png",
+   "name": "media-file",
+   "group": "line/media",
+   "template_slide": 65
+  },
+  {
+   "path": "line/media/music.png",
+   "name": "music",
+   "group": "line/media",
+   "template_slide": 65
+  },
+  {
+   "path": "line/media/play.png",
+   "name": "play",
+   "group": "line/media",
+   "template_slide": 65
+  },
+  {
+   "path": "line/media/sliders.png",
+   "name": "sliders",
+   "group": "line/media",
+   "template_slide": 65
+  },
+  {
+   "path": "line/media/terminal.png",
+   "name": "terminal",
+   "group": "line/media",
+   "template_slide": 65
+  },
+  {
+   "path": "line/numbers/circle-0.png",
+   "name": "circle-0",
+   "group": "line/numbers",
+   "template_slide": 66
+  },
+  {
+   "path": "line/numbers/circle-1.png",
+   "name": "circle-1",
+   "group": "line/numbers",
+   "template_slide": 66
+  },
+  {
+   "path": "line/numbers/circle-2.png",
+   "name": "circle-2",
+   "group": "line/numbers",
+   "template_slide": 66
+  },
+  {
+   "path": "line/numbers/circle-3.png",
+   "name": "circle-3",
+   "group": "line/numbers",
+   "template_slide": 66
+  },
+  {
+   "path": "line/numbers/circle-4.png",
+   "name": "circle-4",
+   "group": "line/numbers",
+   "template_slide": 66
+  },
+  {
+   "path": "line/numbers/circle-5.png",
+   "name": "circle-5",
+   "group": "line/numbers",
+   "template_slide": 66
+  },
+  {
+   "path": "line/numbers/circle-6.png",
+   "name": "circle-6",
+   "group": "line/numbers",
+   "template_slide": 66
+  },
+  {
+   "path": "line/numbers/circle-7.png",
+   "name": "circle-7",
+   "group": "line/numbers",
+   "template_slide": 66
+  },
+  {
+   "path": "line/numbers/circle-8.png",
+   "name": "circle-8",
+   "group": "line/numbers",
+   "template_slide": 66
+  },
+  {
+   "path": "line/numbers/circle-9.png",
+   "name": "circle-9",
+   "group": "line/numbers",
+   "template_slide": 66
+  },
+  {
+   "path": "line/quantifiers/alert-down.png",
+   "name": "alert-down",
+   "group": "line/quantifiers",
+   "template_slide": 64
+  },
+  {
+   "path": "line/quantifiers/balance-shapes.png",
+   "name": "balance-shapes",
+   "group": "line/quantifiers",
+   "template_slide": 64
+  },
+  {
+   "path": "line/quantifiers/bar-chart.png",
+   "name": "bar-chart",
+   "group": "line/quantifiers",
+   "template_slide": 64
+  },
+  {
+   "path": "line/quantifiers/chart-upload.png",
+   "name": "chart-upload",
+   "group": "line/quantifiers",
+   "template_slide": 64
+  },
+  {
+   "path": "line/quantifiers/energy-hand.png",
+   "name": "energy-hand",
+   "group": "line/quantifiers",
+   "template_slide": 64
+  },
+  {
+   "path": "line/quantifiers/growth-ramp.png",
+   "name": "growth-ramp",
+   "group": "line/quantifiers",
+   "template_slide": 64
+  },
+  {
+   "path": "line/quantifiers/line-chart.png",
+   "name": "line-chart",
+   "group": "line/quantifiers",
+   "template_slide": 64
+  },
+  {
+   "path": "line/quantifiers/pie-chart-quarter.png",
+   "name": "pie-chart-quarter",
+   "group": "line/quantifiers",
+   "template_slide": 64
+  },
+  {
+   "path": "line/quantifiers/pie-chart.png",
+   "name": "pie-chart",
+   "group": "line/quantifiers",
+   "template_slide": 64
+  },
+  {
+   "path": "line/quantifiers/power-case.png",
+   "name": "power-case",
+   "group": "line/quantifiers",
+   "template_slide": 64
+  },
+  {
+   "path": "line/quantifiers/process-inputs.png",
+   "name": "process-inputs",
+   "group": "line/quantifiers",
+   "template_slide": 64
+  },
+  {
+   "path": "line/quantifiers/scale-up.png",
+   "name": "scale-up",
+   "group": "line/quantifiers",
+   "template_slide": 64
+  },
+  {
+   "path": "line/quantifiers/sprout.png",
+   "name": "sprout",
+   "group": "line/quantifiers",
+   "template_slide": 64
+  },
+  {
+   "path": "line/quantifiers/time-hand.png",
+   "name": "time-hand",
+   "group": "line/quantifiers",
+   "template_slide": 64
+  },
+  {
+   "path": "line/quantifiers/trend-up.png",
+   "name": "trend-up",
+   "group": "line/quantifiers",
+   "template_slide": 64
+  },
+  {
+   "path": "line/security/bug.svg",
+   "name": "bug",
+   "group": "line/security",
+   "template_slide": 64
+  },
+  {
+   "path": "line/security/controls.svg",
+   "name": "controls",
+   "group": "line/security",
+   "template_slide": 64
+  },
+  {
+   "path": "line/security/file-warning.svg",
+   "name": "file-warning",
+   "group": "line/security",
+   "template_slide": 64
+  },
+  {
+   "path": "line/security/fingerprint.svg",
+   "name": "fingerprint",
+   "group": "line/security",
+   "template_slide": 64
+  },
+  {
+   "path": "line/security/identity-global.svg",
+   "name": "identity-global",
+   "group": "line/security",
+   "template_slide": 64
+  },
+  {
+   "path": "line/security/key.svg",
+   "name": "key",
+   "group": "line/security",
+   "template_slide": 64
+  },
+  {
+   "path": "line/security/lock-check.svg",
+   "name": "lock-check",
+   "group": "line/security",
+   "template_slide": 64
+  },
+  {
+   "path": "line/security/mobile-warning.svg",
+   "name": "mobile-warning",
+   "group": "line/security",
+   "template_slide": 64
+  },
+  {
+   "path": "line/security/safe.svg",
+   "name": "safe",
+   "group": "line/security",
+   "template_slide": 64
+  },
+  {
+   "path": "line/security/shield-check.svg",
+   "name": "shield-check",
+   "group": "line/security",
+   "template_slide": 64
+  },
+  {
+   "path": "line/security/shield-star.svg",
+   "name": "shield-star",
+   "group": "line/security",
+   "template_slide": 64
+  },
+  {
+   "path": "line/security/shield.svg",
+   "name": "shield",
+   "group": "line/security",
+   "template_slide": 64
+  },
+  {
+   "path": "line/security/warning.png",
+   "name": "warning",
+   "group": "line/security",
+   "template_slide": 64
+  },
+  {
+   "path": "line/symbols/check-green.png",
+   "name": "check-green",
+   "group": "line/symbols",
+   "template_slide": 66
+  },
+  {
+   "path": "line/symbols/check.png",
+   "name": "check",
+   "group": "line/symbols",
+   "template_slide": 66
+  },
+  {
+   "path": "line/symbols/circle-arrow-right.png",
+   "name": "circle-arrow-right",
+   "group": "line/symbols",
+   "template_slide": 70
+  },
+  {
+   "path": "line/symbols/circle-green.png",
+   "name": "circle-green",
+   "group": "line/symbols",
+   "template_slide": 66
+  },
+  {
+   "path": "line/symbols/circle.png",
+   "name": "circle",
+   "group": "line/symbols",
+   "template_slide": 66
+  },
+  {
+   "path": "line/symbols/exclamation.png",
+   "name": "exclamation",
+   "group": "line/symbols",
+   "template_slide": 66
+  },
+  {
+   "path": "line/symbols/minus.png",
+   "name": "minus",
+   "group": "line/symbols",
+   "template_slide": 66
+  },
+  {
+   "path": "line/symbols/na.png",
+   "name": "na",
+   "group": "line/symbols",
+   "template_slide": 66
+  },
+  {
+   "path": "line/symbols/no-red.png",
+   "name": "no-red",
+   "group": "line/symbols",
+   "template_slide": 66
+  },
+  {
+   "path": "line/symbols/no.png",
+   "name": "no",
+   "group": "line/symbols",
+   "template_slide": 66
+  },
+  {
+   "path": "line/symbols/pending-yellow.png",
+   "name": "pending-yellow",
+   "group": "line/symbols",
+   "template_slide": 66
+  },
+  {
+   "path": "line/symbols/plus.png",
+   "name": "plus",
+   "group": "line/symbols",
+   "template_slide": 66
+  },
+  {
+   "path": "line/symbols/question.png",
+   "name": "question",
+   "group": "line/symbols",
+   "template_slide": 66
+  },
+  {
+   "path": "line/symbols/x-red.png",
+   "name": "x-red",
+   "group": "line/symbols",
+   "template_slide": 66
+  },
+  {
+   "path": "line/symbols/x.png",
+   "name": "x",
+   "group": "line/symbols",
+   "template_slide": 66
+  },
+  {
+   "path": "line/symbols/yes-green.png",
+   "name": "yes-green",
+   "group": "line/symbols",
+   "template_slide": 66
+  },
+  {
+   "path": "line/symbols/yes.png",
+   "name": "yes",
+   "group": "line/symbols",
+   "template_slide": 66
+  },
+  {
+   "path": "line/users/team.svg",
+   "name": "team",
+   "group": "line/users",
+   "template_slide": 63
+  },
+  {
+   "path": "line/users/user-add.png",
+   "name": "user-add",
+   "group": "line/users",
+   "template_slide": 63
+  },
+  {
+   "path": "line/users/user.png",
+   "name": "user",
+   "group": "line/users",
+   "template_slide": 63
+  },
+  {
+   "path": "logos/box-app-icon.png",
+   "name": "box-app-icon",
+   "group": "logos",
+   "template_slide": 62
+  },
+  {
+   "path": "logos/box-logo-blue.png",
+   "name": "box-logo-blue",
+   "group": "logos",
+   "template_slide": 62
+  },
+  {
+   "path": "product-line/box-ai.png",
+   "name": "box-ai",
+   "group": "product-line",
+   "template_slide": 63
+  },
+  {
+   "path": "product-line/box-extract.png",
+   "name": "box-extract",
+   "group": "product-line",
+   "template_slide": 63
+  },
+  {
+   "path": "product-line/box-sign.png",
+   "name": "box-sign",
+   "group": "product-line",
+   "template_slide": 63
+  },
+  {
+   "path": "product-line/content-platform.png",
+   "name": "content-platform",
+   "group": "product-line",
+   "template_slide": 63
+  },
+  {
+   "path": "product-line/hubs.png",
+   "name": "hubs",
+   "group": "product-line",
+   "template_slide": 63
+  },
+  {
+   "path": "product-line/integrations.png",
+   "name": "integrations",
+   "group": "product-line",
+   "template_slide": 63
+  },
+  {
+   "path": "product-line/no-code-apps.png",
+   "name": "no-code-apps",
+   "group": "product-line",
+   "template_slide": 63
+  },
+  {
+   "path": "product-line/security-and-compliance.png",
+   "name": "security-and-compliance",
+   "group": "product-line",
+   "template_slide": 63
+  },
+  {
+   "path": "product-line/workflow-automation.png",
+   "name": "workflow-automation",
+   "group": "product-line",
+   "template_slide": 63
+  },
+  {
+   "path": "product/box-ai-agents.png",
+   "name": "box-ai-agents",
+   "group": "product",
+   "template_slide": 67
+  },
+  {
+   "path": "product/box-ai.png",
+   "name": "box-ai",
+   "group": "product",
+   "template_slide": 67
+  },
+  {
+   "path": "product/box-consulting.png",
+   "name": "box-consulting",
+   "group": "product",
+   "template_slide": 67
+  },
+  {
+   "path": "product/box-extract.png",
+   "name": "box-extract",
+   "group": "product",
+   "template_slide": 67
+  },
+  {
+   "path": "product/box-sign.png",
+   "name": "box-sign",
+   "group": "product",
+   "template_slide": 67
+  },
+  {
+   "path": "product/collaboration.png",
+   "name": "collaboration",
+   "group": "product",
+   "template_slide": 67
+  },
+  {
+   "path": "product/content-platform.png",
+   "name": "content-platform",
+   "group": "product",
+   "template_slide": 67
+  },
+  {
+   "path": "product/hubs.png",
+   "name": "hubs",
+   "group": "product",
+   "template_slide": 67
+  },
+  {
+   "path": "product/integrations.png",
+   "name": "integrations",
+   "group": "product",
+   "template_slide": 67
+  },
+  {
+   "path": "product/no-code-apps.png",
+   "name": "no-code-apps",
+   "group": "product",
+   "template_slide": 67
+  },
+  {
+   "path": "product/security-and-compliance.png",
+   "name": "security-and-compliance",
+   "group": "product",
+   "template_slide": 67
+  },
+  {
+   "path": "product/workflow-automation.png",
+   "name": "workflow-automation",
+   "group": "product",
+   "template_slide": 67
+  }
+ ]
+}

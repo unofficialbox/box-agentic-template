@@ -1,31 +1,32 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 746" role="img" aria-labelledby="title desc">
 <title id="title">Commercial Loan Review process</title>
 <desc id="desc">Ordered workflow. Each step includes its stop condition. Synthetic demonstration.</desc>
-<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#53657c"/></marker></defs>
-<rect width="960" height="746" fill="#f4f7fb"/>
-<text x="40" y="42" font-family="sans-serif" font-size="24" fill="#172b4d">Box + Salesforce · synthetic demo</text>
-<rect x="40" y="76" width="880" height="98" rx="12" fill="white" stroke="#c5d1df"/>
-<text x="62" y="104" font-family="sans-serif" font-size="18" fill="#172b4d">1. Resolve Salesforce record and Box package</text>
-<text x="62" y="129" font-family="sans-serif" font-size="14" fill="#172b4d">Owner: Loan officer</text>
-<text x="62" y="154" font-family="sans-serif" font-size="14" fill="#172b4d">Hold: Stop if the record is missing or ambiguous.</text>
-<path d="M480,174 V195" stroke="#53657c" marker-end="url(#arrow)"/>
-<rect x="40" y="200" width="880" height="98" rx="12" fill="white" stroke="#c5d1df"/>
-<text x="62" y="228" font-family="sans-serif" font-size="18" fill="#172b4d">2. Find and analyze the term sheet</text>
-<text x="62" y="253" font-family="sans-serif" font-size="14" fill="#172b4d">Owner: Loan officer</text>
-<text x="62" y="278" font-family="sans-serif" font-size="14" fill="#172b4d">Hold: Reject an unrelated folder or unsupported source claim.</text>
-<path d="M480,298 V319" stroke="#53657c" marker-end="url(#arrow)"/>
-<rect x="40" y="324" width="880" height="98" rx="12" fill="white" stroke="#c5d1df"/>
-<text x="62" y="352" font-family="sans-serif" font-size="18" fill="#172b4d">3. Propose the bank terms</text>
-<text x="62" y="377" font-family="sans-serif" font-size="14" fill="#172b4d">Owner: Loan officer</text>
-<text x="62" y="402" font-family="sans-serif" font-size="14" fill="#172b4d">Hold: Reject stale versions, unknown fields, and invalid amounts.</text>
-<path d="M480,422 V443" stroke="#53657c" marker-end="url(#arrow)"/>
-<rect x="40" y="448" width="880" height="98" rx="12" fill="white" stroke="#c5d1df"/>
-<text x="62" y="476" font-family="sans-serif" font-size="18" fill="#172b4d">4. Human credit decision</text>
-<text x="62" y="501" font-family="sans-serif" font-size="14" fill="#172b4d">Owner: Credit officer</text>
-<text x="62" y="526" font-family="sans-serif" font-size="14" fill="#172b4d">Hold: Hold the action when authorization or capability is missing.</text>
-<path d="M480,546 V567" stroke="#53657c" marker-end="url(#arrow)"/>
-<rect x="40" y="572" width="880" height="98" rx="12" fill="white" stroke="#c5d1df"/>
-<text x="62" y="600" font-family="sans-serif" font-size="18" fill="#172b4d">5. Verify the exact generated draft</text>
-<text x="62" y="625" font-family="sans-serif" font-size="14" fill="#172b4d">Owner: Loan officer</text>
-<text x="62" y="650" font-family="sans-serif" font-size="14" fill="#172b4d">Hold: Hold mismatched jobs, stale versions, unresolved tags, and unapproved records.</text>
+<style>text{font-family:&quot;Inter Display&quot;, Inter, system-ui, -apple-system, &quot;Segoe UI&quot;, Arial, sans-serif}.t{font-weight:500}</style>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#0061D3"/></marker><linearGradient id="page" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F0F7FF"/></linearGradient><linearGradient id="title-ink" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#113053"/><stop offset="1" stop-color="#4B6E98"/></linearGradient><linearGradient id="card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#F5F9FD"/></linearGradient><filter id="shadow" x="-5%" y="-10%" width="110%" height="140%"><feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#000000" flood-opacity="0.1"/></filter></defs>
+<rect width="960" height="746" fill="url(#page)"/>
+<text class="t" x="40" y="44" font-size="26" fill="url(#title-ink)">Box + Salesforce · synthetic demo</text>
+<rect x="40" y="76" width="880" height="98" rx="14" fill="url(#card)" stroke="#D0D0D0" filter="url(#shadow)"/>
+<text x="62" y="104" class="t" font-size="18" fill="#113053">1. Resolve Salesforce record and Box package</text>
+<text x="62" y="129" font-size="14" fill="#4B6E98">Owner: Loan officer</text>
+<text x="62" y="154" font-size="14" fill="#4B6E98">Hold: Stop if the record is missing or ambiguous.</text>
+<path d="M480,174 V195" stroke="#0061D3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="40" y="200" width="880" height="98" rx="14" fill="url(#card)" stroke="#D0D0D0" filter="url(#shadow)"/>
+<text x="62" y="228" class="t" font-size="18" fill="#113053">2. Find and analyze the term sheet</text>
+<text x="62" y="253" font-size="14" fill="#4B6E98">Owner: Loan officer</text>
+<text x="62" y="278" font-size="14" fill="#4B6E98">Hold: Reject an unrelated folder or unsupported source claim.</text>
+<path d="M480,298 V319" stroke="#0061D3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="40" y="324" width="880" height="98" rx="14" fill="url(#card)" stroke="#D0D0D0" filter="url(#shadow)"/>
+<text x="62" y="352" class="t" font-size="18" fill="#113053">3. Propose the bank terms</text>
+<text x="62" y="377" font-size="14" fill="#4B6E98">Owner: Loan officer</text>
+<text x="62" y="402" font-size="14" fill="#4B6E98">Hold: Reject stale versions, unknown fields, and invalid amounts.</text>
+<path d="M480,422 V443" stroke="#0061D3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="40" y="448" width="880" height="98" rx="14" fill="url(#card)" stroke="#D0D0D0" filter="url(#shadow)"/>
+<text x="62" y="476" class="t" font-size="18" fill="#113053">4. Human credit decision</text>
+<text x="62" y="501" font-size="14" fill="#4B6E98">Owner: Credit officer</text>
+<text x="62" y="526" font-size="14" fill="#4B6E98">Hold: Hold the action when authorization or capability is missing.</text>
+<path d="M480,546 V567" stroke="#0061D3" stroke-width="1.5" marker-end="url(#arrow)"/>
+<rect x="40" y="572" width="880" height="98" rx="14" fill="url(#card)" stroke="#D0D0D0" filter="url(#shadow)"/>
+<text x="62" y="600" class="t" font-size="18" fill="#113053">5. Verify the exact generated draft</text>
+<text x="62" y="625" font-size="14" fill="#4B6E98">Owner: Loan officer</text>
+<text x="62" y="650" font-size="14" fill="#4B6E98">Hold: Hold mismatched jobs, stale versions, unresolved tags, and unapproved records.</text>
 </svg>

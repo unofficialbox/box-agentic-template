@@ -7,6 +7,7 @@
 5. Follow each storyboard prompt and verify its expected evidence.
 6. Explain each held action and name the human decision owner. Do not describe fixtures as live.
 7. Repeat the walkthrough: it has no external side effects and needs no tenant reset.
+8. Build any slides or extra pages with the box-brand skill and docs/brand/BOX-BRAND.md.
 
 ## Deployment preparation
 

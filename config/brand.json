@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "source": "Box Corporate Template, Q3 FY27 (.potx, theme 'Q2 FY27 Box'). Distilled for agents; the human-readable rules are in docs/brand/BOX-BRAND.md.",
+  "colors": {
+    "box_blue": "#0061D3",
+    "white": "#FFFFFF",
+    "ink": "#212121",
+    "title_start": "#113053",
+    "title_end": "#4B6E98",
+    "subtitle": "#0061D3",
+    "body": "#4B6E98",
+    "body_dense": "#3F628A",
+    "rule": "#0061D3",
+    "pronoun_on_dark": "#91C1FC",
+    "pronoun_on_light": "#0061D3",
+    "container_outline": "#D0D0D0",
+    "asset_stroke": "#F2F2F2",
+    "page_tint": "#F0F7FF",
+    "navy": "#01295C",
+    "purple": "#670BAA",
+    "black": "#000000",
+    "alert": "#ED3757"
+  },
+  "gradients": {
+    "slide_title": ["#113053", "#4B6E98"],
+    "text_highlight": ["#FD56FF", "#307CF2"],
+    "big_number": ["#EBAF83", "#FD56FF", "#00B0F0"],
+    "special_container_outline": ["#BE65F4", "#5189EE"],
+    "container_fill": ["#FFFFFF", "#F5F9FD"],
+    "dark_background": ["#0061D3", "#01295C", "#670BAA"],
+    "light_background": ["#FFFFFF", "#F0F7FF"]
+  },
+  "chart_series": ["#0061D3", "#ED3757", "#F4B21A", "#25C180", "#9F3EEC", "#91C1FC"],
+  "chart_series_tint": "25%",
+  "status": {
+    "pass": "#25C180",
+    "warn": "#F4B21A",
+    "fail": "#ED3757"
+  },
+  "theme_scheme": {
+    "dk1": "0061D3", "lt1": "FFFFFF", "dk2": "212121", "lt2": "4B6D98",
+    "accent1": "EC3657", "accent2": "F4B219", "accent3": "FC56FF", "accent4": "00AFF0", "accent5": "9F3DEC", "accent6": "24C17F",
+    "hlink": "143357", "folHlink": "757575"
+  },
+  "typography": {
+    "heading_font": "Inter Display SemiBold",
+    "title_font": "Inter Display Medium",
+    "body_font": "Inter Display",
+    "web_stack": "\"Inter Display\", Inter, system-ui, -apple-system, \"Segoe UI\", Arial, sans-serif",
+    "slide_title_pt": 32,
+    "subtitle_pt": 16,
+    "body_pt": 16,
+    "min_pt": 14,
+    "ideal_body_pt": [18, 24],
+    "title_leading": 0.9,
+    "bullet_space_before_pt": 12,
+    "emphasis": "Inter Display SemiBold; never italics or underline"
+  },
+  "shapes": {
+    "container_radius_ratio": 0.06,
+    "outline_width_pt": 0.75,
+    "shadow": "0 3pt 11pt rgba(0, 0, 0, 0.10)",
+    "asset_shadow": "black at 10% opacity, 10pt blur, 3pt distance, 90 degrees"
+  },
+  "slide": {"width_in": 13.333, "height_in": 7.5, "aspect": "16:9"},
+  "writing": {
+    "case": "sentence case, except product and team names",
+    "forbidden_patterns": [
+      {"pattern": "&", "rule": "Spell out 'and' instead of using an ampersand"},
+      {"pattern": "!!", "rule": "No repeated exclamation marks"},
+      {"pattern": "Box's", "rule": "Do not use Box with an apostrophe s; use 'our'"},
+      {"pattern": "Box’s", "rule": "Do not use Box with an apostrophe s; use 'our'"}
+    ],
+    "allowed_terms": ["Q&A"],
+    "oxford_comma": true,
+    "caption": "starts lowercase, no closing period, short"
+  },
+  "icons": {
+    "root": "assets/brand/icons",
+    "index": "assets/brand/icons/index.json",
+    "catalog": "assets/brand/icons/catalog"
+  }
+}

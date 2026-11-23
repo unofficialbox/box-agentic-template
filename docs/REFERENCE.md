@@ -50,7 +50,8 @@ python scripts/validate.py
 | Layer | Source | Purpose |
 |---|---|---|
 | Shared instructions | [AGENTS.md](../AGENTS.md) | Authority, routing, verification |
-| Canonical skills | [.agents/skills](../.agents/skills) | Gather, create, connect, deploy, rehearse, verify |
+| Canonical skills | [.agents/skills](../.agents/skills) | Gather, create, connect, deploy, rehearse, verify, brand |
+| Brand | [BOX-BRAND.md](brand/BOX-BRAND.md), [config/brand.json](../config/brand.json), [assets/brand/icons](../assets/brand/icons/README.md) | Box brand rules, tokens, and icons for every generated asset |
 | Claude entry point | [CLAUDE.md](../CLAUDE.md), `.claude/skills/` | Native Claude discovery |
 | Cursor entry point | [.cursor/rules/project.mdc](../.cursor/rules/project.mdc), `.cursor/skills/` | Native Cursor discovery |
 | Codex entry point | `AGENTS.md`, `.agents/skills/` | Project instructions and skills |

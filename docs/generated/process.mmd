@@ -1,3 +1,4 @@
+%%{init: {'theme': 'base', 'themeVariables': {'fontFamily': 'Inter Display, Inter, system-ui, sans-serif', 'primaryColor': '#FFFFFF', 'primaryBorderColor': '#D0D0D0', 'primaryTextColor': '#113053', 'lineColor': '#0061D3', 'textColor': '#4B6E98'}}}%%
 flowchart TD
   box["Box: governed content"]
   salesforce["Salesforce: structured records"]
@@ -17,3 +18,7 @@ flowchart TD
   proposal -. "check fails" .-> hold
   approval -. "check fails" .-> hold
   output -. "check fails" .-> hold
+  classDef platform fill:#0061D3,stroke:#0061D3,color:#FFFFFF
+  classDef hold fill:#FFFFFF,stroke:#ED3757,color:#113053
+  class box,salesforce platform
+  class hold hold

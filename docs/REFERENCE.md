@@ -1,6 +1,6 @@
 # Reference
 
-Detail moved out of the README. Start with the [README](../README.md) for the overview and the agent quick start.
+This page holds the detail that is not in the README. Start with the [README](../README.md) for the overview and the agent quick start.
 
 ## The reference example
 
@@ -60,6 +60,42 @@ python scripts/validate.py
 - **Editing skills:** edit the canonical skills, then run `python scripts/sync_skills.py`. Its `--check` flag detects drift.
 - **Clients:** see [client setup](CLIENTS.md) for configurations and discovery checks.
 - **Other agents:** they can read `AGENTS.md` and the selected `SKILL.md` directly.
+
+## Live prerequisites
+
+Not needed for offline work or for the Dispatch path, which handles its own sign-in. These are needed for the standalone live path: scratch orgs, metadata deploys, package installs, and anonymous Apex.
+
+**Salesforce CLI.**
+
+```bash
+# Requires a current Node.js LTS. Salesforce also publishes native installers.
+npm install --global @salesforce/cli
+sf --version
+```
+
+**Sign in to Salesforce.**
+
+```bash
+sf org login web --alias <dev-hub-alias> --set-default-dev-hub   # Dev Hub, needed for scratch orgs
+sf org login web --alias <target-alias>                          # or an existing org to deploy into
+sf org list
+```
+
+- **Dev Hub:** to create scratch orgs, enable Dev Hub in the hub org (Setup → Dev Hub) first.
+- **Where aliases go:** record aliases and expiry dates in the ignored `config/runtime.local.json`.
+- **No credentials:** never ask for passwords or tokens. The CLI keeps its own session.
+
+**Box.**
+
+- **Connector:** the coding agent needs an authenticated Box connector, such as the Box MCP server. Confirm the user and enterprise with `who_am_i`.
+- **Workspace:** get the user's approval for the target folder before creating anything, ideally an isolated new one.
+
+**Box for Salesforce.**
+
+- **Before connecting:** after installing the package, assign `box__Box_Admin_All_Licenses` (Box Admin, All Licenses) to the System Administrator who will connect Box. Do this before asking them to connect in Box Settings.
+- **Check:** verify the assignment with a `PermissionSetAssignment` query before the hand-off.
+
+Agents: run `sf --version` and `sf org list` before planning any standalone Salesforce deploy. If either fails, stop and point the user here instead of guessing.
 
 ## Standalone and Dispatch deployment
 

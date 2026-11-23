@@ -14,7 +14,7 @@ A starter that lets a coding agent (Claude Code, Codex, Cursor, or similar) turn
 3. Answer the agent's questions, a few at a time. Review the build brief it shows you and confirm it.
 4. The agent creates `../<your-slug>` with the tailored project, runs its checks, and tells you what is offline, what is deployable, and what still needs live work.
 
-Requires Python 3.11+ and Git. No cloud account, API key, or Node runtime is needed until you choose to go live.
+Requires Python 3.11+ and Git. No cloud account, API key, or Node runtime is needed until you choose to go live. Going live needs the [live prerequisites](docs/REFERENCE.md#live-prerequisites).
 
 ## For AI agents: start here
 
@@ -37,7 +37,7 @@ Follow these steps in order. Do not skip ahead to domain code.
 4. **Confirm.** Show the full `review` output. Run `confirm --fingerprint …` only after the user confirms that exact brief. Never confirm it yourself.
 5. **Generate and tailor.** Run `python scripts/new_project.py --slug <slug> --name "<Name>" --intake-state config/intake.local.json --init-git`, then use `create-use-case` in the new project to tailor its domain, fixtures, tools, tests, and deliverables.
 6. **Verify.** Run `validate.py`, coverage, `build_deliverables.py --check`, and `build_deployment.py` in the generated project ([commands](docs/REFERENCE.md#verify)).
-7. **Go live only on request.** Use `connect-tools` to discover the real Box and Salesforce capabilities, then `deploy-solution`. Get the user's approval for each external write session.
+7. **Go live only on request.** Check the [live prerequisites](docs/REFERENCE.md#live-prerequisites) first, including the Salesforce CLI and org sign-in. Use `connect-tools` to discover the real Box and Salesforce capabilities, then `deploy-solution`. Get the user's approval for each external write session.
 
 Guardrails that always apply:
 

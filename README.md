@@ -12,7 +12,9 @@ A starter that lets a coding agent (Claude Code, Codex, Cursor, or similar) turn
    ```
 
 3. Answer the agent's questions, a few at a time. Review the build brief it shows you and confirm it.
-4. The agent creates `../<your-slug>` with the tailored project, runs its checks, and tells you what is offline, what is deployable, and what still needs live work.
+4. The agent creates the tailored project in a brand-new sibling directory, `../<your-slug>`, runs its checks, and tells you what is offline, what is deployable, and what still needs live work.
+   - **The template stays untouched:** generation never writes into an existing directory and refuses if the destination exists. Use `--destination` to put the project somewhere else outside the template.
+   - **Git:** the new project gets its own fresh Git repository on `main`, with no template history and no remote. Add a remote yourself before pushing.
 
 Requires Python 3.11+ and Git. No cloud account, API key, or Node runtime is needed until you choose to go live. Going live needs the [live prerequisites](docs/REFERENCE.md#live-prerequisites).
 

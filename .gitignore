@@ -28,3 +28,7 @@ config/intake.local.json
 # Portal site build output
 node_modules/
 salesforce-project/force-app/main/default/uiBundles/*/dist/
+salesforce-project/force-app/main/default/uiBundles/*/tsconfig.tsbuildinfo
+# Salesforce CLI local state (org IDs, source tracking)
+.sf/
+.sfdx/

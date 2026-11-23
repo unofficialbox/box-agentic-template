@@ -61,7 +61,12 @@ The record page shows the record's Box documents with Box Content Preview, adds 
 5. **Sign fields:** to use Sign, add the two Sign fields to the record object.
 6. **Build and deploy:** build and deploy as above.
 
+**Org settings the site needs:** Digital Experiences enabled, with ExperienceBundle metadata and standard external profiles allowed. Deploy `CommunitiesSettings` (`enableNetworksEnabled`, `enableOotbProfExtUserOpsEnable`) and `ExperienceBundleSettings` (`enableExperienceBundleMetadata`) before the site. After deploying, assign `<site>_Guest_User_Api_Access` to the site's guest user so sign-in and registration work. The site is served at `https://<org>.my.site.com/<site_name>/`.
+
 **Known build notes:**
+
+- `box-annotations` and `box-content-preview` are pinned to 5.2.1-beta.18 and 3.85.0, the versions proven in box-agentic-loans, and the bundle ships a `package-lock.json`. box-annotations 5.3.0 leaves raw `require("react")` calls in the browser build, which renders a blank page with `ReferenceError: require is not defined`.
+- `salesforce-project/.forceignore` keeps `node_modules/` out of deploys.
 
 - `box-ui-elements` needs `.npmrc` `legacy-peer-deps=true`, `define: { global: "globalThis" }`, and a `~@box` alias for its stylesheets. All three are already in the template.
 - The main chunk is about 4.9 MB because Preview is bundled.

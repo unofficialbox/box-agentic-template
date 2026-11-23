@@ -1,0 +1,8 @@
+# Salesforce CLI ignore list. The portal UI bundle deploys its source and dist/, never node_modules.
+package.xml
+**/jsconfig.json
+**/.eslintrc.json
+**/__tests__/**
+**/tsconfig.tsbuildinfo
+node_modules/
+.DS_Store

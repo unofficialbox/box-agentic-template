@@ -15,6 +15,8 @@ ROOT = Path(__file__).resolve().parents[1]
 TEMPLATE = Path("templates/salesforce/portal-site/force-app/main/default")
 TARGET = Path("salesforce-project/force-app/main/default")
 TOKEN = "BoxPortalTemplate"
+NOTES_TEMPLATE = Path("templates/salesforce/internal-notes/force-app/main/default")
+NOTES_TOKEN = "InternalNoteTemplate"
 NAME = re.compile(r"[A-Za-z][A-Za-z0-9]{1,38}")
 FIELD = re.compile(r"[A-Za-z][A-Za-z0-9_]*")
 BRAND = re.compile(r"(/\* BOX BRAND START[^\n]*\*/\n)(.*?)(/\* BOX BRAND END \*/)", re.S)
@@ -48,6 +50,15 @@ def load_portal(root=ROOT):
         raise ValueError("customer_access needs the record's account lookup field (for example AccountId)")
     if any(not re.fullmatch(r"[A-Za-z0-9 _.-]{1,80}", p) for p in access.get("profiles", [])):
         raise ValueError("customer_access profiles must be profile names")
+    notes = portal.get("internal_notes") or {}
+    if notes.get("enabled"):
+        obj = notes.get("object") or ""
+        if not re.fullmatch(r"[A-Za-z][A-Za-z0-9_]{0,36}__c", obj) or "__" in obj[:-3]:
+            raise ValueError("internal_notes.object must be a custom object API name such as Internal_Review_Note__c")
+        if obj in {record["object"], (site.get("documents") or {}).get("object")}:
+            raise ValueError("internal_notes.object must be its own object, never the portal record or document object")
+        if not re.fullmatch(r"[A-Za-z][A-Za-z0-9_]*__c", notes.get("lookup_field") or "") or not FIELD.fullmatch(notes.get("relationship_name") or ""):
+            raise ValueError("internal_notes needs a custom lookup_field and a relationship_name")
     box = site["box"]
     fields = [box.get("account_field"), box.get("sign_embed_url_field"), box.get("sign_request_id_field")]
     if any(f is not None and not FIELD.fullmatch(f) for f in fields):
@@ -103,6 +114,27 @@ def permission_blocks(site):
     return fields, objects
 
 
+def render_notes(root, portal):
+    """Employee-only notes object: lookup to the portal record, Private sharing, no portal access."""
+    notes = portal.get("internal_notes") or {}
+    if not notes.get("enabled"):
+        return {}
+    base = notes["object"][:-3]
+    record = portal["site"]["record"]
+    values = [(NOTES_TOKEN + "__c", notes["object"]), (NOTES_TOKEN, base), ("__LOOKUP_FIELD__", notes["lookup_field"]),
+              ("__RECORD_OBJECT__", record["object"]), ("__RECORD_LABEL__", escape(record["label"])),
+              ("__RELATIONSHIP_NAME__", notes["relationship_name"]), ("__PLURAL_LABEL__", escape(notes["plural_label"])),
+              ("__LABEL__", escape(notes["label"]))]
+    source = Path(root) / NOTES_TEMPLATE
+    outputs = {}
+    for path in sorted(p for p in source.rglob("*") if p.is_file()):
+        rel, text = path.relative_to(source).as_posix(), path.read_text()
+        for old, new in values:
+            rel, text = rel.replace(old, new), text.replace(old, new)
+        outputs[(TARGET / rel).as_posix()] = text.encode()
+    return outputs
+
+
 def render(root=ROOT):
     """Return {relative output path: bytes} for the portal, or {} when the portal option is off."""
     root = Path(root)
@@ -145,6 +177,7 @@ def render(root=ROOT):
                     text = text.replace(token, value)
             data = text.encode()
         outputs[(TARGET / rel).as_posix()] = data
+    outputs.update(render_notes(root, portal))
     return outputs
 
 

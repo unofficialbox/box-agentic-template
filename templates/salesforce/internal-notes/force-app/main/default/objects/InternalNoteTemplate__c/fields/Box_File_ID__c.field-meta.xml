@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Box_File_ID__c</fullName>
+    <description>The Box file this note came from, if any (for example in an internal review folder).</description>
+    <externalId>true</externalId>
+    <label>Box File ID</label>
+    <length>40</length>
+    <type>Text</type>
+    <unique>true</unique>
+</CustomField>

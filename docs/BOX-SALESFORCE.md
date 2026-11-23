@@ -18,7 +18,7 @@ Every generated project contains both platform blueprints and a Salesforce metad
 - `Amount__c`, `Rate__c`, `Term_Months__c`: reference loan fields; replace for another business use case.
 - `SystemModstamp`: Salesforce's standard record version source; a live adapter must use the platform's supported concurrency mechanism, not the fixture's numeric version.
 
-The Box document metadata blueprint includes `salesforceRecordId`, `documentType`, and `versionStatus`. It is a portable specification, not a ready-to-submit Box API request. A live adapter must verify the authenticated user's access to the Salesforce record and the mapped Box folder. Never trust a caller-supplied folder or a document's record ID as authorization.
+The Box document metadata blueprint includes `salesforceRecordId`, `documentType`, and `versionStatus`. It is a portable specification, not a ready-to-submit Box API request. A live adapter must verify the authenticated user's access to the Salesforce record and the mapped Box folder. Never trust a caller-supplied folder or a document's record ID as authorization. Keep employee-only notes and findings out of any object that inherits a customer-visible record's sharing; use the internal notes pattern in [SALESFORCE-SURFACES.md](SALESFORCE-SURFACES.md#employee-only-notes-internal-notes-pattern).
 
 Copy `config/runtime.example.json` to ignored `config/runtime.local.json` for tenant-specific non-secret Box and Salesforce bindings. Use existing authenticated connectors or a credential store; do not put tokens or client secrets in these files.
 

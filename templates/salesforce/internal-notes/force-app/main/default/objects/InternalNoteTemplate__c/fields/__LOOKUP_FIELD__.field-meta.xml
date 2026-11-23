@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>__LOOKUP_FIELD__</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The record this note is about. A lookup on purpose: master-detail would inherit the parent's sharing, which portal customers have.</description>
+    <label>__RECORD_LABEL__</label>
+    <referenceTo>__RECORD_OBJECT__</referenceTo>
+    <relationshipLabel>__PLURAL_LABEL__</relationshipLabel>
+    <relationshipName>__RELATIONSHIP_NAME__</relationshipName>
+    <type>Lookup</type>
+</CustomField>

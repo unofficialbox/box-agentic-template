@@ -8,6 +8,14 @@
     "profiles": [],
     "account_field": null
   },
+  "internal_notes": {
+    "enabled": true,
+    "object": "Internal_Review_Note__c",
+    "label": "Internal Review Note",
+    "plural_label": "Internal Review Notes",
+    "lookup_field": "Record__c",
+    "relationship_name": "Internal_Review_Notes"
+  },
   "site": {
     "title": "Customer portal",
     "record": {

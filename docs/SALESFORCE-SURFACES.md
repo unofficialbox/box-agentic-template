@@ -52,6 +52,22 @@ The record page shows the record's Box documents with Box Content Preview, adds 
 - `site.documents.object`: the child document object. It adds read on that object and its fields to `<site>_Box_Access`.
 - Without these, customers can sign in but see no records.
 
+### Employee-only notes (internal notes pattern)
+
+Anything customers must never read (reviewer notes, internal review files, AI findings) cannot live in a child object that inherits the portal record's sharing. Customers can read their record, so they can read its master-detail children; hiding those rows in the UI is not access control.
+
+The template renders a separate object for these notes when `internal_notes.enabled` is true (default `Internal_Review_Note__c`), from `templates/salesforce/internal-notes/`:
+
+| Choice | Why |
+|---|---|
+| Lookup to the portal record, not master-detail | Master-detail inherits the parent's sharing, which portal customers have |
+| `sharingModel` and `externalSharingModel` Private | Employees see notes through ownership, roles, or sharing rules; external users get nothing by default |
+| No object permission in `<site>_Box_Access` | Even a sharing mistake cannot expose notes, because portal users lack read on the object |
+| `<Object>_Employee_Access` permission set | Grants create, read, and edit to the employees who review records; never assign it to portal users |
+| `Box_File_ID__c` | Links a note to its file in the internal review Box folder, which the portal never lists |
+
+Settings: `object`, `label`, `plural_label`, `lookup_field`, and `relationship_name` in `internal_notes` of `config/salesforce/portal.json`. The build refuses a notes object that is the portal record or document object. In the Box folder, keep internal files in a subfolder that is not in `site.box.visible_subfolders`. If your project already defines its own employee-only object in its Salesforce blueprint, set `enabled` to false so the two do not overlap.
+
 **`site.box` settings in `config/salesforce/portal.json`:**
 
 - `account_field`: a record field holding the customer's Account. An external user must belong to that Account; leave it null to rely on sharing alone.

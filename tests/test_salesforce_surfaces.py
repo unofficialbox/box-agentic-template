@@ -97,12 +97,39 @@ class PortalTests(unittest.TestCase):
             self.assertNotIn("ClientSecret", browser)
             self.assertNotIn("oauth2/token", browser)
 
+    def test_internal_notes_are_a_private_lookup_object_outside_portal_access(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = project_copy(tmp)
+            edit(root, "config/salesforce/portal.json", lambda p: (p.update(enabled=True), p["internal_notes"].update(
+                enabled=True, object="Internal_Review_Note__c", lookup_field="Record__c", relationship_name="Internal_Review_Notes")))
+            out = build_portal.render(root)
+            portal = json.loads((root / "config/salesforce/portal.json").read_text())
+            obj, site_name = portal["site"]["record"]["object"], portal["site_name"]
+            base = "salesforce-project/force-app/main/default/"
+            meta = out[base + "objects/Internal_Review_Note__c/Internal_Review_Note__c.object-meta.xml"].decode()
+            self.assertIn("<sharingModel>Private</sharingModel>", meta)
+            self.assertIn("<externalSharingModel>Private</externalSharingModel>", meta)
+            lookup = out[base + "objects/Internal_Review_Note__c/fields/Record__c.field-meta.xml"].decode()
+            self.assertIn("<type>Lookup</type>", lookup)
+            self.assertNotIn("MasterDetail", lookup)
+            self.assertIn(f"<referenceTo>{obj}</referenceTo>", lookup)
+            self.assertIn("<object>Internal_Review_Note__c</object>",
+                          out[base + "permissionsets/Internal_Review_Note_Employee_Access.permissionset-meta.xml"].decode())
+            portal_access = out[base + f"permissionsets/{site_name}_Box_Access.permissionset-meta.xml"].decode()
+            self.assertNotIn("Internal_Review_Note__c", portal_access)
+            self.assertFalse(any("InternalNoteTemplate" in k or b"__LOOKUP_FIELD__" in v for k, v in out.items()))
+            edit(root, "config/salesforce/portal.json", lambda p: p["internal_notes"].update(enabled=False))
+            self.assertFalse(any("Internal_Review_Note" in k for k in build_portal.render(root)))
+
     def test_invalid_portal_config_refuses(self):
         cases = [lambda p: p.update(site_name="bad name"), lambda p: p.update(url_path_prefix="Bad_Prefix"),
                  lambda p: p["site"]["box"].update(sign_embed_url_field="Sign_Embed_URL__c", sign_request_id_field=None),
                  lambda p: p["site"]["box"].update(visible_subfolders=["it's"]),
                  lambda p: p["site"]["box"].update(account_field="Account; x"),
                  lambda p: p.update(customer_access={"profiles": ["Customer Community User"], "account_field": None}),
+                 lambda p: p["internal_notes"].update(enabled=True, object=p["site"]["record"]["object"]),
+                 lambda p: p["internal_notes"].update(enabled=True, object="Bad__Name__c"),
+                 lambda p: p["internal_notes"].update(enabled=True, lookup_field="Record"),
                  lambda p: p["site"]["record"].update(object="Opportunity; DROP"),
                  lambda p: p["site"].update(status_tone={"Approved": "green"})]
         for change in cases:

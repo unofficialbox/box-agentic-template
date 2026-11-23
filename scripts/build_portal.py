@@ -9,6 +9,7 @@ import argparse
 import json
 from pathlib import Path
 import re
+from xml.sax.saxutils import escape
 
 ROOT = Path(__file__).resolve().parents[1]
 TEMPLATE = Path("templates/salesforce/portal-site/force-app/main/default")
@@ -37,11 +38,16 @@ def load_portal(root=ROOT):
              *[f["api_name"] for f in record["fields"]]]
     if site.get("documents"):
         d = site["documents"]
-        names += [d["relationship"], d["type_field"], d["status_field"], d.get("version_field")]
+        names += [d["relationship"], d["type_field"], d["status_field"], d.get("version_field"), d.get("object")]
     if any(n is not None and not FIELD.fullmatch(n) for n in names):
         raise ValueError("Portal config contains an invalid Salesforce API name")
     if any(t not in {"pass", "wait", "fail"} for t in site.get("status_tone", {}).values()):
         raise ValueError("Portal status_tone values must be pass, wait, or fail")
+    access = portal.get("customer_access") or {}
+    if access.get("profiles") and not FIELD.fullmatch(access.get("account_field") or ""):
+        raise ValueError("customer_access needs the record's account lookup field (for example AccountId)")
+    if any(not re.fullmatch(r"[A-Za-z0-9 _.-]{1,80}", p) for p in access.get("profiles", [])):
+        raise ValueError("customer_access profiles must be profile names")
     box = site["box"]
     fields = [box.get("account_field"), box.get("sign_embed_url_field"), box.get("sign_request_id_field")]
     if any(f is not None and not FIELD.fullmatch(f) for f in fields):
@@ -83,12 +89,17 @@ def permission_blocks(site):
     obj = record["object"]
     names = [record["title_field"], record.get("stage_field"), record.get("status_field"), box.get("account_field"),
              box.get("sign_embed_url_field"), box.get("sign_request_id_field"), *[f["api_name"] for f in record["fields"]]]
-    custom = sorted({n for n in names if n and n.endswith("__c")})
-    fields = "".join(f"    <fieldPermissions>\n        <editable>false</editable>\n        <field>{obj}.{n}</field>\n"
-                     "        <readable>true</readable>\n    </fieldPermissions>\n" for n in custom)
-    objects = (f"    <objectPermissions>\n        <allowCreate>false</allowCreate>\n        <allowDelete>false</allowDelete>\n"
-               f"        <allowEdit>false</allowEdit>\n        <allowRead>true</allowRead>\n        <modifyAllRecords>false</modifyAllRecords>\n"
-               f"        <object>{obj}</object>\n        <viewAllRecords>false</viewAllRecords>\n    </objectPermissions>\n")
+    pairs = {(obj, n) for n in names if n and n.endswith("__c")}
+    readable = [obj]
+    docs = site.get("documents") or {}
+    if docs.get("object"):
+        readable.append(docs["object"])
+        pairs |= {(docs["object"], n) for n in (docs.get("type_field"), docs.get("status_field"), docs.get("version_field")) if n and n.endswith("__c")}
+    fields = "".join(f"    <fieldPermissions>\n        <editable>false</editable>\n        <field>{o}.{n}</field>\n"
+                     "        <readable>true</readable>\n    </fieldPermissions>\n" for o, n in sorted(pairs))
+    objects = "".join(f"    <objectPermissions>\n        <allowCreate>false</allowCreate>\n        <allowDelete>false</allowDelete>\n"
+                      f"        <allowEdit>false</allowEdit>\n        <allowRead>true</allowRead>\n        <modifyAllRecords>false</modifyAllRecords>\n"
+                      f"        <object>{o}</object>\n        <viewAllRecords>false</viewAllRecords>\n    </objectPermissions>\n" for o in readable)
     return fields, objects
 
 
@@ -105,9 +116,13 @@ def render(root=ROOT):
     if portal.get("email_sender"):
         replacements.append(("admin@company.com", portal["email_sender"]))
     source = root / TEMPLATE
+    access = portal.get("customer_access") or {}
+    profiles = access.get("profiles", [])
     outputs = {}
     for path in sorted(p for p in source.rglob("*") if p.is_file()):
         rel = path.relative_to(source).as_posix().replace(TOKEN, name)
+        if rel.startswith("sharingSets/") and not profiles:
+            continue
         data = path.read_bytes()
         if path.suffix in TEXT:
             text = data.decode()
@@ -120,6 +135,11 @@ def render(root=ROOT):
             if rel.endswith("_Box_Access.permissionset-meta.xml"):
                 fields, objects = permission_blocks(portal["site"])
                 text = text.replace("<!-- PORTAL FIELD PERMISSIONS -->\n", fields).replace("<!-- PORTAL OBJECT PERMISSIONS -->\n", objects)
+            if rel.endswith(".network-meta.xml"):
+                text = text.replace("<!-- PORTAL MEMBER PROFILES -->\n", "".join(f"        <profile>{escape(p)}</profile>\n" for p in profiles))
+            if rel.startswith("sharingSets/"):
+                text = (text.replace("__SHARING_PROFILES__", "\n".join(f"    <profiles>{escape(p)}</profiles>" for p in profiles))
+                        .replace("__SHARING_OBJECT__", portal["site"]["record"]["object"]).replace("__SHARING_FIELD__", access["account_field"]))
             if rel.endswith("classes/PortalBoxSettings.cls"):
                 for token, value in apex_settings(portal["site"]).items():
                     text = text.replace(token, value)

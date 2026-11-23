@@ -36,6 +36,7 @@
     <headlessRegistrationTemplate>unfiled$public/CommunityHeadlessRegistrationTemplate</headlessRegistrationTemplate>
     <networkMemberGroups>
         <profile>admin</profile>
+<!-- PORTAL MEMBER PROFILES -->
     </networkMemberGroups>
     <networkPageOverrides>
         <changePasswordPageOverrideSetting>Standard</changePasswordPageOverrideSetting>

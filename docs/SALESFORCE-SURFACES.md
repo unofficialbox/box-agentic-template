@@ -45,6 +45,13 @@ The record page shows the record's Box documents with Box Content Preview, adds 
 | `src/box/EmbeddedSign.tsx` | UI bundle | Box Sign iframe. Completion is polled from Apex every 5 seconds rather than trusting iframe messages |
 | `namedCredentials/`, `externalCredentials/`, `cspTrustedSites/`, `objects/Portal_Box_Config__c`, `permissionsets/<site>_Box_Access` | metadata | Credential, CSP Trusted Sites for Box hosts, the CCG subject setting, and portal user access (Apex classes, the credential principal, read on the portal's custom fields) |
 
+**Customer access in `config/salesforce/portal.json`:**
+
+- `customer_access.profiles`: the external user profiles that become site members and receive a sharing set.
+- `customer_access.account_field`: the record's Account lookup (for example `AccountId`). The sharing set grants customers read on records of their own Account.
+- `site.documents.object`: the child document object. It adds read on that object and its fields to `<site>_Box_Access`.
+- Without these, customers can sign in but see no records.
+
 **`site.box` settings in `config/salesforce/portal.json`:**
 
 - `account_field`: a record field holding the customer's Account. An external user must belong to that Account; leave it null to rely on sharing alone.

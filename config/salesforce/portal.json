@@ -4,6 +4,10 @@
   "site_name": "CustomerPortal",
   "url_path_prefix": "portal",
   "email_sender": null,
+  "customer_access": {
+    "profiles": [],
+    "account_field": null
+  },
   "site": {
     "title": "Customer portal",
     "record": {

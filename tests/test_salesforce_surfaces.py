@@ -84,6 +84,14 @@ class PortalTests(unittest.TestCase):
                         "classes/PortalSignStatus.cls", f"uiBundles/{site_name}/src/box/BoxDocuments.tsx",
                         f"uiBundles/{site_name}/src/box/EmbeddedSign.tsx", f"uiBundles/{site_name}/src/box/UploadDialog.tsx"):
                 self.assertIn(base + rel, out)
+            self.assertFalse(any("sharingSets/" in k for k in out))
+            edit(root, "config/salesforce/portal.json", lambda p: p.update(customer_access={"profiles": ["Customer Community User"], "account_field": "Account__c"}))
+            out = build_portal.render(root)
+            sharing = out[base + f"sharingSets/{site_name}_Customer_Access.sharingSet-meta.xml"].decode()
+            self.assertIn(f"<object>{obj}</object>", sharing)
+            self.assertIn("<objectField>Account__c</objectField>", sharing)
+            self.assertIn("<profiles>Customer Community User</profiles>", sharing)
+            self.assertIn("<profile>Customer Community User</profile>", out[base + f"networks/{site_name}.network-meta.xml"].decode())
             browser = "".join(v.decode() for k, v in out.items() if "/src/" in k and k.endswith((".ts", ".tsx")))
             self.assertNotIn("ClientSecret", browser)
             self.assertNotIn("oauth2/token", browser)
@@ -93,6 +101,7 @@ class PortalTests(unittest.TestCase):
                  lambda p: p["site"]["box"].update(sign_embed_url_field="Sign_Embed_URL__c", sign_request_id_field=None),
                  lambda p: p["site"]["box"].update(visible_subfolders=["it's"]),
                  lambda p: p["site"]["box"].update(account_field="Account; x"),
+                 lambda p: p.update(customer_access={"profiles": ["Customer Community User"], "account_field": None}),
                  lambda p: p["site"]["record"].update(object="Opportunity; DROP"),
                  lambda p: p["site"].update(status_tone={"Approved": "green"})]
         for change in cases:

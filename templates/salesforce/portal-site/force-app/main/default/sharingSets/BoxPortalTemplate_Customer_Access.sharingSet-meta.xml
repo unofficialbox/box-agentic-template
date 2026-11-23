@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SharingSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <name>BoxPortalTemplate_Customer_Access</name>
+    <description>Read access for portal customers to the records on their own Account. Rendered only when config/salesforce/portal.json lists customer_access profiles.</description>
+__SHARING_PROFILES__
+    <accessMappings>
+        <accessLevel>Read</accessLevel>
+        <object>__SHARING_OBJECT__</object>
+        <objectField>__SHARING_FIELD__</objectField>
+        <userField>Contact.Account</userField>
+    </accessMappings>
+</SharingSet>

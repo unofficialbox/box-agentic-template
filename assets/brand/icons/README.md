@@ -10,7 +10,7 @@ Find an icon: `grep -i <word> assets/brand/icons/index.json`, or open the catalo
 | `product/` | Full-color Box product icons. Use only to name that product. |
 | `product-line/` | Line versions of the Box product icons, for use beside other line icons. |
 | `file-types/` | File-type and folder icons as they appear in the Box web app. |
-| `logos/` | Box logo (blue wordmark) and app icon. Read the logo rules in docs/brand/BOX-BRAND.md first. |
+| `logos/` | Box logo (blue and white wordmark) and app icon. Read the logo rules in docs/brand/BOX-BRAND.md first. |
 
 Not included: personas and headshots, customer logos, AI vendor logos, product screenshots, and hero images. Get those from the Box Brand team or the original template.
 
@@ -120,7 +120,7 @@ Not included: personas and headshots, customer logos, AI vendor logos, product s
 
 ## logos
 
-`box-app-icon`, `box-logo-blue`
+`box-app-icon`, `box-logo-blue`, `box-logo-white` (the wordmark in white, for blue and dark backgrounds)
 
 ## product-line
 

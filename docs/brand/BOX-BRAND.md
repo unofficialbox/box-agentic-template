@@ -118,7 +118,7 @@ Every chart and stat carries a "Source:" line. Customer logo walls go in a table
 
 ## Logos and imagery
 
-- **Logo use:** use only the supplied files in `assets/brand/icons/logos/`. The template uses the white logo on blue or dark backgrounds and the blue logo on white. By general logo practice (not stated in the template), never recolor, stretch, or outline it. The repo has the blue wordmark and the app icon only; ask the Box Brand team for the white version.
+- **Logo use:** use only the supplied files in `assets/brand/icons/logos/`. The template uses the white logo on blue or dark backgrounds and the blue logo on white. By general logo practice (not stated in the template), never recolor, stretch, or outline it. The repo has the blue wordmark, the white wordmark (the same shape in white, for blue and dark backgrounds), and the app icon.
 - **Partner lockup:** "box + [partner logo]", with the partner logo at the same visual height.
 - **Icons:** use the gradient line icons from `assets/brand/icons/line/` as the default. Use product icons only to name a product. Do not mix in icons from other libraries.
 - **Personas and headshots:** use brand-approved images only, and be mindful of diversity. Headshots should be well framed, in color, looking at the camera, against a background that contrasts with the subject, without logos or other people, and not pixelated or artsy.

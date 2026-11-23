@@ -2061,6 +2061,12 @@
    "template_slide": 62
   },
   {
+   "path": "logos/box-logo-white.png",
+   "name": "box-logo-white",
+   "group": "logos",
+   "template_slide": 62
+  },
+  {
    "path": "product-line/box-ai.png",
    "name": "box-ai",
    "group": "product-line",

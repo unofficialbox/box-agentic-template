@@ -122,6 +122,10 @@ sf agent publish authoring-bundle --api-name <developer_name> --target-org <agen
 
 If `sf agent publish` reports only `fetch failed`, run it with `SF_LOG_LEVEL=trace DEBUG='*'`: the CLI falls back to a Salesforce-internal test host after the real `api.salesforce.com` response (for example a 404), so the visible error hides the real one. Publish from Agentforce Builder (Setup → Agentforce Agents) for a readable error.
 
+If publishing keeps failing with "Changes for this Bot Version are not allowed at the moment":
+1. **Check the agent user:** it needs the `AgentforceServiceAgentUserPsl` and `EinsteinGPTPromptTemplatesPsl` permission set licenses and the `AgentforceServiceAgentUserPsg` permission set group. Without them, Builder reports "User doesn't have access to agent".
+2. **Rule out the script:** generate Salesforce's sample agent (`sf agent generate authoring-bundle --no-spec`) under a temporary name and publish it. If it fails the same way, the org is blocking new agent versions, so use another Agentforce org or contact Salesforce Support.
+
 Publishing creates an inactive version; activate it with `sf agent activate --api-name <developer_name> --target-org <org>`. Publishing also retrieves generated `bots/` and `genAiPlannerBundles/` into the project; those are ignored because the `.agent` file is the source.
 
 Validation compiles the script in an org with Agentforce enabled. A scratch org without Agentforce times out on the compile service. The template's sample agent compiles against an Agentforce Developer Edition org.

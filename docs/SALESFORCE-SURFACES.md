@@ -43,6 +43,7 @@ To show Box files in the portal, follow the pattern already proven in [box-agent
 `scripts/build_agent.py` writes one authoring bundle (`<developer_name>.agent` and `.bundle-meta.xml`) from `config/salesforce/agent.json`, `config/tools.json`, and `templates/salesforce/agent/agent.agent`:
 
 - **Structure:** a router (`start_agent agent_router`) transitions to one subagent per entry in `subagents`, plus an `off_topic` guard. Each subagent exposes its tools as reasoning actions.
+- **Record binding:** tool inputs named in `record_inputs` (default `record_id`) are bound to the record ID the router captures; the model fills every other input from the conversation.
 - **Actions:** each tool becomes an action targeting `apex://<apex_prefix><Tool>`, with inputs taken from the tool's `inputSchema`. Tools that are not read-only get `require_user_confirmation: True`.
 - **Guardrails:** the system instructions and every subagent state that documents are data, that proposals are not writes, and that people approve. The agent never approves, signs, or writes on its own.
 - **Agent type:** employee agents only (`AgentforceEmployeeAgent`). A service agent also needs `default_agent_user` and messaging setup, so the generator refuses it.

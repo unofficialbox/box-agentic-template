@@ -89,6 +89,7 @@ def plan(root=ROOT):
 
 def agent_script(root, agent, actions):
     subagents, router = [], []
+    record_inputs = set(agent.get("record_inputs", ["record_id"]))
     for s in agent["subagents"]:
         router.append(f"            go_to_{s['name']}: @utils.transition to @subagent.{s['name']}\n"
                       f"                description: \"{text(s['description'])}\"")
@@ -103,7 +104,7 @@ def agent_script(root, agent, actions):
             block.append(f"            call_{name}: @actions.{name}")
             block.append(f"                description: \"{text(a['tool']['description'])}\"")
             for i in a["inputs"]:
-                source = "@variables.record_id" if i["name"] == "record_id" else "..."
+                source = "@variables.record_id" if i["name"] in record_inputs else "..."
                 block.append(f"                with {i['name']} = {source}")
         block.append("            back_to_router: @utils.transition to @subagent.agent_router")
         block.append("                description: \"The user needs a different workflow step\"")

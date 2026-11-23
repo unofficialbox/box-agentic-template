@@ -84,7 +84,8 @@ class PortalTests(unittest.TestCase):
                         "classes/PortalSignStatus.cls", f"uiBundles/{site_name}/src/box/BoxDocuments.tsx",
                         f"uiBundles/{site_name}/src/box/EmbeddedSign.tsx", f"uiBundles/{site_name}/src/box/UploadDialog.tsx"):
                 self.assertIn(base + rel, out)
-            self.assertFalse(any("sharingSets/" in k for k in out))
+            edit(root, "config/salesforce/portal.json", lambda p: p.update(customer_access={"profiles": [], "account_field": None}))
+            self.assertFalse(any("sharingSets/" in k for k in build_portal.render(root)))
             edit(root, "config/salesforce/portal.json", lambda p: p.update(customer_access={"profiles": ["Customer Community User"], "account_field": "Account__c"}))
             out = build_portal.render(root)
             sharing = out[base + f"sharingSets/{site_name}_Customer_Access.sharingSet-meta.xml"].decode()

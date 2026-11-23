@@ -161,8 +161,9 @@ class AgentTests(unittest.TestCase):
             for block in ("system:", "config:", "start_agent agent_router:", "subagent off_topic:"):
                 self.assertIn(block, script)
             self.assertIn(f'developer_name: "{name}"', script)
-            self.assertIn('agent_type: "AgentforceEmployeeAgent"', script)
-            self.assertNotIn("default_agent_user", script)
+            self.assertIn(f'agent_type: "{agent["agent_type"]}"', script)
+            if agent["agent_type"] == "AgentforceEmployeeAgent":
+                self.assertNotIn("default_agent_user", script)
             self.assertNotIn("{{", script)
             self.assertIsNone(re.search(r":\s*(true|false)\s*$", script, re.M))
             self.assertNotIn("\t", script)

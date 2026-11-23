@@ -59,8 +59,38 @@ class PortalTests(unittest.TestCase):
             self.assertEqual(sorted(build_portal.build(root)), sorted(out))
             self.assertEqual(build_portal.build(root, check=True), [])
 
+    def test_box_settings_permissions_and_components_render(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = project_copy(tmp)
+            edit(root, "config/salesforce/portal.json", lambda p: (p.update(enabled=True), p["site"]["box"].update(
+                account_field="Account__c", visible_subfolders=["01 Customer Documents", "03 Agreements"],
+                upload_subfolder="01 Customer Documents", sign_embed_url_field="Sign_Embed_URL__c", sign_request_id_field="Sign_Request_ID__c")))
+            out = build_portal.render(root)
+            base = "salesforce-project/force-app/main/default/"
+            settings = out[base + "classes/PortalBoxSettings.cls"].decode()
+            self.assertIn("RECORD_OBJECT = 'Agentic_Work_Item__c'", settings)
+            self.assertIn("{ '01 Customer Documents', '03 Agreements' }", settings)
+            self.assertIn("SIGN_REQUEST_ID_FIELD = 'Sign_Request_ID__c'", settings)
+            self.assertNotIn("__", settings.replace("__c", ""))
+            perms = out[base + "permissionsets/CustomerPortal_Box_Access.permissionset-meta.xml"].decode()
+            for field in ("Account__c", "Sign_Embed_URL__c", "Sign_Request_ID__c", "Status__c"):
+                self.assertIn(f"<field>Agentic_Work_Item__c.{field}</field>", perms)
+            self.assertNotIn("<!--", perms)
+            self.assertIn("<externalCredentialPrincipal>Portal_Box-Portal_Box_Principal</externalCredentialPrincipal>", perms)
+            for rel in ("namedCredentials/Portal_Box.namedCredential-meta.xml", "cspTrustedSites/Portal_Box_App.cspTrustedSite-meta.xml",
+                        "objects/Portal_Box_Config__c/Portal_Box_Config__c.object-meta.xml", "classes/PortalBoxTokenService.cls",
+                        "classes/PortalSignStatus.cls", "uiBundles/CustomerPortal/src/box/BoxDocuments.tsx",
+                        "uiBundles/CustomerPortal/src/box/EmbeddedSign.tsx", "uiBundles/CustomerPortal/src/box/UploadDialog.tsx"):
+                self.assertIn(base + rel, out)
+            browser = "".join(v.decode() for k, v in out.items() if "/src/" in k and k.endswith((".ts", ".tsx")))
+            self.assertNotIn("ClientSecret", browser)
+            self.assertNotIn("oauth2/token", browser)
+
     def test_invalid_portal_config_refuses(self):
         cases = [lambda p: p.update(site_name="bad name"), lambda p: p.update(url_path_prefix="Bad_Prefix"),
+                 lambda p: p["site"]["box"].update(sign_embed_url_field="Sign_Embed_URL__c"),
+                 lambda p: p["site"]["box"].update(visible_subfolders=["it's"]),
+                 lambda p: p["site"]["box"].update(account_field="Account; x"),
                  lambda p: p["site"]["record"].update(object="Opportunity; DROP"),
                  lambda p: p["site"].update(status_tone={"Approved": "green"})]
         for change in cases:
@@ -77,6 +107,8 @@ class PortalTests(unittest.TestCase):
         self.assertNotIn("TestChatPage", routes)
         self.assertIn("BOX BRAND START", (src / "styles/global.css").read_text())
         self.assertIn("hidden_types", (src / "pages/RecordDetail.tsx").read_text())
+        self.assertIn("<BoxDocuments", (src / "pages/RecordDetail.tsx").read_text())
+        self.assertIn("installBoxPreview()", (src / "box/BoxDocuments.tsx").read_text())
 
 
 class AgentTests(unittest.TestCase):

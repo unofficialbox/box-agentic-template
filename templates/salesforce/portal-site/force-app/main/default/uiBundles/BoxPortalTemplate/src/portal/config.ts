@@ -31,6 +31,14 @@ export interface PortalConfig {
 		hidden_types: string[];
 	};
 	status_tone: Record<string, "pass" | "wait" | "fail">;
+	box: {
+		documents_label: string;
+		account_field: string | null;
+		visible_subfolders: string[];
+		upload_subfolder: string | null;
+		sign_embed_url_field: string | null;
+		sign_request_id_field: string | null;
+	};
 }
 
 export const portalConfig = raw as PortalConfig;

@@ -8,10 +8,21 @@
     "stage_field": null,
     "status_field": "Status__c",
     "fields": [
-      { "api_name": "Amount__c", "label": "Amount" }
+      {
+        "api_name": "Amount__c",
+        "label": "Amount"
+      }
     ]
   },
   "stages": [],
   "documents": null,
-  "status_tone": {}
+  "status_tone": {},
+  "box": {
+    "documents_label": "Your files",
+    "account_field": null,
+    "visible_subfolders": [],
+    "upload_subfolder": null,
+    "sign_embed_url_field": null,
+    "sign_request_id_field": null
+  }
 }

@@ -15,7 +15,7 @@ function assertName(name: string): string {
 
 function recordFields(config: PortalConfig): string[] {
 	const r = config.record;
-	return [r.title_field, r.stage_field, r.status_field, ...r.fields.map((f) => f.api_name)]
+	return [r.title_field, r.stage_field, r.status_field, config.box.sign_embed_url_field, ...r.fields.map((f) => f.api_name)]
 		.filter((f): f is string => Boolean(f))
 		.map(assertName);
 }

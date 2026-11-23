@@ -14,6 +14,7 @@ Two optional Salesforce surfaces are part of every project. The intake asks abou
 The site template began as `sf template generate project --template reactexternalapp` (Salesforce CLI 2.159.7, API 67.0, React 19, Vite 7, Tailwind 4, shadcn/ui, `@salesforce/platform-sdk`). It has been trimmed and customized:
 
 - Removed: the demo chat widget, account sample pages, global search route, and Codey images.
+- Added Box: a document list with Box Content Preview, Box Content Uploader, and embedded Box Sign on the record page (see below).
 - Added: a record list page (`src/pages/Home.tsx`) and a record detail page (`src/pages/RecordDetail.tsx`) with a stage path and a document list with status pills. The record, fields, stages, and documents come from `src/portal/portal.config.json`, which the build writes from `config/salesforce/portal.json`.
 - Branded: `src/styles/global.css` carries a generated `BOX BRAND` block from `config/brand.json`; the header uses Box blue and the cards use the brand container style. See the [Box brand guide](brand/BOX-BRAND.md).
 - Kept: login, registration, password reset, profile, session timeout, and the Experience Cloud site metadata.
@@ -28,15 +29,43 @@ Placeholders in the template: `BoxPortalTemplate` (API names and paths, replaced
 2. **Install and build:** in `salesforce-project/force-app/main/default/uiBundles/<site_name>/`, run `npx npm@11 install` (npm 10.9 fails with `Cannot read properties of null (reading 'edgesOut')`), then `npm run build`. Node 22 or later is required.
 3. **Deploy:** run `sf project deploy start --source-dir force-app --target-org <alias>` from `salesforce-project/`, then publish the site and give external users access to the record object and fields.
 
-### Box content in the portal
+### Box documents, preview, upload, and Sign
 
-To show Box files in the portal, follow the pattern already proven in [box-agentic-loans](https://github.com/unofficialbox/box-agentic-loans) (`los-salesforce-project/.../uiBundles/losreactapp`). It is not in this template yet:
+The record page shows the record's Box documents with Box Content Preview, adds files with Box Content Uploader, and embeds Box Sign when a signing request is open. The pattern is ported from [box-agentic-loans](https://github.com/unofficialbox/box-agentic-loans). All Box access goes through Apex, so the browser never holds the Box client secret or a broad token.
 
-- **Preview and Uploader:** `box-ui-elements` React components loaded lazily inside `IntlProvider` and `MemoryRouter`. Bundle `box-content-preview` locally and set `globalThis.Box.Preview`, because Experience Cloud's `script-src 'self'` blocks the Box CDN. Pass `token` as a function.
-- **Content Explorer:** not used there. In this embedding it renders a touch layout where files do not open in preview, so list the folder through the API and draw your own table.
-- **Box Sign:** a plain `<iframe>` of the signer's `iframeable_embed_url`, created by an Apex action with `embed_url_external_user_id`. Detect completion by polling `GET /sign_requests/{id}` from Apex, not by trusting iframe messages.
-- **Tokens:** an Apex REST endpoint checks record access, resolves the folder with the Box for Salesforce Toolkit (`getFolderIdByRecordId`), and returns a downscoped token. Internal users get `base_explorer item_preview base_upload`; customers get `base_upload` plus per-file `base_preview`. The parent token comes from a Client Credentials Grant through a named credential, so Apex never holds the secret.
-- **Site settings:** add CSP Trusted Sites for `api.box.com`, `upload.box.com`, `*.boxcloud.com`, `public.boxcloud.com`, `cdn01.boxcdn.net`, and `*.app.box.com` (frame, for Sign). Add the site origin to the Box app's CORS domains.
+| Piece | Source | What it does |
+|---|---|---|
+| `PortalBoxTokenService` (`GET /services/apexrest/portal/box-token`) | `classes/` | Checks record access, finds the folder through the Box for Salesforce association, lists customer-visible files on the server, and returns an upload-only token (`base_upload`) for the upload folder. With `fileId`, returns a preview-only token (`base_preview`) for that one file after checking it is visible |
+| `PortalBoxFolderService` (`POST .../portal/box-folder`) | `classes/` | Creates the record's folder with Box for Salesforce when none exists. This is a separate request because Apex cannot call out after DML |
+| `PortalSignStatus` (`POST .../portal/sign-status`) | `classes/` | Reads the Box Sign status from Box. On a final status, clears the stored iframe URL |
+| `PortalBoxSendForSignature` | `classes/` | Invocable action for employees, Flows, and agents. Creates an embedded Box Sign request for a file in the record folder and stores the signer's `iframeable_embed_url` and request ID on the record. Customers cannot call it |
+| `PortalBoxAuth`, `PortalBoxAccess`, `PortalBoxDocuments`, `PortalBoxSettings` | `classes/` | Client Credentials Grant through the `Portal_Box` named credential, the record access check (sharing, plus an optional account match), folder listing, and the settings rendered from `site.box` |
+| `src/box/BoxDocuments.tsx` | UI bundle | File list and Box Content Preview (`box-ui-elements`). Preview is bundled from npm, not the Box CDN, because the site's `script-src 'self'` blocks it. Content Explorer is not used: embedded, it renders a touch layout whose files never open |
+| `src/box/UploadDialog.tsx` | UI bundle | Box Content Uploader in a dialog, limited to the upload folder |
+| `src/box/EmbeddedSign.tsx` | UI bundle | Box Sign iframe. Completion is polled from Apex every 5 seconds rather than trusting iframe messages |
+| `namedCredentials/`, `externalCredentials/`, `cspTrustedSites/`, `objects/Portal_Box_Config__c`, `permissionsets/<site>_Box_Access` | metadata | Credential, CSP Trusted Sites for Box hosts, the CCG subject setting, and portal user access (Apex classes, the credential principal, read on the portal's custom fields) |
+
+**`site.box` settings in `config/salesforce/portal.json`:**
+
+- `account_field`: a record field holding the customer's Account. An external user must belong to that Account; leave it null to rely on sharing alone.
+- `visible_subfolders`: the record subfolders customers may see. Leave it empty to show files at the folder root.
+- `upload_subfolder`: where uploads land.
+- `sign_embed_url_field` and `sign_request_id_field`: the record fields that hold the Sign iframe URL and request ID. Set both, or set neither to turn Sign off.
+
+**One-time Box and org setup** (each org write needs approval):
+
+1. **Box app:** create a Box Platform app with Client Credentials Grant, enable it in the enterprise, and add the site origin under CORS domains. Without CORS, previews fail with `cors_origin_not_whitelisted`.
+2. **Credentials:** in Setup, open the `Portal_Box` external credential and set `ClientId` and `ClientSecret` on `Portal_Box_Principal`. They stay encrypted in the org and never appear in source.
+3. **Subject:** set `Portal Box Config` (a custom setting) with a Box User Id (acts as that user) or an Enterprise Id (service account, which must be collaborated on the record folders).
+4. **Packages and access:** install Box for Salesforce, assign `<site>_Box_Access` to portal users, and give them a license that can read the record object. Grant read on any child document object separately.
+5. **Sign fields:** to use Sign, add the two Sign fields to the record object.
+6. **Build and deploy:** build and deploy as above.
+
+**Known build notes:**
+
+- `box-ui-elements` needs `.npmrc` `legacy-peer-deps=true`, `define: { global: "globalThis" }`, and a `~@box` alias for its stylesheets. All three are already in the template.
+- The main chunk is about 4.9 MB because Preview is bundled.
+- The pinned preview stylesheet version (3.83.0) is the newest the Box CDN serves.
 
 ## Agentforce agent (Agent Script)
 

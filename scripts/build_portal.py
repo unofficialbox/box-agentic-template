@@ -42,7 +42,24 @@ def load_portal(root=ROOT):
         raise ValueError("Portal config contains an invalid Salesforce API name")
     if any(t not in {"pass", "wait", "fail"} for t in site.get("status_tone", {}).values()):
         raise ValueError("Portal status_tone values must be pass, wait, or fail")
+    box = site["box"]
+    fields = [box.get("account_field"), box.get("sign_embed_url_field"), box.get("sign_request_id_field")]
+    if any(f is not None and not FIELD.fullmatch(f) for f in fields):
+        raise ValueError("Portal box config contains an invalid Salesforce field name")
+    if bool(box.get("sign_embed_url_field")) != bool(box.get("sign_request_id_field")):
+        raise ValueError("Set both sign_embed_url_field and sign_request_id_field, or neither")
+    if any(not re.fullmatch(r"[^'\\\n]{1,255}", n) for n in [*box["visible_subfolders"], *([box["upload_subfolder"]] if box.get("upload_subfolder") else [])]):
+        raise ValueError("Box subfolder names must be 1-255 characters without quotes or backslashes")
     return portal
+
+
+def apex_settings(site):
+    box = site["box"]
+    return {"__RECORD_OBJECT__": site["record"]["object"], "__ACCOUNT_FIELD__": box.get("account_field") or "",
+            "__VISIBLE_SUBFOLDERS__": ", ".join("'" + n + "'" for n in box["visible_subfolders"]),
+            "__UPLOAD_SUBFOLDER__": box.get("upload_subfolder") or "",
+            "__SIGN_EMBED_URL_FIELD__": box.get("sign_embed_url_field") or "",
+            "__SIGN_REQUEST_ID_FIELD__": box.get("sign_request_id_field") or ""}
 
 
 def brand_css(brand):
@@ -58,6 +75,21 @@ def brand_css(brand):
             "-webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }\n"
             f".portal-card {{ display: block; padding: 1.5rem; border-radius: 1rem; border: 1px solid {c['container_outline']}; "
             f"background: linear-gradient({', '.join(g['container_fill'])}); box-shadow: {brand['shapes']['shadow']}; color: inherit; }}\n")
+
+
+def permission_blocks(site):
+    """Read access for the portal's custom record fields; standard fields are governed by the user license."""
+    record, box = site["record"], site["box"]
+    obj = record["object"]
+    names = [record["title_field"], record.get("stage_field"), record.get("status_field"), box.get("account_field"),
+             box.get("sign_embed_url_field"), box.get("sign_request_id_field"), *[f["api_name"] for f in record["fields"]]]
+    custom = sorted({n for n in names if n and n.endswith("__c")})
+    fields = "".join(f"    <fieldPermissions>\n        <editable>false</editable>\n        <field>{obj}.{n}</field>\n"
+                     "        <readable>true</readable>\n    </fieldPermissions>\n" for n in custom)
+    objects = (f"    <objectPermissions>\n        <allowCreate>false</allowCreate>\n        <allowDelete>false</allowDelete>\n"
+               f"        <allowEdit>false</allowEdit>\n        <allowRead>true</allowRead>\n        <modifyAllRecords>false</modifyAllRecords>\n"
+               f"        <object>{obj}</object>\n        <viewAllRecords>false</viewAllRecords>\n    </objectPermissions>\n")
+    return fields, objects
 
 
 def render(root=ROOT):
@@ -85,6 +117,12 @@ def render(root=ROOT):
                 text = BRAND.sub(lambda m: m.group(1) + brand_css(brand) + m.group(3), text)
             if rel.endswith("src/portal/portal.config.json"):
                 text = json.dumps(portal["site"], indent=2) + "\n"
+            if rel.endswith("_Box_Access.permissionset-meta.xml"):
+                fields, objects = permission_blocks(portal["site"])
+                text = text.replace("<!-- PORTAL FIELD PERMISSIONS -->\n", fields).replace("<!-- PORTAL OBJECT PERMISSIONS -->\n", objects)
+            if rel.endswith("classes/PortalBoxSettings.cls"):
+                for token, value in apex_settings(portal["site"]).items():
+                    text = text.replace(token, value)
             data = text.encode()
         outputs[(TARGET / rel).as_posix()] = data
     return outputs

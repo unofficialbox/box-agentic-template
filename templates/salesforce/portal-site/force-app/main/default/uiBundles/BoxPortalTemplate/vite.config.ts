@@ -6,6 +6,7 @@ import { resolve } from 'path';
 import tailwindcss from '@tailwindcss/vite';
 import salesforce from '@salesforce/vite-plugin-ui-bundle';
 import codegen from 'vite-plugin-graphql-codegen';
+import { boxPreviewAssets } from './vite.box-preview-assets';
 
 const schemaPath = resolve(__dirname, '../../../../../schema.graphql');
 const schemaExists = existsSync(schemaPath);
@@ -13,8 +14,12 @@ const schemaExists = existsSync(schemaPath);
 export default defineConfig(({ mode }) => {
   return {
     base: './',
+    // box-ui-elements dependencies (draft-js and friends) read the Node `global`.
+    define: { global: 'globalThis' },
     plugins: [
       tailwindcss(),
+      // Box Content Preview side-car assets served from this app's origin (see the plugin).
+      boxPreviewAssets(),
       react(),
       salesforce(),
       // Only add codegen when schema exists (e.g. after `npm run graphql:schema`).
@@ -43,6 +48,8 @@ export default defineConfig(({ mode }) => {
     resolve: {
       dedupe: ['react', 'react-dom'],
       alias: {
+        // box-ui-elements stylesheets use webpack-style '~package' imports.
+        '~@box': '@box',
         '@': path.resolve(__dirname, './src'),
         '@api': path.resolve(__dirname, './src/api'),
         '@components': path.resolve(__dirname, './src/components'),

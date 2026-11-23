@@ -5,9 +5,11 @@ import { portalConfig } from "../portal/config";
 import { childNodes, detailQuery, nodes, tone, value } from "../portal/queries";
 import { StagePath, StatusPill } from "../portal/StagePath";
 import documentIcon from "../assets/icons/document.png";
+import { BoxDocuments } from "../box/BoxDocuments";
+import { EmbeddedSign } from "../box/EmbeddedSign";
 
 type Doc = { id: string; type: string; status: string; version: string };
-type Detail = { title: string; stage: string; status: string; fields: { label: string; value: string }[]; docs: Doc[] };
+type Detail = { title: string; stage: string; status: string; signUrl: string; fields: { label: string; value: string }[]; docs: Doc[] };
 
 export default function RecordDetail() {
 	const { recordId } = useParams();
@@ -31,6 +33,7 @@ export default function RecordDetail() {
 					title: value(node, r.title_field),
 					stage: value(node, r.stage_field),
 					status: value(node, r.status_field),
+					signUrl: value(node, portalConfig.box.sign_embed_url_field),
 					fields: r.fields.map((f) => ({ label: f.label, value: value(node, f.api_name) })),
 					docs,
 				});
@@ -58,6 +61,13 @@ export default function RecordDetail() {
 							))}
 						</dl>
 					)}
+					{detail.signUrl && recordId && (
+						<section aria-labelledby="sign-title" className="mt-8">
+							<h2 id="sign-title" className="text-xl font-medium text-title mb-2">Sign your document</h2>
+							<EmbeddedSign embedUrl={detail.signUrl} recordId={recordId} />
+						</section>
+					)}
+					{recordId && <BoxDocuments recordId={recordId} title={portalConfig.box.documents_label} />}
 					{d && (
 						<>
 							<h2 className="text-xl font-medium text-title mt-8 mb-2">{d.label}</h2>

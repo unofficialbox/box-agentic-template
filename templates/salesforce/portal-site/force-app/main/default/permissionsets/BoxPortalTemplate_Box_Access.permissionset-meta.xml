@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <classAccesses>
+        <apexClass>PortalBoxAccess</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>PortalBoxAuth</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>PortalBoxDocuments</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>PortalBoxFolderService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>PortalBoxSettings</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>PortalBoxTokenService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>PortalSignStatus</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <description>Portal users: the Box token, folder, and Sign status endpoints and the Portal_Box credential principal. Record access still comes from sharing; the endpoints check it before touching Box.</description>
+    <externalCredentialPrincipalAccesses>
+        <enabled>true</enabled>
+        <externalCredentialPrincipal>Portal_Box-Portal_Box_Principal</externalCredentialPrincipal>
+    </externalCredentialPrincipalAccesses>
+<!-- PORTAL FIELD PERMISSIONS -->
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>BoxPortalTemplate Box Access</label>
+    <objectPermissions>
+        <allowCreate>false</allowCreate>
+        <allowDelete>false</allowDelete>
+        <allowEdit>false</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>UserExternalCredential</object>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+<!-- PORTAL OBJECT PERMISSIONS -->
+</PermissionSet>

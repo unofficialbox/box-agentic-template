@@ -11,6 +11,8 @@ This is the maintained source for the customer portal: an Experience Cloud site 
 | Stage path and status pills | `src/portal/StagePath.tsx` |
 | GraphQL queries | `src/portal/queries.ts` |
 | Brand colors and fonts | `config/brand.json`; the `BOX BRAND` block in `src/styles/global.css` is regenerated |
+| Box documents, preview, upload, Sign | `src/box/`, `classes/PortalBox*.cls`, `classes/PortalSignStatus.cls`; settings in `site.box` of `config/salesforce/portal.json` |
+| Box credential, CSP, portal user access | `namedCredentials/`, `externalCredentials/`, `cspTrustedSites/`, `objects/Portal_Box_Config__c/`, `permissionsets/BoxPortalTemplate_Box_Access.permissionset-meta.xml` |
 | Site, network, login pages | `networks/`, `sites/`, `digitalExperience*/`, `classes/UIBundle*.cls` |
 
 Keep the placeholders: `BoxPortalTemplate` in names and paths, `boxportaltemplate` for the URL name, and `__PORTAL_TITLE__` for the visible title. After any change, run `python scripts/build_portal.py`, then build the bundle:
@@ -23,4 +25,4 @@ npm run build
 
 ## Origin
 
-Generated with `sf template generate project --template reactexternalapp` (Salesforce CLI 2.159.7, API 67.0) and then trimmed and customized. To take a newer upstream scaffold, generate it with the name `BoxPortalTemplate`, diff it against this folder, and carry over the portal pages, `src/portal/`, the brand block, and the removals listed in the guide.
+Generated with `sf template generate project --template reactexternalapp` (Salesforce CLI 2.159.7, API 67.0), then trimmed and customized. The Box components and Apex are ported from [box-agentic-loans](https://github.com/unofficialbox/box-agentic-loans). To take a newer upstream scaffold, generate it with the name `BoxPortalTemplate`, diff it against this folder, and carry over the portal pages, `src/portal/`, `src/box/`, the Box Apex and metadata, the Vite and `.npmrc` settings, the brand block, and the removals listed in the guide.

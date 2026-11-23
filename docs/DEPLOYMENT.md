@@ -11,7 +11,7 @@ Deployment has two supported preparation paths. Both use the same included asset
 | `dispatch.bcl` workspace and `config/deployment.json` | Box workspace with three stage folders |
 | `config/box/metadata-templates.bcl` | Box document metadata template |
 | `sample-data/documents/` and manifest sample list | Three synthetic document files |
-| `salesforce-project/` | Salesforce custom object and six reference fields |
+| `salesforce-project/` | Salesforce custom object and six reference fields, the Agent Script bundle with Apex action stubs, and (when enabled) the Multi-Framework React portal site. See [SALESFORCE-SURFACES.md](SALESFORCE-SURFACES.md) |
 
 The included runtime remains a mock. Deploying these assets does not deploy live workflow adapters, host the MCP server, enable Agentforce, install Box for Salesforce, apply metadata instances, seed business records, or create record-to-folder bindings. Those are explicit implementation/acceptance steps for the generated business use case. Add actual source and supported handlers before expanding advertised deployment scope.
 

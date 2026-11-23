@@ -1,0 +1,24 @@
+{
+  "enabled": false,
+  "kind": "multi_framework_react_site",
+  "site_name": "CustomerPortal",
+  "url_path_prefix": "portal",
+  "email_sender": null,
+  "site": {
+    "title": "Customer portal",
+    "record": {
+      "object": "Agentic_Work_Item__c",
+      "label": "Request",
+      "plural_label": "Your requests",
+      "title_field": "Name",
+      "stage_field": null,
+      "status_field": "Status__c",
+      "fields": [
+        {"api_name": "Amount__c", "label": "Amount"}
+      ]
+    },
+    "stages": [],
+    "documents": null,
+    "status_tone": {}
+  }
+}

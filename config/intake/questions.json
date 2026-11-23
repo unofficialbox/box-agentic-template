@@ -71,6 +71,19 @@
             "config/tools.json",
             ".agents/skills/"
           ]
+        },
+        {
+          "id": "agentforce_agent",
+          "prompt": "Should the project include an Agentforce agent written in Agent Script (an authoring bundle whose actions call the project's tools through Apex), or no Agentforce agent? Choose agent_script or none.",
+          "maps_to": [
+            "config/salesforce/agent.json",
+            "templates/salesforce/agent/",
+            "scripts/build_agent.py"
+          ],
+          "choices": [
+            "agent_script",
+            "none"
+          ]
         }
       ]
     },
@@ -91,6 +104,19 @@
           "maps_to": [
             "docs/ARCHITECTURE.md",
             "src/"
+          ]
+        },
+        {
+          "id": "customer_portal",
+          "prompt": "Should external users get a portal built as a Salesforce Multi-Framework React site (an Experience Cloud site running a React UI bundle, from the maintained site template), or no portal? Choose multi_framework_react_site or none.",
+          "maps_to": [
+            "config/salesforce/portal.json",
+            "templates/salesforce/portal-site/",
+            "scripts/build_portal.py"
+          ],
+          "choices": [
+            "multi_framework_react_site",
+            "none"
           ]
         },
         {

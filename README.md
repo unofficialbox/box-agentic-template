@@ -48,6 +48,7 @@ Guardrails that always apply:
 - Never ask for passwords, tokens, or keys. Keep tenant IDs only in the ignored `config/runtime.local.json`.
 - Every slide, page, diagram, and document follows the Box brand. Use the `box-brand` skill, `config/brand.json`, and the icons in `assets/brand/icons/`.
 - Edit skills in `.agents/skills/` only, then run `python scripts/sync_skills.py`.
+- Found a bug or a missing capability in this template? File an issue on this repo as described in `AGENTS.md` (no private data).
 - Report offline tests, protocol tests, live connectivity, and external changes separately. Never claim live success you did not verify.
 
 ## What a generated project contains
@@ -58,6 +59,8 @@ Guardrails that always apply:
 | Domain runtime, fixtures, and behavior tests | `src/`, `fixtures/`, `tests/` |
 | Tool contracts and mock MCP server | `config/tools.json`, `src/box_agentic/mcp_server.py` |
 | Salesforce DX metadata and Box deployment assets | `salesforce-project/`, `config/box/`, `dispatch.bcl` |
+| Optional customer portal: a Salesforce Multi-Framework React site from a maintained template | `templates/salesforce/portal-site/`, `config/salesforce/portal.json` |
+| Agentforce agent in Agent Script, with Apex action stubs | `templates/salesforce/agent/`, `config/salesforce/agent.json` |
 | Process diagram, storyboard, brief, runbook (Box branded) | `docs/generated/` |
 
 Preview the reference outputs: [storyboard](docs/generated/storyboard.html), [process diagram](docs/generated/process.svg), and [solution brief](docs/generated/solution-brief.md).
@@ -65,6 +68,7 @@ Preview the reference outputs: [storyboard](docs/generated/storyboard.html), [pr
 ## Learn more
 
 - [Box brand guide](docs/brand/BOX-BRAND.md): writing style, colors, type, layouts, and the [icon library](assets/brand/icons/README.md); [template catalog](docs/brand/TEMPLATE-CATALOG.md) for slide layouts.
+- [Salesforce portal and Agentforce agent](docs/SALESFORCE-SURFACES.md): the Multi-Framework React site template, Agent Script generation, Box UI Elements guidance, and deploy steps.
 - [Reference](docs/REFERENCE.md): local commands, the scaffold-only copy, the skills layout, deployment, and scope.
 - [Guided intake](docs/GUIDED-PROMPT.md): the full prompt, the question order, and the build gate.
 - [Build your own](docs/BUILD-YOUR-OWN.md), [Use case](docs/USE-CASE.md), [Box + Salesforce](docs/BOX-SALESFORCE.md), [Tools](docs/TOOLS.md), [Architecture](docs/ARCHITECTURE.md), [Deployment](docs/DEPLOYMENT.md), [Operations](docs/OPERATIONS.md), [Clients](docs/CLIENTS.md), [Source review](docs/SOURCE-REVIEW.md).

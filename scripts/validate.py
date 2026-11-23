@@ -9,13 +9,16 @@ from sync_skills import sync
 from build_deliverables import build
 from build_salesforce import build as build_salesforce
 from build_deployment import build as build_deployment
+from build_portal import build as build_portal
+from build_agent import build as build_agent
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
 def main():
     for path in ROOT.rglob("*.json"):
-        if not any(p in {".git", ".venv", "output", "build", "dist"} for p in path.relative_to(ROOT).parts):
+        # Site template sources include JSONC (tsconfig) files that the Node toolchain parses.
+        if not any(p in {".git", ".venv", "output", "build", "dist", "node_modules", "templates", "uiBundles"} for p in path.relative_to(ROOT).parts):
             json.loads(path.read_text())
     project = json.loads((ROOT / "config/project.json").read_text())
     if project["kind"] not in {"template", "project"} or project["mode"] != "mock":
@@ -28,6 +31,10 @@ def main():
         raise ValueError("Run python scripts/build_deployment.py to refresh deployment artifacts")
     if build_salesforce(check=True):
         raise ValueError("Run python scripts/build_salesforce.py to refresh Salesforce metadata")
+    if build_portal(check=True):
+        raise ValueError("Run python scripts/build_portal.py to refresh the portal site source")
+    if build_agent(check=True):
+        raise ValueError("Run python scripts/build_agent.py to refresh the Agent Script bundle")
     if build(check=True):
         raise ValueError("Run python scripts/build_deliverables.py to refresh demo materials")
     stale = sync(check=True)

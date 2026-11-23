@@ -57,8 +57,8 @@ deployment, publishing, sharing, sending signatures, or deleting resources.
 | Stage | Required details |
 |---|---|
 | 1. Business purpose | Project name/slug, problem/outcome, process boundaries |
-| 2. Implementation scope | Offline versus live adapters, technical/performance/cost constraints, agents/clients/tools |
-| 3. People and access | Roles, user surfaces, data/record/document boundaries |
+| 2. Implementation scope | Offline versus live adapters, technical/performance/cost constraints, agents/clients/tools, Agentforce Agent Script agent or none |
+| 3. People and access | Roles, user surfaces, Salesforce Multi-Framework React portal site or none, data/record/document boundaries |
 | 4. Workflow and decisions | Trigger and ordered steps, approval ownership, exceptions/recovery |
 | 5. Salesforce | Objects/relationships/fields/external IDs, lifecycle, allowed writes/concurrency |
 | 6. Box | Documents/extraction, folders/metadata/record mapping, policy/citations/governance |
@@ -67,7 +67,7 @@ deployment, publishing, sharing, sending signatures, or deleting resources.
 | 9. Acceptance and operations | Observable checks, deployment/reset/audit, dependencies/entitlements |
 | 10. Live preparation, conditional | Target aliases/scope, authenticated capabilities, disposable acceptance data |
 
-There are 27 core questions, plus three live-preparation questions when `implementation_depth` is `live_adapters`. Known answers are not asked again. The state machine determines question order and coverage; the coding agent is still responsible for interpreting prose, detecting contradictions, and verifying technical claims. Presence checks cannot prove a business answer is correct.
+There are 29 core questions, plus three live-preparation questions when `implementation_depth` is `live_adapters`. Known answers are not asked again. The state machine determines question order and coverage; the coding agent is still responsible for interpreting prose, detecting contradictions, and verifying technical claims. Presence checks cannot prove a business answer is correct.
 
 ## Local commands
 

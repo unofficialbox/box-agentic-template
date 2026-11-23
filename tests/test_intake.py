@@ -27,8 +27,8 @@ class IntakeTests(unittest.TestCase):
         state = answer(self.catalog, self.state, 'implementation_depth', mode)
         while next_batch(self.catalog, state)['stage'] == 'questions':
             for question in next_batch(self.catalog, state)['questions']:
-                state = answer(self.catalog, state, question['id'],
-                               'Concrete test decision for ' + question['id'])
+                value = question['choices'][0] if question.get('choices') else 'Concrete test decision for ' + question['id']
+                state = answer(self.catalog, state, question['id'], value)
         return state
 
     def save(self, state, path=None):
@@ -52,14 +52,14 @@ class IntakeTests(unittest.TestCase):
         self.assertEqual(initial['deferred_by_scope'], [])
         offline = self.complete()
         result = review(self.catalog, offline)
-        self.assertEqual(len(result['answers']), 27)
+        self.assertEqual(len(result['answers']), 29)
         self.assertEqual(len(result['deferred_by_scope']), 3)
         self.assertEqual(result['missing'], [])
         scoped = answer(self.catalog, offline, 'live_targets', 'Previously supplied test org alias, kept outside active build scope')
         self.assertEqual(review(self.catalog, scoped)['inactive_answers'][0]['id'], 'live_targets')
         live = answer(self.catalog, offline, 'implementation_depth', 'live_adapters')
         self.assertEqual(set(review(self.catalog, live)['missing']), {'live_targets', 'live_capabilities', 'live_verification'})
-        self.assertEqual(len(review(self.catalog, self.complete('live_adapters'))['answers']), 30)
+        self.assertEqual(len(review(self.catalog, self.complete('live_adapters'))['answers']), 32)
 
     def test_recommendations_remain_visible_until_user_confirms_brief(self):
         state = self.complete()

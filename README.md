@@ -37,7 +37,7 @@ Follow these steps in order. Do not skip ahead to domain code.
 4. **Confirm.** Show the full `review` output. Run `confirm --fingerprint …` only after the user confirms that exact brief. Never confirm it yourself.
 5. **Generate and tailor.** Run `python scripts/new_project.py --slug <slug> --name "<Name>" --intake-state config/intake.local.json --init-git`, then use `create-use-case` in the new project to tailor its domain, fixtures, tools, tests, and deliverables.
 6. **Verify.** Run `validate.py`, coverage, `build_deliverables.py --check`, and `build_deployment.py` in the generated project ([commands](docs/REFERENCE.md#verify)).
-7. **Go live only on request.** Check the [live prerequisites](docs/REFERENCE.md#live-prerequisites) first, including the Salesforce CLI and org sign-in. Use `connect-tools` to discover the real Box and Salesforce capabilities, then `deploy-solution`. Get the user's approval for each external write session.
+7. **Go live only on request.** Check the [live prerequisites](docs/REFERENCE.md#live-prerequisites) first, including the Salesforce CLI and org sign-in, plus a Box connector or the Box CLI fallback. Use `connect-tools` to discover the real Box and Salesforce capabilities, then `deploy-solution`. Get the user's approval for each external write session.
 
 Guardrails that always apply:
 

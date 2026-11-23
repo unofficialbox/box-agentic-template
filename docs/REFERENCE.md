@@ -89,13 +89,22 @@ sf org list
 
 - **Connector:** the coding agent needs an authenticated Box connector, such as the Box MCP server. Confirm the user and enterprise with `who_am_i`.
 - **Workspace:** get the user's approval for the target folder before creating anything, ideally an isolated new one.
+- **Fallback: Box CLI.** Use the CLI when the agent has no Box connector. It also needs a current Node.js LTS.
+
+  ```bash
+  npm install --global @box/cli
+  box login              # browser OAuth; the CLI stores its own session
+  box users:get me       # confirm the user and enterprise
+  ```
+
+  The user runs `box login` themselves, for example with `! box login` in Claude Code. The CLI covers the same setup steps: `box folders:create`, `box files:upload`, `box metadata-templates:create`, and `box files:metadata:add`. Run `box <command> --help` for exact flags before using one. The connector rules apply unchanged: approve each write session and never handle tokens or client secrets.
 
 **Box for Salesforce.**
 
 - **Before connecting:** after installing the package, assign `box__Box_Admin_All_Licenses` (Box Admin, All Licenses) to the System Administrator who will connect Box. Do this before asking them to connect in Box Settings.
 - **Check:** verify the assignment with a `PermissionSetAssignment` query before the hand-off.
 
-Agents: run `sf --version` and `sf org list` before planning any standalone Salesforce deploy. If either fails, stop and point the user here instead of guessing.
+Agents: run `sf --version` and `sf org list` before planning any standalone Salesforce deploy. For Box, call the connector's `who_am_i`. If no connector is available, run `box --version` and `box users:get me`. If any of these checks fail, stop and point the user here instead of guessing.
 
 ## Standalone and Dispatch deployment
 

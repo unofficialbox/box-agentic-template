@@ -103,15 +103,21 @@ class AgentTests(unittest.TestCase):
             tools = {t["name"]: t for t in json.loads((root / "config/tools.json").read_text())["tools"]}
             self.assertIn("require_user_confirmation: True", script) if any(
                 not tools[t]["annotations"]["readOnlyHint"] for s in agent["subagents"] for t in s["tools"]) else None
-            stub = seeds["salesforce-project/force-app/main/default/classes/BoxAgentGetRecord.cls"]
-            self.assertIn("public String record_id;", stub)
+            first = agent["subagents"][0]["tools"][0]
+            cls = agent["apex_prefix"] + "".join(part.capitalize() for part in first.split("_"))
+            stub = seeds[f"salesforce-project/force-app/main/default/classes/{cls}.cls"]
+            for key in tools[first]["inputSchema"].get("properties", {}):
+                self.assertIn(f" {key};", stub)
             self.assertIn("live_adapter_not_implemented", stub)
+            for key in agent.get("record_inputs", ["record_id"]):
+                if any(key in tools[t]["inputSchema"].get("properties", {}) for s in agent["subagents"] for t in s["tools"]):
+                    self.assertIn(f"with {key} = @variables.record_id", script)
 
     def test_seeded_apex_is_never_overwritten_but_script_drift_is_detected(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = project_copy(tmp)
             build_agent.build(root)
-            stub = root / "salesforce-project/force-app/main/default/classes/BoxAgentGetRecord.cls"
+            stub = next((root / "salesforce-project/force-app/main/default/classes").glob("*.cls"))
             stub.write_text("// implemented by hand")
             self.assertEqual(build_agent.build(root, check=True), [])
             build_agent.build(root)

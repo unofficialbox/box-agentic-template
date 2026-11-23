@@ -24,3 +24,7 @@ output/
 config/runtime/demo-environment.json
 
 config/intake.local.json
+
+# Portal site build output
+node_modules/
+salesforce-project/force-app/main/default/uiBundles/*/dist/
